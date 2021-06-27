@@ -2,9 +2,11 @@ import React from 'react'
 import {
   View,
   Button,
-  TextInput,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native'
+import { Header, } from 'react-native-elements';
+import { TextInput } from 'react-native-paper';
 
 export default class InfoUser extends React.Component {
   state = {
@@ -22,44 +24,69 @@ export default class InfoUser extends React.Component {
       console.log('error signing up: ', err)
     }
   }
- 
+
   render() {
+    const { navigation } = this.props;
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder='Username'
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('username', val)}
+      <>
+        <Header
+          placement="center"
+          centerComponent={<Image
+            source={require('../../img/Since1992.png')}
+            style={{ width: 60, height: 60, margin: 0 }}
+
+          />}
+          containerStyle={{
+            backgroundColor: '#292B2D',
+            height: 112,
+            margin: 0
+          }}
         />
-        <TextInput
-          style={styles.input}
-          placeholder='Password'
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('password', val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Email'
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('email', val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Phone Number'
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('phone_number', val)}
-        />
-        <Button
-          title='Sign Up'
-          onPress={this.signUp}
-        />
-      </View>
+
+        <View style={styles.container}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+            <TextInput label='ชื่อผู้ใช้งาน'
+              style={{ width: '70%', height: 45, margin: '1%', borderWidth: 1, borderRadius: 5, }}
+              //onChangeText={usernameHandler}
+              multiline={false}
+              theme={{
+                colors: {
+                  primary: '#AEAEAE',
+                  underlineColor: 'transparent',
+                  margin: 10,
+                  text: 'black'
+                }
+              }}
+            />
+          </View>
+          <TextInput
+            style={styles.input}
+            placeholder='Password'
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor='white'
+            onChangeText={val => this.onChangeText('password', val)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Email'
+            autoCapitalize="none"
+            placeholderTextColor='white'
+            onChangeText={val => this.onChangeText('email', val)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Phone Number'
+            autoCapitalize="none"
+            placeholderTextColor='white'
+            onChangeText={val => this.onChangeText('phone_number', val)}
+          />
+          <Button
+            title='Sign Up'
+            onPress={() => navigation.navigate('InformationScreen')}
+          />
+        </View>
+      </>
     )
   }
 }
@@ -79,6 +106,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#292B2D'
   }
 })

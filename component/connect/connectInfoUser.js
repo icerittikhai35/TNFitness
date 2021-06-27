@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import InfoUser from '../login/InfoUser';
 import Login from '../login/InfoUser';
 
-const Stacknoti = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-export default function ConnectTraining() {
+export default function connectInfoUser() {
 
   return (
-    <Stacknoti.Navigator>
-      <Stacknoti.Screen name="Login" component={Login} />
-      <Stacknoti.Screen name="InfoUser" component={InfoUser} />
-    </Stacknoti.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="InfoUser" component={InfoUser} options={{headerShown : false}} />
+    </Stack.Navigator>
   );
 } 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 import { Header, } from 'react-native-elements';
-
+import { TextInput } from 'react-native-paper';
 
 //npm install axios –save อย่าลืมติดตั้ง
 import axios from 'axios';
@@ -27,6 +27,7 @@ export default function InsertInfo(props) {
                 .then((response) => {
                     alert(JSON.stringify(response.data));
                     setIsSubmit(false)
+                    props.navigation.navigate("Login");
                 })
                 .catch((err) => {
                     console.log(err);
@@ -56,35 +57,68 @@ export default function InsertInfo(props) {
             <View style={{ alignItems: 'center' }}>
                 <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#ffffff', paddingTop: '8%' }}>สมัครสมาชิก</Text>
 
+
+
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: '8%' }}>
-                    <TextInput placeholder='Email'
-                        style={{ width: '70%', height: 45, margin: 12, borderWidth: 1, backgroundColor: "#AEAEAE", borderRadius: 5 }}
+                    <TextInput label='อีเมล์'
+                        style={{ width: '70%', height: 45, margin: '1%', borderWidth: 1, borderRadius: 5, }}
                         onChangeText={(text) => setEmail(text)}
+                        multiline={false}
+                        theme={{
+                            colors: {
+                                primary: '#AEAEAE',
+                                underlineColor: 'transparent',
+                                margin: 10,
+                                text: 'black'
+                            }
+                        }}
                     />
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <TextInput placeholder='Username'
-                        style={{ width: '70%', height: 45, margin: 12, borderWidth: 1, backgroundColor: "#AEAEAE", borderRadius: 5 }}
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+                    <TextInput label='ชื่อผู้ใช้งาน'
+                        style={{ width: '70%', height: 45, margin: '1%', borderWidth: 1, borderRadius: 5, }}
                         onChangeText={usernameHandler}
+                        multiline={false}
+                        theme={{
+                            colors: {
+                                primary: '#AEAEAE',
+                                underlineColor: 'transparent',
+                                margin: 10,
+                                text: 'black'
+                            }
+                        }}
                     />
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <TextInput placeholder='Password'
-                        style={{ width: '70%', height: 45, margin: 12, borderWidth: 1, backgroundColor: "#AEAEAE", borderRadius: 5 }}
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+                    <TextInput label='รหัสผ่าน'
+                        style={{ width: '70%', height: 45, margin: '1%', borderWidth: 1, borderRadius: 5, }}
                         onChangeText={(text) => setPassword(text)}
                         secureTextEntry={true}
+                        multiline={false}
+                        theme={{
+                            colors: {
+                                primary: '#AEAEAE',
+                                underlineColor: 'transparent',
+                                margin: 10,
+                                text: 'black'
+                            }
+                        }}
                     />
                 </View>
+
+
                 <View style={{ paddingTop: '60%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                     <TouchableOpacity
                         style={{ backgroundColor: '#69BD51', width: '70%', height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
                         title={"Go to the hell"}
                         onPress={() => setIsSubmit(true)}
                     >
-                        <Text style={{ color: 'white', fontWeight: 'bold',fontSize:18 }}>สมัครสมาชิก</Text>
+                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>สมัครสมาชิก</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row',paddingTop:10 }}>
+                <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>ต้องการเข้าสู่ระบบ ? </Text>
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate('Login')}>
