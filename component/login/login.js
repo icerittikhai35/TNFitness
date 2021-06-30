@@ -57,7 +57,7 @@ export default function LoginInfo(props) {
         )
         .then((response) => {
           if (response.data == 'true') {
-            props.navigation.navigate("connectInfoUser");
+            props.navigation.navigate("InformationScreen");
             setIsSubmit(false) 
           } else {
             alert(JSON.stringify(response.data));
