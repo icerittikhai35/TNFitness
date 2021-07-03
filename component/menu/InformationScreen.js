@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar, Text, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Profile from './profile';
+import ConnectProfile from '../connect/connectProfile';
 import ConnectTraining from '../connect/connectTraining';
 import ConnectFeed from '../connect/connectFeed';
 
@@ -57,7 +57,7 @@ const InformationScreen = () => {
           }}>
           <Tab.Screen name="Feed" component={ConnectFeed} />
           <Tab.Screen name="Training" component={ConnectTraining} />
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Profile" component={ConnectProfile} />
         </Tab.Navigator>
       
     </>

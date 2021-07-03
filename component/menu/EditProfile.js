@@ -20,7 +20,7 @@ import {
 
 const screenWidth = Dimensions.get("window").width;
 
-export default class Profile extends Component {
+export default class EditProfile extends Component {
 
     render(props) {
         return (
@@ -35,59 +35,14 @@ export default class Profile extends Component {
                             <Text style={styles.name}>John Doe</Text>
                             <Text style={styles.info}>เป้าหมาย : ลดน้ำหนัก / ประสบการณ์ : มือใหม่</Text>
                             <Text style={styles.description}>อายุ:20  ส่วนสูง:180  น้ำหนัก:70</Text>
-                            <TouchableOpacity
-                                style={styles.buttonContainer}
-                                onPress={() => { props.navigation.navigate('EditPtofile') }}
-                            >
+                            <TouchableOpacity style={styles.buttonContainer}>
                                 <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
                             </TouchableOpacity>
 
-                            <View style={{ width: '120%', height: '80%', alignItems: 'center', backgroundColor: '#ffffff', paddingTop: 15 }} >
+                            <View style={{ width: '120%', height: '80%', alignItems: 'center' , backgroundColor:'#ffffff' ,paddingTop:15}} >
 
                                 <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                                <LineChart
-                                    data={{
-                                        labels: ["January", "February", "March", "April", "May", "June"],
-                                        datasets: [
-                                            {
-                                                data: [
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100
-                                                ]
-                                            }
-                                        ]
-                                    }}
-                                    width={Dimensions.get("window").width} // from react-native
-                                    height={220}
-                                    yAxisLabel="$"
-                                    yAxisSuffix="k"
-                                    yAxisInterval={1} // optional, defaults to 1
-                                    chartConfig={{
-                                        backgroundColor: "#3D3D3D",
-                                        backgroundGradientFrom: "#3D3D3D",
-                                        backgroundGradientTo: "#3D3D3D",
-                                        decimalPlaces: 2, // optional, defaults to 2dp
-                                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        style: {
-                                            borderRadius: 16
-                                        },
-                                        propsForDots: {
-                                            r: "6",
-                                            strokeWidth: "2",
-                                            stroke: "#69BD51"
-                                        }
-                                    }}
-                                    bezier
-                                    style={{
-                                        marginVertical: 8,
-                                        borderRadius: 7
-                                    }}
-                                />
+                                
 
                                 <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
                                 <LineChart
@@ -131,7 +86,7 @@ export default class Profile extends Component {
                                     style={{
                                         marginVertical: 8,
                                         borderRadius: 7,
-                                        marginBottom: 50
+                                        marginBottom:50
                                     }}
                                 />
 

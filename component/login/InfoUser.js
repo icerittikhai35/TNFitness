@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Text, View, StyleSheet, colors, Image, TextInput } from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
 import { Header, } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
-import RNPickerSelect from 'react-native-picker-select';
+import { Picker } from '@react-native-community/picker';
 
 
 export default class App extends Component {
@@ -13,12 +13,15 @@ export default class App extends Component {
     super(props)
     this.state = { date: "2016-05-15" }
 
+
+  }
+  state = {
+    dog: 'begle'
   }
 
 
-
   render() {
-
+    const { navigation } = this.props;
     return (
       <>
         <Header
@@ -135,27 +138,24 @@ export default class App extends Component {
             nextBtnTextStyle={styles.NextBtnText}
             previousBtnStyle={styles.previousBtn}
             previousBtnTextStyle={styles.previousBtnText}
-            previousBtnText={'ย้อนหลับ'}
+            previousBtnText={'ย้อนกลับ'}
             nextBtnText={'ถัดไป'}
           >
-            <View style={{ alignItems: 'center' }}>
-              <Text>This is the content within step 2!</Text>
+            <View style={styles.container}>
+              <View >
+                <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>ข้อมูลผู้ใช้งาน</Text>
+              </View>
               <View style={styles.containerPicker}>
-                <Text>
-                  Test
-                </Text>
-                <RNPickerSelect
-                
-                  onValueChange={(language) => setLanguage(language)}
-                  items={[
-                    { label: "JavaScript", value: "JavaScript" },
-                    { label: "TypeStript", value: "TypeStript" },
-                    { label: "Python", value: "Python" },
-                    { label: "Java", value: "Java" },
-                    { label: "C++", value: "C++" },
-                    { label: "C", value: "C" },
-                  ]}
-                />
+                <Picker style={{ width: '100%',backgroundColor:'#ffffff',borderRadius:15 ,alignItems:'center',justifyContent:'center'}}
+                  selectedValue={this.state.dog}
+                  enabled={true}
+                  onValueChange={(itemValue, itemIndex) => this.setState({ dog: itemValue })}
+                >
+                  <Picker.Item label="ลดไขมัน" value="1"></Picker.Item>
+                  <Picker.Item label="สร้างกล้ามเนื้อ " value="2"></Picker.Item>
+                  <Picker.Item label="เพื่อสุขภาพ" value="3"></Picker.Item>
+                </Picker>
+
               </View>
             </View>
           </ProgressStep>
@@ -165,11 +165,26 @@ export default class App extends Component {
             nextBtnTextStyle={styles.NextBtnText}
             previousBtnStyle={styles.previousBtn}
             previousBtnTextStyle={styles.previousBtnText}
-            previousBtnText={'ย้อนหลับ'}
+            previousBtnText={'ย้อนกลับ'}
             finishBtnText={'เสร็จสิ้น'}
+            onSubmit={() => { navigation.navigate('InformationScreen') }}
           >
-            <View style={{ alignItems: 'center' }}>
-              <Text>This is the content within step 3!</Text>
+             <View style={styles.container}>
+              <View >
+                <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>ข้อมูลผู้ใช้งาน</Text>
+              </View>
+              <View style={styles.containerPicker}>
+                <Picker style={{ width: '100%',backgroundColor:'#ffffff',borderRadius:15 ,alignItems:'center',justifyContent:'center'}}
+                  selectedValue={this.state.dog}
+                  enabled={true}
+                  onValueChange={(itemValue, itemIndex) => this.setState({ dog: itemValue })}
+                >
+                  <Picker.Item label="มือใหม่" value="1"></Picker.Item>
+                  <Picker.Item label="ปานกลาง " value="2"></Picker.Item>
+                  <Picker.Item label="ประสบการณ์สูง" value="3"></Picker.Item>
+                </Picker>
+
+              </View>
             </View>
           </ProgressStep>
         </ProgressSteps>
@@ -215,8 +230,12 @@ const styles = StyleSheet.create({
   },
   containerPicker: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    width: '80%',
+    height: 200,
+    borderRadius: 7
+
+
   },
 });
