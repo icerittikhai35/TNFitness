@@ -23,12 +23,21 @@ const screenWidth = Dimensions.get("window").width;
 export default class Profile extends Component {
 
     render(props) {
+
         return (
             <View style={styles.container}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >
-                    <View style={styles.header}></View>
+                    <View style={styles.header}>
+                        <Text style={{ color: 'white', marginLeft: '5%', marginTop: 13, fontSize: 16 }}>โปรไฟล์</Text>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Setting')}>
+                            <Image
+                                style={{ height: 25, width: 25, marginRight: '5%', marginTop: 13 }}
+                                source={require('../../img/setting.png')}
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
                     <View style={styles.body}>
                         <View style={styles.bodyContent}>
@@ -37,7 +46,8 @@ export default class Profile extends Component {
                             <Text style={styles.description}>อายุ:20  ส่วนสูง:180  น้ำหนัก:70</Text>
                             <TouchableOpacity
                                 style={styles.buttonContainer}
-                                onPress={() => { props.navigation.navigate('EditPtofile') }}
+                                onPress={() => this.props.navigation.navigate('EditProfile')}
+
                             >
                                 <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
                             </TouchableOpacity>
@@ -149,7 +159,9 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: "#3D3D3D",
-        height: 150,
+        height: 50,
+        justifyContent: 'space-between',
+        flexDirection: 'row'
     },
     avatar: {
         width: 100,
@@ -160,7 +172,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignSelf: 'center',
         position: 'absolute',
-        marginTop: 100
+        marginTop: 5
     },
     name: {
         fontSize: 22,
