@@ -7,7 +7,7 @@ import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { Picker } from '@react-native-community/picker';
 
 
-export default class App extends Component {
+export default class infoUser1 extends Component {
 
   constructor(props) {
     super(props)

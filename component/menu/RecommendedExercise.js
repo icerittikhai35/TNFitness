@@ -55,21 +55,13 @@ const RecommendedExercise = (props) => {
           source={require('../../img/Since1992.png')}
           style={{ width: 60, height: 60, }}
         />}
-        rightComponent={<View style={{ marginTop: 19 }}>
-          <TouchableOpacity
-            onPress={() => { props.navigation.navigate('Training') }}>
-            <Icon
-              name="settings"
-              size={25}
-              color={'white'}
-            />
-          </TouchableOpacity>
-        </View>}
+        
         containerStyle={{
           backgroundColor: '#292B2D',
           justifyContent: 'space-around',
           alignItems: 'center',
           height: 112,
+          borderBottomColor:'#292B2D'
 
         }}
       />

@@ -25,6 +25,7 @@ const ExerciseNews = (props) => {
                 containerStyle={{
                     backgroundColor: '#292B2D',
                     height: 112,
+                    
                 }}
 
             />

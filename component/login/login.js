@@ -49,7 +49,7 @@ export default function LoginInfo(props) {
     const authenticate = async () => {
       axios
         .post(
-          "http://34.87.5.29/login.php",
+          "http://34.126.113.88/login.php",
           JSON.stringify({
             username: username,
             password: password,
@@ -57,7 +57,7 @@ export default function LoginInfo(props) {
         )
         .then((response) => {
           if (response.data == 'true') {
-            props.navigation.navigate("InformationScreen");
+            props.navigation.navigate("connectInfoUser");
             setIsSubmit(false) 
           } else {
             alert(JSON.stringify(response.data));

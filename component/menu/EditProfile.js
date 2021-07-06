@@ -6,7 +6,8 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-    ScrollView
+    ScrollView,
+    TextInput
 } from 'react-native';
 
 import {
@@ -38,58 +39,27 @@ export default class EditProfile extends Component {
                             <TouchableOpacity style={styles.buttonContainer}>
                                 <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
                             </TouchableOpacity>
-
-                            <View style={{ width: '120%', height: '80%', alignItems: 'center' , backgroundColor:'#ffffff' ,paddingTop:15}} >
-
-                                <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                                
-
-                                <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                                <LineChart
-                                    data={{
-                                        labels: ["January", "February", "March", "April", "May", "June"],
-                                        datasets: [
-                                            {
-                                                data: [
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100
-                                                ]
-                                            }
-                                        ]
-                                    }}
-                                    width={Dimensions.get("window").width} // from react-native
-                                    height={220}
-                                    yAxisLabel="$"
-                                    yAxisSuffix="k"
-                                    yAxisInterval={1} // optional, defaults to 1
-                                    chartConfig={{
-                                        backgroundColor: "#3D3D3D",
-                                        backgroundGradientFrom: "#3D3D3D",
-                                        backgroundGradientTo: "#3D3D3D",
-                                        decimalPlaces: 2, // optional, defaults to 2dp
-                                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        style: {
-                                            borderRadius: 16
-                                        },
-                                        propsForDots: {
-                                            r: "6",
-                                            strokeWidth: "2",
-                                            stroke: "#69BD51"
-                                        }
-                                    }}
-                                    bezier
-                                    style={{
-                                        marginVertical: 8,
-                                        borderRadius: 7,
-                                        marginBottom:50
-                                    }}
+                            <View style={{ width: 280, alignItems: 'center', }}>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#3D3D3D', margin: 5 }}>น้ำหนัก</Text>
+                                <TextInput
+                                    style={{ width: '100%', height: 45, margin: '1%', borderWidth: 0, borderRadius: 5, backgroundColor: '#ffffff' }}
+                                    fontSize={18}
+                                    placeholder="กรอกน้ำหนัก (กิโลกรัม)"
+                                    textAlign='center'
+                                    keyboardType='numeric'
+                                // onChangeText={(text) => setPassword(text)}
                                 />
-
+                            </View>
+                            <View style={{ width: 280, alignItems: 'center', }}>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#3D3D3D', margin: 5 }}>ส่วนสูง</Text>
+                                <TextInput
+                                    style={{ width: '100%', height: 45, margin: '1%', borderWidth: 0, borderRadius: 5, backgroundColor: '#ffffff' }}
+                                    fontSize={18}
+                                    placeholder="กรอกส่วนสูง (เซนติเมตร)"
+                                    textAlign='center'
+                                    keyboardType='numeric'
+                                // onChangeText={(text) => setPassword(text)}
+                                />
                             </View>
 
                         </View>

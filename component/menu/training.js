@@ -19,6 +19,7 @@ const Training = (props) => {
         containerStyle={{
           backgroundColor: '#292B2D',
           height: 112,
+          borderBottomColor:'#292B2D'
         }}
       />
       <View style={styles.container}>
