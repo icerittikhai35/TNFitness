@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -6,76 +6,100 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-    ScrollView
+    ScrollView,
 } from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native'
 
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-} from "react-native-chart-kit";
 
-const screenWidth = Dimensions.get("window").width;
 
 export default class EditProfile extends Component {
 
     render(props) {
         return (
             <View style={styles.container}>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                >
-                    <View style={styles.header}>
-                       
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
-                            <Image
-                                style={{ height: 25, width: 25, marginLeft:15, marginTop: 13 }}
-                                source={require('../../img/arrow.png')}
-                            />
-                        </TouchableOpacity>
+
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                        <Image
+                            style={{ height: 25, width: 25, marginLeft: 15, marginTop: 13 }}
+                            source={require('../../img/arrow.png')}
+                        />
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={{ color: 'white', marginLeft: '20%', marginTop: 13, fontSize: 16, fontWeight: 'bold' }}>ตั้งค่า</Text>
                     </View>
-                    <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
-                    <View style={styles.body}>
-                        <View style={styles.bodyContent}>
-                            <Text style={styles.name}>John Doe</Text>
-                            <Text style={styles.info}>เป้าหมาย : ลดน้ำหนัก / ประสบการณ์ : มือใหม่</Text>
-                            <Text style={styles.description}>อายุ:20  ส่วนสูง:180  น้ำหนัก:70</Text>
-                            <TouchableOpacity
-                                style={styles.buttonContainer}
-                                onPress={() => this.props.navigation.navigate('EditProfile')}
+                </View>
 
-                            >
-                                <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
-                            </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProfile')}>
+                    <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+                        <Image
+                            style={{ height: 25, width: 25, marginLeft: 15, }}
+                            source={require('../../img/icon/user.png')}
+                        />
+                        <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>แก้ไขข้อมูลส่วนตัว</Text>
+                    </View>
+                </TouchableOpacity>
 
-                            <View style={{ width: '120%', height: '80%', alignItems: 'center', backgroundColor: '#ffffff', paddingTop: 15 }} >
-
-                                <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                               
-
-                                <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-
-
-                            </View>
-
-                        </View>
+                <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.8, flexDirection: 'row',justifyContent:'space-between'}}>
+                    <View style={{flexDirection: 'row', paddingTop: 13 ,}}>
+                        <Image
+                            style={{ height: 25, width: 25, marginLeft: 15, }}
+                            source={require('../../img/icon/bell.png')}
+                        />
+                        <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>การเเจ้งเตือน</Text>
+                    </View>
+                    <View style={{flexDirection: 'row',paddingRight:'5%'}}>
+                        <ToggleSwitch
+                            isOn={true}
+                            onColor="green"
+                            offColor="#292B2D"
+                            size="medium"
+                            onToggle={isOn => console.log("changed to : ", isOn)}
+                        />
 
                     </View>
-                </ScrollView>
+
+                </View>
+
+                <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+                    <Image
+                        style={{ height: 25, width: 25, marginLeft: 15, }}
+                        source={require('../../img/icon/contact.png')}
+                    />
+                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>ติดต่อเรา</Text>
+                </View>
+
+                <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+                    <Image
+                        style={{ height: 25, width: 25, marginLeft: 15, }}
+                        source={require('../../img/icon/newspaper.png')}
+                    />
+                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>รายงานปัญหา</Text>
+                </View>
+
+                <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+                    <Image
+                        style={{ height: 25, width: 25, marginLeft: 15, }}
+                        source={require('../../img/icon/logout.png')}
+                    />
+                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>ออกจากระบบ</Text>
+                </View>
+
             </View >
         );
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+        backgroundColor: '#3D3D3D'
+    },
     header: {
-        backgroundColor: "#3D3D3D",
+        backgroundColor: "#292B2D",
         height: 50,
-        justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 48
     },
     avatar: {
         width: 100,
@@ -86,7 +110,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignSelf: 'center',
         position: 'absolute',
-        marginTop: 5
+        marginTop: 100
     },
     name: {
         fontSize: 22,
@@ -94,7 +118,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     body: {
-        marginTop: 20,
+        marginTop: 80,
     },
     bodyContent: {
 

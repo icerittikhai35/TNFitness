@@ -54,7 +54,7 @@ const ExerciseNews = (props) => {
                                 <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
                                     <TouchableOpacity
                                         style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('Feed') }}
+                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
                                     >
                                         <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
                                     </TouchableOpacity>
@@ -81,7 +81,7 @@ const ExerciseNews = (props) => {
                                 <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
                                     <TouchableOpacity
                                         style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('Feed') }}
+                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
                                     >
                                         <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
                                     </TouchableOpacity>
@@ -107,7 +107,7 @@ const ExerciseNews = (props) => {
                                 <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
                                     <TouchableOpacity
                                         style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('Feed') }}
+                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
                                     >
                                         <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
                                     </TouchableOpacity>
@@ -134,7 +134,7 @@ const ExerciseNews = (props) => {
                                 <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
                                     <TouchableOpacity
                                         style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('Feed') }}
+                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
                                     >
                                         <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
                                     </TouchableOpacity>

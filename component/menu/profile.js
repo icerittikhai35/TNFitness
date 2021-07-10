@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     header: {
-        backgroundColor: "#292B2D",
+        backgroundColor: "#3D3D3D",
         height: 50,
         justifyContent: 'space-between',
         flexDirection: 'row'

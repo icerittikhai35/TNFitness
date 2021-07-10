@@ -22,6 +22,11 @@ const App = () => {
       <NavigationContainer>
 
         <Stack.Navigator>
+        <Stack.Screen
+            name="InformationScreen"
+            component={InformationScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Login"
             component={Login}
@@ -37,11 +42,7 @@ const App = () => {
             component={connectInfoUser}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="InformationScreen"
-            component={InformationScreen}
-            options={{ headerShown: false }}
-          />
+         
 
 
 
