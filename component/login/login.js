@@ -38,7 +38,7 @@ async function logIn() {
 
 
 export default function LoginInfo(props) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [googleSubmitting, setGoogleSubmitting] = useState("");
 
@@ -51,7 +51,7 @@ export default function LoginInfo(props) {
         .post(
           "http://34.126.113.88/login.php",
           JSON.stringify({
-            username: username,
+            email: email,
             password: password,
           })
         )
@@ -74,7 +74,7 @@ export default function LoginInfo(props) {
   }, [isSubmit]);
 
   const usernameHandler = (text) => {
-    setUsername(text);
+    setEmail(text);
 
   };
 

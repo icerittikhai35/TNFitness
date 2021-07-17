@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, Text, ScrollView, View, TouchableOpacity, StyleSheet, Button } from 'react-native';
-
 import { ListItem, Header, Image, Tile } from 'react-native-elements';
-
 import Icon from 'react-native-vector-icons/Feather';
+import axios from 'axios';
 
-const ExerciseNews = (props) => {
+export default function ExerciseNews  ({props,route,navigation})  {
+    const [info, setInfo] = useState([])
+
+
+    useEffect(() => {
+        axios.get('http://34.126.113.88/showdata.php'
+          
+        )
+            .then(response => {
+                setInfo(response.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    })
     return (
         <>
 
@@ -25,7 +38,7 @@ const ExerciseNews = (props) => {
                 containerStyle={{
                     backgroundColor: '#292B2D',
                     height: 112,
-                    
+
                 }}
 
             />
@@ -52,12 +65,14 @@ const ExerciseNews = (props) => {
                             </Text>
                             <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
                                 <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
-                                    >
-                                        <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
-                                    </TouchableOpacity>
+                                    {info.map(item => (
+                                        <TouchableOpacity
+                                            style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
+                                            onPress={() =>  navigation.navigate('showExerciseNews', {dogid: item.idnew_feed_exer })}
+                                        >
+                                            <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
+                                        </TouchableOpacity>
+                                    ))}
 
                                 </View>
                             </View>
@@ -185,4 +200,3 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ExerciseNews;

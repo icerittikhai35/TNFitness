@@ -1,11 +1,38 @@
-import React, { useState } from 'react';
-import { ImageBackground, Text, ScrollView, View, TouchableOpacity, StyleSheet, Button } from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import { ImageBackground, Text, ScrollView, View, TouchableOpacity, StyleSheet, Button, FlatList } from 'react-native';
 import { ListItem, Header, Image, Tile } from 'react-native-elements';
-
 import Icon from 'react-native-vector-icons/Feather';
+import axios from 'axios';
+import { SliderBox } from 'react-native-image-slider-box';
 
-const showExerciseNews = (props) => {
+export default function showExerciseNews({ props, route }) {
+    const path = ['01.jpg', '02.jpg', '03.jpg'];
+    const { dogid } = route.params;
+    const [info, setInfo] = useState([]);
+
+
+    useEffect(() => {
+        axios.get('http://34.126.113.88/showdataNewEx.php', {
+            params: {
+                id: dogid
+            }
+        }
+        )
+            .then(response => {
+                setInfo(response.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    })
+
+    const images = info.map(item => (
+        item.Link_forder_img
+    ))
+    const showpath = path.map(item => (
+        images + item
+    ))
+
     return (
         <>
 
@@ -25,7 +52,7 @@ const showExerciseNews = (props) => {
                 containerStyle={{
                     backgroundColor: '#292B2D',
                     height: 112,
-                    borderBottomColor:'#292B2D'
+                    borderBottomColor: '#292B2D'
 
                 }}
 
@@ -40,12 +67,7 @@ const showExerciseNews = (props) => {
 
 
                     <View style={styles.container}>
-                        <ImageBackground source={require('../../img/new.jpg')}
-                            style={styles.image}
-                        >
-
-                           
-                        </ImageBackground>
+                        <SliderBox sliderBoxHeight={400} images={showpath} />
                         <View style={{ backgroundColor: '#ffffff' }}>
                         </View>
                     </View>
@@ -54,7 +76,15 @@ const showExerciseNews = (props) => {
                         มีงานวิจัยพบว่าการออกกำลังกายเป็นประจำ
                         ส่งผลดีต่อสุขภาพ
                     </Text>
-                    <Text style={{ fontSize: 18, fontWeight: 'normal', color: '#000000', paddingLeft: '5%' ,paddingRight:'5%',marginBottom:'50%'}}>ข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกายข่าวสารการออกกำลังกาย</Text>
+                    <FlatList
+                        data={info}
+                        keyExtractor={item => item.idnew_feed_exer}
+                        renderItem={({ item }) => (
+                            <Text key={item} style={{ fontSize: 28, color: 'black' }}>
+                                {item.Material_new_feed_exer}
+                            </Text>
+                        )}
+                    />
 
 
 
@@ -92,10 +122,9 @@ const styles = StyleSheet.create({
         paddingLeft: '5%',
         paddingBottom: 15,
         paddingTop: 15,
-       // backgroundColor: "#000000a0"
+        // backgroundColor: "#000000a0"
 
 
     }
 });
 
-export default showExerciseNews;

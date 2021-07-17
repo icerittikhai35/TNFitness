@@ -6,6 +6,7 @@ import { SliderBox } from "react-native-image-slider-box";
 
 export default class Feed extends Component {
 
+  
   constructor(props) {
     super(props);
     this.state = {
