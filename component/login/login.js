@@ -58,7 +58,7 @@ export default function LoginInfo(props) {
         .then((response) => {
           if (response.data == 'true') {
             props.navigation.navigate("connectInfoUser");
-            setIsSubmit(false) 
+            setIsSubmit(false)
           } else {
             alert(JSON.stringify(response.data));
             setIsSubmit(false)
@@ -180,9 +180,9 @@ export default function LoginInfo(props) {
             title={"Go to the hell"}
             onPress={logIn}
           >
-           <Image
+            <Image
               source={require('../../img/facebook.png')}
-              style={{ width: 30, height: 30,marginRight:5 }}
+              style={{ width: 30, height: 30, marginRight: 5 }}
             />
             <Text style={{ color: '#4267B2', fontWeight: 'bold', fontSize: 18 }}>เข้าสู่ระบบ ด้วย Facebook</Text>
           </TouchableOpacity>
@@ -197,7 +197,7 @@ export default function LoginInfo(props) {
           >
             <Image
               source={require('../../img/Google.png')}
-              style={{ width: 30, height: 30,marginRight:25 }}
+              style={{ width: 30, height: 30, marginRight: 25 }}
             />
             <Text style={{ color: '#4267B2', fontWeight: 'bold', fontSize: 18 }}>เข้าสู่ระบบ ด้วย Google</Text>
           </TouchableOpacity>

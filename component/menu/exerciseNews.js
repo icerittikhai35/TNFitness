@@ -27,7 +27,7 @@ export default function ExerciseNews  ({props,route,navigation})  {
                 leftComponent={
                     <View style={{ marginTop: 0, alignItems: 'center' }}>
                         <TouchableOpacity
-                            onPress={() => { props.navigation.navigate('Feed') }}>
+                            onPress={() => { navigation.navigate('Feed') }}>
                             <Icon
                                 name="arrow-left"
                                 size={25}
@@ -68,7 +68,7 @@ export default function ExerciseNews  ({props,route,navigation})  {
                                     {info.map(item => (
                                         <TouchableOpacity
                                             style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                            onPress={() =>  navigation.navigate('showExerciseNews', {dogid: item.idnew_feed_exer })}
+                                            onPress={() =>  navigation.navigate('showExerciseNews', {idNewFeed: item.idnew_feed_exer })}
                                         >
                                             <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
                                         </TouchableOpacity>

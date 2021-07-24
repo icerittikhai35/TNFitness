@@ -5,16 +5,16 @@ import Icon from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import { SliderBox } from 'react-native-image-slider-box';
 
-export default function showExerciseNews({ props, route }) {
+export default function showExerciseNews({ navigation, route }) {
     const path = ['01.jpg', '02.jpg', '03.jpg'];
-    const { dogid } = route.params;
+    const { idNewFeed } = route.params;
     const [info, setInfo] = useState([]);
 
 
     useEffect(() => {
         axios.get('http://34.126.113.88/showdataNewEx.php', {
             params: {
-                id: dogid
+                id: idNewFeed
             }
         }
         )
@@ -41,7 +41,7 @@ export default function showExerciseNews({ props, route }) {
                 leftComponent={
                     <View style={{ marginTop: 0, alignItems: 'center' }}>
                         <TouchableOpacity
-                            onPress={() => { props.navigation.navigate('ExerciseNews') }}>
+                            onPress={() => { navigation.navigate('ExerciseNews') }}>
                             <Icon
                                 name="arrow-left"
                                 size={25}
