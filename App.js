@@ -8,6 +8,7 @@ import InformationScreen from './component/menu/InformationScreen';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import connectInfoUser from './component/connect/connectInfoUser';
+import Profile from './component/menu/profile';
 
 
 const Stack = createStackNavigator();
@@ -22,17 +23,20 @@ const App = () => {
       <NavigationContainer>
 
         <Stack.Navigator>
+         
+
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
 
           <Stack.Screen
             name="InformationScreen"
             component={InformationScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
+
           <Stack.Screen
             name="Register"
             component={Register}

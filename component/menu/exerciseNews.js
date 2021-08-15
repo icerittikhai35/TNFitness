@@ -4,13 +4,13 @@ import { ListItem, Header, Image, Tile } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 
-export default function ExerciseNews  ({props,route,navigation})  {
+export default function ExerciseNews({ props, route, navigation }) {
     const [info, setInfo] = useState([])
 
 
     useEffect(() => {
-        axios.get('http://34.126.113.88/showdata.php'
-          
+        axios.get('http://35.240.174.142/showdata.php'
+
         )
             .then(response => {
                 setInfo(response.data);
@@ -21,7 +21,6 @@ export default function ExerciseNews  ({props,route,navigation})  {
     })
     return (
         <>
-
             <Header
                 placement="center"
                 leftComponent={
@@ -52,113 +51,47 @@ export default function ExerciseNews  ({props,route,navigation})  {
                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000000', paddingLeft: '5%' }}>ข่าวสารการออกกำลังกาย</Text>
                     <Text style={{ fontSize: 20, color: '#000000', paddingLeft: '5%' }}>ดูเนื้อหาล่าสุดจาก</Text>
                     <Text style={{ fontSize: 20, color: '#000000', paddingLeft: '5%', fontWeight: 'bold', marginBottom: 15 }}>TRAINING FITNESS.</Text>
+                    <View style={{paddingBottom:20}}>
+                        {info.map(item => (
+                            <View style={styles.container}>
+                                <ImageBackground source={{ uri: item.Cover_page }}
+                                    style={styles.image}
+                                >
+                                    <Text
+                                        style={styles.text}>
+                                        {item.Topic_new_feed_exer}
+                                    </Text>
+                                    <Text
+                                        style={styles.textDetail}>
+                                        {item.Material_new_feed_exer}
+                                    </Text>
+                                    <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
+                                        <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
 
 
-                    <View style={styles.container}>
-                        <ImageBackground source={require('../../img/new.jpg')}
-                            style={styles.image}
-                        >
-                            <Text
-                                style={styles.text}>
-                                มีงานวิจัยพบว่าการออกกำลังกายเป็นประจำ
-                                ส่งผลดีต่อสุขภาพ
-                            </Text>
-                            <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
-                                <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
-                                    {info.map(item => (
-                                        <TouchableOpacity
-                                            style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                            onPress={() =>  navigation.navigate('showExerciseNews', {idNewFeed: item.idnew_feed_exer })}
-                                        >
-                                            <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
-                                        </TouchableOpacity>
-                                    ))}
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15 }}
+                                                onPress={() => navigation.navigate('showExerciseNews', { idNewFeed: item.idnew_feed_exer })}
+                                            >
+                                                <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
+                                            </TouchableOpacity>
 
+
+
+                                        </View>
+                                    </View>
+                                </ImageBackground>
+                                <View style={{ backgroundColor: '#ffffff' }}>
                                 </View>
                             </View>
-                        </ImageBackground>
-                        <View style={{ backgroundColor: '#ffffff' }}>
-                        </View>
+
+                        ))}
                     </View>
 
 
 
-                    <View style={styles.container}>
-                        <ImageBackground source={require('../../img/Covid.jpg')}
-                            style={styles.image}
-                        >
-                            <Text
-                                style={styles.text}>
-                                มีงานวิจัยพบว่าการออกกำลังกายเป็นประจำ
-                                ส่งผลดีต่อสุขภาพ
-                            </Text>
-                            <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
-                                <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
-                                    >
-                                        <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </ImageBackground>
-                        <View style={{ backgroundColor: '#ffffff' }}>
-                        </View>
-                    </View>
 
 
-
-                    <View style={styles.container}>
-                        <ImageBackground source={require('../../img/pic1.jpg')}
-                            style={styles.image}
-                        >
-                            <Text
-                                style={styles.text}>
-                                มีงานวิจัยพบว่าการออกกำลังกายเป็นประจำ
-                                ส่งผลดีต่อสุขภาพ
-                            </Text>
-                            <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
-                                <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
-                                    >
-                                        <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
-                                    </TouchableOpacity>
-
-                                </View>
-                            </View>
-                        </ImageBackground>
-                        <View style={{ backgroundColor: '#ffffff' }}>
-                        </View>
-                    </View>
-
-
-
-                    <View style={styles.lastcontainer}>
-                        <ImageBackground source={require('../../img/TOP1.jpg')}
-                            style={styles.image}
-                        >
-                            <Text
-                                style={styles.text}>
-                                มีงานวิจัยพบว่าการออกกำลังกายเป็นประจำ
-                                ส่งผลดีต่อสุขภาพ
-                            </Text>
-                            <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
-                                <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15, }}
-                                        onPress={() => { props.navigation.navigate('showExerciseNews') }}
-                                    >
-                                        <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </ImageBackground>
-                        <View style={{ backgroundColor: '#ffffff' }}>
-                        </View>
-                    </View>
 
 
                 </ScrollView>
@@ -194,6 +127,18 @@ const styles = StyleSheet.create({
         paddingLeft: '5%',
         paddingBottom: 15,
         paddingTop: 15,
+        backgroundColor: "#000000a0"
+
+
+    },
+    textDetail: {
+        color: "white",
+        fontSize: 16,
+        fontWeight: "normal",
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingBottom: 15,
+        paddingTop: 0,
         backgroundColor: "#000000a0"
 
 

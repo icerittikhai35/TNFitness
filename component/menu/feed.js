@@ -10,7 +10,7 @@ export default function Feed({ navigation, route }) {
 
 
   useEffect(() => {
-    axios.get('http://34.126.113.88/showdata.php')
+    axios.get('http://35.240.174.142/showdata.php')
       .then(response => {
         setInfo(response.data);
       })

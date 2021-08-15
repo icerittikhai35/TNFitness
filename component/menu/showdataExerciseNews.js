@@ -12,7 +12,7 @@ export default function showExerciseNews({ navigation, route }) {
 
 
     useEffect(() => {
-        axios.get('http://34.126.113.88/showdataNewEx.php', {
+        axios.get('http://35.240.174.142/showdataNewEx.php', {
             params: {
                 id: idNewFeed
             }

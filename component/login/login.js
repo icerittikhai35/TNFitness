@@ -7,6 +7,7 @@ import * as Google from 'expo-google-app-auth';
 
 //npm install axios –save อย่าลืมติดตั้ง
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 //Facebook Login
@@ -49,15 +50,16 @@ export default function LoginInfo(props) {
     const authenticate = async () => {
       axios
         .post(
-          "http://34.126.113.88/login.php",
+          "http://35.240.174.142//login.php",
           JSON.stringify({
             email: email,
             password: password,
           })
         )
         .then((response) => {
-          if (response.data == 'true') {
+          if (response.data.onLogin == "true") {
             props.navigation.navigate("connectInfoUser");
+            AsyncStorage.setItem('id', response.data.iduser)
             setIsSubmit(false)
           } else {
             alert(JSON.stringify(response.data));

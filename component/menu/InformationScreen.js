@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ConnectProfile from '../connect/connectProfile';
 import ConnectTraining from '../connect/connectTraining';
 import ConnectFeed from '../connect/connectFeed';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const InformationScreen = () => {
 
