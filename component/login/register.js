@@ -17,7 +17,7 @@ export default function InsertInfo(props) {
         const authenticate = async () => {
             axios
                 .post(
-                    "http://34.126.113.88/insert.php",
+                    "http://35.240.174.142/insert.php",
                     JSON.stringify({
                         username: username,
                         password: password,

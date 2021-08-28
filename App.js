@@ -25,15 +25,16 @@ const App = () => {
         <Stack.Navigator>
          
 
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
+          
 
           <Stack.Screen
             name="InformationScreen"
             component={InformationScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
             options={{ headerShown: false }}
           />
 

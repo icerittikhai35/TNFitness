@@ -66,14 +66,14 @@ export default function ExerciseNews({ props, route, navigation }) {
                                         {item.Material_new_feed_exer}
                                     </Text>
                                     <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
-                                        <View style={{ width: 150, paddingLeft: '5%', paddingBottom: '10%', }}>
+                                        <View style={{ width: 150, paddingLeft: '5%', paddingBottom: 20,marginTop:20 }}>
 
 
                                             <TouchableOpacity
                                                 style={{ backgroundColor: '#ffffff', width: '70%', height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 15 }}
                                                 onPress={() => navigation.navigate('showExerciseNews', { idNewFeed: item.idnew_feed_exer })}
                                             >
-                                                <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14 }}>เพิ่มเติม</Text>
+                                                <Text style={{ color: '#000000', fontWeight: 'normal', fontSize: 14, }}>เพิ่มเติม</Text>
                                             </TouchableOpacity>
 
 
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: "bold",
         paddingLeft: '5%',
-        paddingBottom: 15,
-        paddingTop: 15,
+        paddingBottom: 0,
+        paddingTop: 0,
         backgroundColor: "#000000a0"
 
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         paddingLeft: '5%',
         paddingRight: '5%',
-        paddingBottom: 15,
+        paddingBottom: 0,
         paddingTop: 0,
         backgroundColor: "#000000a0"
 

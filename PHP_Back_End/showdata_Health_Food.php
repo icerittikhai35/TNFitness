@@ -2,7 +2,7 @@
 include 'connect.php';
 
 // Creating SQL command to fetch all records from Table.
-$sql = "SELECT * FROM new_feed_exer order by idnew_feed_exer desc";
+$sql = "SELECT * FROM new_feed_health_food order by idnew_feed_health_food desc";
 
 $result = $conn->query($sql);
 

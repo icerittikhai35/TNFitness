@@ -5,6 +5,7 @@ import ExerciseNews from '../menu/exerciseNews';
 import FoodNews from '../menu/FoodNews';
 import Feed from '../menu/feed';
 import showExerciseNews from '../menu/showdataExerciseNews';
+import showHealthFoodNews from '../menu/showdataHealthFoodNews';
 
 
 const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ export default function ConnectFeed() {
       <Stack.Screen name="ExerciseNews" component={ExerciseNews} options={{headerShown : false}}/>
       <Stack.Screen name="FoodNews" component={FoodNews} options={{headerShown : false}}/>
       <Stack.Screen name="showExerciseNews" component={showExerciseNews} options={{headerShown : false}}/>
+      <Stack.Screen name="showHealthFoodNews" component={showHealthFoodNews} options={{headerShown : false}}/>
     </Stack.Navigator>
     </>
   );

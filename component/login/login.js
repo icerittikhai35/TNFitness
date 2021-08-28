@@ -50,7 +50,7 @@ export default function LoginInfo(props) {
     const authenticate = async () => {
       axios
         .post(
-          "http://35.240.174.142//login.php",
+          "http://35.240.174.142/login.php",
           JSON.stringify({
             email: email,
             password: password,

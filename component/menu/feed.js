@@ -1,4 +1,4 @@
-import React ,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import { Header, Image, Tile } from 'react-native-elements';
 import { SliderBox } from "react-native-image-slider-box";
@@ -7,10 +7,24 @@ import axios from 'axios';
 export default function Feed({ navigation, route }) {
   const path = ['01.jpg', '02.jpg', '03.jpg'];
   const [info, setInfo] = useState([]);
+  const [infoexer, setInfoexer] = useState([]);
+
+  {/*useEffect(() => {
+    axios.get('http://35.240.174.142/showdata.php'
+
+    )
+        .then(response => {
+          setInfoexer(response.data);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+*/}
 
 
   useEffect(() => {
-    axios.get('http://35.240.174.142/showdata.php')
+    axios.get('http://35.240.174.142/showdata_Health_Food.php')
       .then(response => {
         setInfo(response.data);
       })
@@ -19,12 +33,13 @@ export default function Feed({ navigation, route }) {
       })
   })
 
-  const images = info.map(item => (
+  const images = infoexer.map(item => (
     item.Link_forder_img
   ))
   const showpath = path.map(item => (
     images + item
   ))
+
 
   return (
 
@@ -53,7 +68,7 @@ export default function Feed({ navigation, route }) {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: '5%' }}>
               <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#ffffff', paddingLeft: '5%' }}>มีอะไรใหม่</Text>
               <TouchableOpacity
-                onPress={() => {navigation.navigate('ExerciseNews') }}>
+                onPress={() => { navigation.navigate('ExerciseNews') }}>
                 <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#ffffff', paddingBottom: 4, borderBottomWidth: 1, borderBottomColor: 'white' }}>ดูทั้งหมด</Text>
               </TouchableOpacity>
             </View>
@@ -61,8 +76,11 @@ export default function Feed({ navigation, route }) {
             <Text style={{ fontSize: 20, color: '#ffffff', paddingLeft: '5%', fontWeight: 'bold' }}>TRAINING FITNESS.</Text>
             <View style={{ alignItems: 'center', marginTop: 30, }}>
               <View style={{ width: '100%', marginBottom: 0 }}>
+              {/*
                 <SliderBox sliderBoxHeight={500} images={showpath} />
                 <Text>{showpath}</Text>
+              */}
+
               </View>
 
               <View style={{ width: '100%', height: 300 }}>
@@ -89,34 +107,26 @@ export default function Feed({ navigation, route }) {
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                 >
+                  {info.map(item => (
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('showHealthFoodNews', { idNewFeed: item.idnew_feed_health_food })}
+                    >
+                      <View style={{ width: 200, height: 400, marginRight: 15, }}>
+                        <Image
+                          style={{ height: 350, width: '100%', borderRadius: 15 }}
+                          source={{ uri: item.Cover_page }}
+                        />
+                        <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#000000', }}>
+                          {item.Topic_new_feed_health_food}
+                        </Text>
+                        <Text style={{ fontSize: 12, color: '#000000', }}>
+                          {item.Material_new_feed_health_food}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
 
-                  <View style={{ width: 200, height: 400, marginRight: 15, }}>
-                    <Image
-                      style={{ height: 350, width: '100%', borderRadius: 15 }}
-                      source={{ uri: 'http://34.126.113.88/images/pic1.jpg' }}
-                    />
-                    <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#000000', }}>อาหาร</Text>
-                    <Text style={{ fontSize: 12, color: '#000000', }}>การเลือกกินอาหารที่เป็นประโยชน์</Text>
-                  </View>
 
-                  <View style={{ width: 200, height: 400, marginRight: 15 }}>
-                    <Image
-                      style={{ height: 350, width: '100%', borderRadius: 15 }}
-                      source={require('../../img/Covid.jpg')}
-                    />
-                    <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#000000', }}>สุขภาพ</Text>
-                    <Text style={{ fontSize: 12, color: '#000000', }}>การเลือกกินอาหารที่เป็นประโยชน์</Text>
-                  </View>
-
-                  <View style={{ width: 200, height: 400, marginRight: 15 }}>
-                    <Image
-                      style={{ height: 350, width: '100%', borderRadius: 15 }}
-                      source={require('../../img/new.jpg')}
-                    />
-                    <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#000000', }}>อาหาร</Text>
-                    <Text style={{ fontSize: 12, color: '#000000', }}>การเลือกกินอาหารที่เป็นประโยชน์</Text>
-                  </View>
-
+                  ))}
 
                 </ScrollView>
               </View>

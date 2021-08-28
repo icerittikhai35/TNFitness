@@ -5,14 +5,14 @@ import Icon from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import { SliderBox } from 'react-native-image-slider-box';
 
-export default function showExerciseNews({ navigation, route }) {
+export default function showHealthFoodNews({ navigation, route }) {
     const path = ['01.jpg', '02.jpg', '03.jpg'];
     const { idNewFeed } = route.params;
     const [info, setInfo] = useState([]);
 
- 
+
     useEffect(() => {
-        axios.get('http://35.240.174.142/showdataNewEx.php', {
+        axios.get('http://35.240.174.142/showdataNewHF.php', {
             params: {
                 id: idNewFeed
             }
@@ -71,19 +71,19 @@ export default function showExerciseNews({ navigation, route }) {
                         <View style={{ backgroundColor: '#ffffff' }}>
                         </View>
                     </View>
-                    
                     <FlatList
                         data={info}
-                        keyExtractor={item => item.idnew_feed_exer}
+                        keyExtractor={item => item.idnew_feed_health_food}
                         renderItem={({ item }) => (
-                            <View key={item}>
+                            <View key={item}>         
                                 <Text style={styles.text}>
-                                    {item.Topic_new_feed_exer}
+                                    {item.Topic_new_feed_health_food}
                                 </Text>
                                 <Text style={styles.text}>
-                                    {item.Material_new_feed_exer}
+                                    {item.Material_new_feed_health_food}
                                 </Text>
                             </View>
+
                         )}
                     />
 
