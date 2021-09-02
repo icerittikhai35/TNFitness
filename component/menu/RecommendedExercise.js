@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import { Agenda } from 'react-native-calendars';
-import { ListItem, Header, Image, Tile } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Feather';
-import { Card, Avatar } from 'react-native-paper';
+import { ListItem, Header, Image, Card } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { Avatar } from 'react-native-paper';
+import { Exercise } from '../../DataExercise';
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -20,11 +21,11 @@ const RecommendedExercise = (props) => {
         const strTime = timeToString(time);
         if (!items[strTime]) {
           items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 3 + 1);
+          const numItems = Math.floor(1);
           for (let j = 0; j < numItems; j++) {
             items[strTime].push({
-              name: 'Item for ' + strTime + ' #' + j,
-              height: Math.max(50, Math.floor(Math.random() * 150))
+              name: 'Item for ' + ' #' + j,
+              height: 150
             });
           }
         }
@@ -37,98 +38,147 @@ const RecommendedExercise = (props) => {
     }, 1000);
   }
 
-  
 
-const renderItem = (item) => {
-  return (
-    <TouchableOpacity style={{ marginRight: 10, marginTop: 17, backgroundColor: '#3D3D3D', }}>
-      {/*<View style={{width: '100%', backgroundColor: '#3D3D3D',}}>*/}
-      <Card style={{ backgroundColor: '#3D3D3D', borderWidth: 1 }}>
-        <Card.Content>
+
+  const renderItem = (item) => {
+    return (
+
+      <View style={{ paddingRight: '5%', backgroundColor: '#3D3D3D' }}>
+        {Exercise.map(item => (
+
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              backgroundColor: '#3D3D3D',
-
+              backgroundColor: '#292B2D',
+              borderRadius: 20,
+              height: 120,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              marginBottom: 10,
+              borderRadius: 15
             }}>
-            <Avatar.Text label="Test" />
+
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#292B2D',
+                margin: 10
+              }}>
+              <Image
+                style={{ height: 100, width: 150, borderRadius: 15 }}
+                source={{ uri: item.imageUrls }}
+              />
+              <View style={{ width: "100%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%' }}>
+                <View style={{ marginBottom: 0 }}>
+                  <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{item.name}</Text>
+                </View>
+                <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.volume}</Text>
+                  </View>
+                  <View style={{ alignItems: 'center', paddingLeft: 10 }}>
+                    <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.round}</Text>
+                  </View>
+                  <View style={{ alignItems: 'center', paddingLeft: 10 }}>
+                    <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.weight}</Text>
+                  </View>
+                  <View style={{ alignItems: 'center', paddingLeft: 10 }}>
+                    <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.break}</Text>
+                  </View>
+                  <View style={{ backgroundColor: '#69BD51', width: 30, height: 30, borderRadius: 30, marginBottom: 15, paddingLeft: 5, alignItems: 'center' }}>
+                    <Icon
+                      name="right"
+                      size={20}
+                      color={'white'}
+                      style={{marginTop:5}}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
-        </Card.Content>
-      </Card>
-      {/*</View>*/}
-    </TouchableOpacity>
-  );
-};
-return (
-  <>
-
-    <Header
-      placement="center"
-      leftComponent={
-        <View style={{ marginTop: 19 }}>
-          <TouchableOpacity
-            onPress={() => { props.navigation.navigate('Training') }}>
-            <Icon
-              name="arrow-left"
-              size={25}
-              color={'white'}
-            />
-          </TouchableOpacity>
-        </View>}
-      centerComponent={<Image
-        source={require('../../img/Since1992.png')}
-        style={{ width: 60, height: 60, }}
-      />}
-
-      containerStyle={{
-        backgroundColor: '#292B2D',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        height: 112,
-        borderBottomColor: '#292B2D'
-
-      }}
-    />
 
 
+        ))}
 
-    <View style={styles.container}>
-      <Image
-        style={{ height: 100, width: '100%', borderRadius: 0 }}
-        source={require('../../img/TN1.jpg')}
-      />
-      <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 20 }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
-      <View style={{ flex: 1, backgroundColor: '#3D3D3D' }}>
-        <Agenda
-          items={items}
-          onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
-          //โชว์ตาราง
-          loadItemsForMonth={loadItems}
-          renderItem={renderItem}
-          current={'2021-01-0 1'}
-          hideKnob={true}
-          theme={{
-            backgroundColor: '#3D3D3D',
-            calendarBackground: '#3D3D3D',
-            selectedDayBackgroundColor: '#69BD51',
-            selectedDayTextColor: '#000000',
-            todayTextColor: '#69BD51',
-            textDisabledColor: '#888888',
-            dayTextColor: '#9E9E9E',
-            agendaKnobColor: '#69BD51',
-            dotColor: '#3D3D3D',
-            'stylesheet.calendar.header': { week: { marginTop: Platform.OS == 'ios' ? 6 : 2, flexDirection: 'row', justifyContent: 'space-between' } }
-
-          }}
-        />
       </View>
-    </View>
+
+    );
+  };
+  return (
+    <>
+
+      <Header
+        placement="center"
+        leftComponent={
+          <View style={{ marginTop: 19 }}>
+            <TouchableOpacity
+              onPress={() => { props.navigation.navigate('Training') }}>
+              <Icon
+                name="arrowleft"
+                size={25}
+                color={'white'}
+              />
+            </TouchableOpacity>
+          </View>}
+        centerComponent={<Image
+          source={require('../../img/Since1992.png')}
+          style={{ width: 60, height: 60, }}
+        />}
+
+        containerStyle={{
+          backgroundColor: '#292B2D',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          height: 112,
+          borderBottomColor: '#292B2D'
+
+        }}
+      />
 
 
-  </>
-);
+
+      <View style={styles.container}>
+        <Image
+          style={{ height: 100, width: '100%', borderRadius: 0 }}
+          source={require('../../img/TN1.jpg')}
+        />
+        <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 20 }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
+        <View style={{ flex: 1, backgroundColor: '#3D3D3D' }}>
+          <Agenda
+            items={items}
+            onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
+            //โชว์ตาราง
+            loadItemsForMonth={loadItems}
+            renderItem={renderItem}
+            current={'2021-01-0 1'}
+            hideKnob={true}
+            disabledByDefault={true}
+            onRefresh={() => console.log('refreshing...')}
+            theme={{
+              backgroundColor: '#3D3D3D',
+              calendarBackground: '#3D3D3D',
+              selectedDayBackgroundColor: '#69BD51',
+              selectedDayTextColor: '#000000',
+              todayTextColor: '#69BD51',
+              textDisabledColor: '#888888',
+              dayTextColor: '#9E9E9E',
+              agendaKnobColor: '#69BD51',
+              dotColor: '#3D3D3D',
+              'stylesheet.calendar.header': { week: { marginTop: Platform.OS == 'ios' ? 6 : 2, flexDirection: 'row', justifyContent: 'space-between' } }
+
+            }}
+          />
+        </View>
+      </View>
+
+
+    </>
+  );
 
 };
 const styles = StyleSheet.create({

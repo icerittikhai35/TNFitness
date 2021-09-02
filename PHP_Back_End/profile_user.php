@@ -1,8 +1,10 @@
 <?php
 include 'connect.php';
 
+$iduser = $_GET["id"];
+
 // Creating SQL command to fetch all records from Table.
-$sql = "SELECT * FROM new_feed_health_food order by idnew_feed_health_food desc";
+$sql = "SELECT * FROM user WHERE iduser = '".$iduser."'";
 
 $result = $conn->query($sql);
 
@@ -23,4 +25,3 @@ if ($result->num_rows >0) {
  echo $json;
 $conn->close();
 ?>
-
