@@ -11,6 +11,17 @@ const timeToString = (time) => {
   return date.toISOString().split('T')[0];
 }
 
+const renderDay = (day, item) => {
+  if (!item) {
+    return (<View></View>)
+  }
+}
+const renderEmptyDate = () => {
+  return (
+    <View style={{ height: 0 }}></View>
+  );
+}
+
 const RecommendedExercise = (props) => {
   const [items, setItems] = useState({});
 
@@ -25,7 +36,8 @@ const RecommendedExercise = (props) => {
           for (let j = 0; j < numItems; j++) {
             items[strTime].push({
               name: 'Item for ' + ' #' + j,
-              height: 150
+              height: 0,
+              width: 0
             });
           }
         }
@@ -40,10 +52,10 @@ const RecommendedExercise = (props) => {
 
 
 
-  const renderItem = (item) => {
+  const renderItem = (items) => {
     return (
 
-      <View style={{ paddingRight: '5%', backgroundColor: '#3D3D3D' }}>
+      <View style={{ paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#3D3D3D' }}>
         {Exercise.map(item => (
 
           <View
@@ -62,13 +74,14 @@ const RecommendedExercise = (props) => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 backgroundColor: '#292B2D',
+                //292B2D
                 margin: 10
               }}>
               <Image
                 style={{ height: 100, width: 150, borderRadius: 15 }}
                 source={{ uri: item.imageUrls }}
               />
-              <View style={{ width: "100%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%' }}>
+              <View style={{ width: "60%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%',backgroundColor:'#292B2D' }}>
                 <View style={{ marginBottom: 0 }}>
                   <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{item.name}</Text>
                 </View>
@@ -77,26 +90,26 @@ const RecommendedExercise = (props) => {
                     <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
                     <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.volume}</Text>
                   </View>
-                  <View style={{ alignItems: 'center', paddingLeft: 10 }}>
+                  <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
                     <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
                     <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.round}</Text>
                   </View>
-                  <View style={{ alignItems: 'center', paddingLeft: 10 }}>
+                  <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
                     <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
                     <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.weight}</Text>
                   </View>
-                  <View style={{ alignItems: 'center', paddingLeft: 10 }}>
+                  <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
                     <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
                     <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.break}</Text>
                   </View>
-                  <View style={{ backgroundColor: '#69BD51', width: 30, height: 30, borderRadius: 30, marginBottom: 15, paddingLeft: 5, alignItems: 'center' }}>
-                    <Icon
-                      name="right"
-                      size={20}
-                      color={'white'}
-                      style={{marginTop:5}}
+
+                  <View style={{alignItems:'flex-end',width:'25%',marginBottom:20}}>
+                    <Image
+                      style={{ height: 30, width:30, borderRadius: 0 }}
+                      source={require('../../img/right-tn.png')}
                     />
                   </View>
+
                 </View>
               </View>
             </View>
@@ -152,24 +165,28 @@ const RecommendedExercise = (props) => {
           <Agenda
             items={items}
             onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
+            renderEmptyDate={renderEmptyDate}
+            renderDay={renderDay}
             //โชว์ตาราง
             loadItemsForMonth={loadItems}
             renderItem={renderItem}
             current={'2021-01-0 1'}
             hideKnob={true}
-            disabledByDefault={true}
             onRefresh={() => console.log('refreshing...')}
             theme={{
               backgroundColor: '#3D3D3D',
               calendarBackground: '#3D3D3D',
               selectedDayBackgroundColor: '#69BD51',
-              selectedDayTextColor: '#000000',
+              selectedDayTextColor: '#ffffff',
               todayTextColor: '#69BD51',
               textDisabledColor: '#888888',
               dayTextColor: '#9E9E9E',
               agendaKnobColor: '#69BD51',
               dotColor: '#3D3D3D',
+
+
               'stylesheet.calendar.header': { week: { marginTop: Platform.OS == 'ios' ? 6 : 2, flexDirection: 'row', justifyContent: 'space-between' } }
+
 
             }}
           />
