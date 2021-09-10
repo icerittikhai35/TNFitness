@@ -9,7 +9,7 @@ export default function ExerciseNews({ props, route, navigation }) {
 
 
     useEffect(() => {
-        axios.get('http://35.240.174.142/showdata.php'
+        axios.get('http://34.126.141.128/showdata.php'
 
         )
             .then(response => {
@@ -54,7 +54,7 @@ export default function ExerciseNews({ props, route, navigation }) {
                     <View style={{paddingBottom:20}}>
                         {info.map(item => (
                             <View style={styles.container}>
-                                <ImageBackground source={{ uri: item.Cover_page }}
+                                <ImageBackground source={{ uri: item.url }}
                                     style={styles.image}
                                 >
                                     <Text

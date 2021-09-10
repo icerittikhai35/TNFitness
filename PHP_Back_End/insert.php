@@ -4,21 +4,26 @@
     $json = json_decode(file_get_contents('php://input'), true);
 
     $username = $json["username"];
-    $password = $json["password"];
     $email = $json["email"];
+    $password = $json["password"];
 
 
-    $count = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM new_table WHERE email = '$email'"));
-    if($count == 1){
-        $arr = array("result"=>"Email already has");
-        echo json_encode($arr);
-    } elseif ($count == 0) {
-        $query1 = "INSERT INTO new_table  (idnew_table, username,password, email) VALUES (NULL, '$username', '$password', '$email');";
-        $query_output = mysqli_query($conn, $query1);
-        $arr = array('result'=>'เสร็จสิ้น');
-        echo json_encode($arr);
-    } else {
-        $arr = array('result' => 'fail');
-        echo json_encode($arr);
-    } 
+    $count = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM user where email = '$email'"));
+    if ($email == "" && $username == "" && $password == ""){
+        echo json_encode("กรุณากรอกข้อมูล");
+    }
+    else{
+        if($count == 1){
+            $message = "Email already has";
+            echo json_encode($message);
+        } elseif ($count == 0) {
+            $query1 = "INSERT INTO user (iduser, username, email, password) VALUES (NULL, '$username', '$email', '$password');";
+            $query_output = mysqli_query($conn, $query1);
+            $message = "ok";
+            echo json_encode($message);
+        } else {
+            $arr = array('result' => 'fail');
+            echo json_encode($arr);
+        } 
+    }
 ?>

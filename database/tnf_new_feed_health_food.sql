@@ -14,14 +14,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
 
 --
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '816dce85-c9c5-11eb-a4d6-42010a940002:1-274991';
 
 --
 -- Table structure for table `new_feed_health_food`
@@ -49,7 +46,6 @@ LOCK TABLES `new_feed_health_food` WRITE;
 INSERT INTO `new_feed_health_food` VALUES (1,'Test Food',' TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest','http://35.240.174.142/images/feed/','http://35.240.174.142/images/new.jpg'),(2,'Test2','Topic','http://35.240.174.142/images/feed/','http://35.240.174.142/images/new.jpg');
 /*!40000 ALTER TABLE `new_feed_health_food` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

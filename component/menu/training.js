@@ -19,7 +19,7 @@ const Training = (props) => {
         containerStyle={{
           backgroundColor: '#292B2D',
           height: 112,
-          borderBottomColor:'#292B2D'
+          borderBottomColor: '#292B2D'
         }}
       />
       <View style={styles.container}>
@@ -48,10 +48,12 @@ const Training = (props) => {
             </View>
 
             <View style={{ width: '90%', }}>
-              <Image
-                style={{ height: 150, width: '100%', borderRadius: 20 }}
-                source={require('../../img/TN3.jpg')}
-              />
+              <TouchableOpacity onPress={() => { props.navigation.navigate('ManageExercise') }}>
+                <Image
+                  style={{ height: 150, width: '100%', borderRadius: 20 }}
+                  source={require('../../img/TN3.jpg')}
+                />
+              </TouchableOpacity>
             </View>
 
 

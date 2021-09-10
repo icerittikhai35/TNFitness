@@ -9,74 +9,83 @@ import {
     ScrollView,
 } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
+import Icon from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-export default class EditProfile extends Component {
 
-    render(props) {
-        return (
-            <View style={styles.container}>
+export default function EditProfile({navigation}) {
+    function logout() {
+        AsyncStorage.setItem('id', '')
+        navigation.navigate('Login')
 
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
-                        <Image
-                            style={{ height: 25, width: 25, marginLeft: 15, marginTop: 13 }}
-                            source={require('../../img/arrow.png')}
-                        />
-                    </TouchableOpacity>
-                    <View>
-                        <Text style={{ color: 'white', marginLeft: '20%', marginTop: 13, fontSize: 16, fontWeight: 'bold' }}>ตั้งค่า</Text>
-                    </View>
-                </View>
+    }
+    return (
+        <View style={styles.container}>
 
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProfile')}>
-                    <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
-                        <Image
-                            style={{ height: 25, width: 25, marginLeft: 15, }}
-                            source={require('../../img/icon/user.png')}
-                        />
-                        <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>แก้ไขข้อมูลส่วนตัว</Text>
-                    </View>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                    <Icon
+                        name="arrowleft"
+                        size={25}
+                        color={'white'}
+                    />
                 </TouchableOpacity>
-
-                <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.8, flexDirection: 'row',justifyContent:'space-between'}}>
-                    <View style={{flexDirection: 'row', paddingTop: 13 ,}}>
-                        <Image
-                            style={{ height: 25, width: 25, marginLeft: 15, }}
-                            source={require('../../img/icon/bell.png')}
-                        />
-                        <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>การเเจ้งเตือน</Text>
-                    </View>
-                    <View style={{flexDirection: 'row',paddingRight:'5%'}}>
-                        <ToggleSwitch
-                            isOn={true}
-                            onColor="green"
-                            offColor="#292B2D"
-                            size="medium"
-                            onToggle={isOn => console.log("changed to : ", isOn)}
-                        />
-
-                    </View>
-
+                <View>
+                    <Text style={{ color: 'white', marginLeft: '20%', marginTop: 0, fontSize: 16, fontWeight: 'bold' }}>ตั้งค่า</Text>
                 </View>
+            </View>
 
+            <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
                 <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
                     <Image
                         style={{ height: 25, width: 25, marginLeft: 15, }}
-                        source={require('../../img/icon/contact.png')}
+                        source={require('../../img/icon/user.png')}
                     />
-                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>ติดต่อเรา</Text>
+                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>แก้ไขข้อมูลส่วนตัว</Text>
                 </View>
+            </TouchableOpacity>
 
-                <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+            <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.8, flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', paddingTop: 13, }}>
                     <Image
                         style={{ height: 25, width: 25, marginLeft: 15, }}
-                        source={require('../../img/icon/newspaper.png')}
+                        source={require('../../img/icon/bell.png')}
                     />
-                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>รายงานปัญหา</Text>
+                    <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>การเเจ้งเตือน</Text>
+                </View>
+                <View style={{ flexDirection: 'row', paddingRight: '5%' }}>
+                    <ToggleSwitch
+                        isOn={true}
+                        onColor="green"
+                        offColor="#292B2D"
+                        size="medium"
+                        onToggle={isOn => console.log("changed to : ", isOn)}
+                    />
+
                 </View>
 
+            </View>
+
+            <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+                <Image
+                    style={{ height: 25, width: 25, marginLeft: 15, }}
+                    source={require('../../img/icon/contact.png')}
+                />
+                <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>ติดต่อเรา</Text>
+            </View>
+
+            <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
+                <Image
+                    style={{ height: 25, width: 25, marginLeft: 15, }}
+                    source={require('../../img/icon/newspaper.png')}
+                />
+                <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>รายงานปัญหา</Text>
+            </View>
+            <TouchableOpacity
+                onPress={logout}
+            >
                 <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
                     <Image
                         style={{ height: 25, width: 25, marginLeft: 15, }}
@@ -84,11 +93,11 @@ export default class EditProfile extends Component {
                     />
                     <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>ออกจากระบบ</Text>
                 </View>
-
-            </View >
-        );
-    }
+            </TouchableOpacity>
+        </View >
+    );
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -99,7 +108,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#292B2D",
         height: 50,
         flexDirection: 'row',
-        marginTop: 48
+        marginTop: 48,
+        alignItems: 'center',
+        paddingLeft:'3%'
+
     },
     avatar: {
         width: 100,

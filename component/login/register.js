@@ -17,17 +17,21 @@ export default function InsertInfo(props) {
         const authenticate = async () => {
             axios
                 .post(
-                    "http://35.240.174.142/insert.php",
+                    "http://34.126.141.128/insert.php",
                     JSON.stringify({
                         username: username,
-                        password: password,
+                        password: password, 
                         email: email
                     })
                 )
                 .then((response) => {
-                    alert(JSON.stringify(response.data));
-                    setIsSubmit(false)
-                    props.navigation.navigate("Login");
+                    if (response.data == "ok") {
+                        props.navigation.navigate("Login");
+                        setIsSubmit(false)
+                    } else {
+                        alert(JSON.stringify(response.data));
+                        setIsSubmit(false)
+                    }
                 })
                 .catch((err) => {
                     console.log(err);

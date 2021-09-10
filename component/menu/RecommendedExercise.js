@@ -55,7 +55,7 @@ const RecommendedExercise = (props) => {
   const renderItem = (items) => {
     return (
 
-      <View style={{ paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#3D3D3D' }}>
+      <View style={{ paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginBottom: 50 }}>
         {Exercise.map(item => (
 
           <View
@@ -81,7 +81,7 @@ const RecommendedExercise = (props) => {
                 style={{ height: 100, width: 150, borderRadius: 15 }}
                 source={{ uri: item.imageUrls }}
               />
-              <View style={{ width: "60%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%',backgroundColor:'#292B2D' }}>
+              <View style={{ width: "60%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
                 <View style={{ marginBottom: 0 }}>
                   <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{item.name}</Text>
                 </View>
@@ -103,9 +103,9 @@ const RecommendedExercise = (props) => {
                     <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.break}</Text>
                   </View>
 
-                  <View style={{alignItems:'flex-end',width:'25%',marginBottom:20}}>
+                  <View style={{ alignItems: 'flex-end', width: '25%', marginBottom: 20 }}>
                     <Image
-                      style={{ height: 30, width:30, borderRadius: 0 }}
+                      style={{ height: 30, width: 30, borderRadius: 0 }}
                       source={require('../../img/right-tn.png')}
                     />
                   </View>

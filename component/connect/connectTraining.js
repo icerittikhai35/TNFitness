@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RecommendedExercise from '../menu/RecommendedExercise';
 import Training from '../menu/training';
+import ManageExercise from '../menu/manageExercise';
 
 const Stacknoti = createBottomTabNavigator();
 
@@ -11,6 +12,7 @@ export default function ConnectTraining() {
     <Stacknoti.Navigator>
       <Stacknoti.Screen name="Training" component={Training} />
       <Stacknoti.Screen name="RecommendedExercise" component={RecommendedExercise} />
+      <Stacknoti.Screen name="ManageExercise" component={ManageExercise} />
     </Stacknoti.Navigator>
   );
 } 

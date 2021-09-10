@@ -10,7 +10,7 @@ const screenWidth = Dimensions.get("window").width;
 
 
 
-export default function Profile({navigation}) {
+export default function Profile({ navigation }) {
 
     const [infouser, setUser] = useState();
     const [userdata, setUserdata] = useState([]);
@@ -18,7 +18,7 @@ export default function Profile({navigation}) {
         AsyncStorage.getItem('id')
             .then((value) => {
                 setUser(value);
-                axios.get('http://35.240.174.142/profile_user.php', {
+                axios.get('http://34.126.141.128/profile_user.php', {
                     params: {
                         id: infouser
                     }
@@ -33,18 +33,17 @@ export default function Profile({navigation}) {
     })
 
 
-    function logout() {
-        AsyncStorage.setItem('id','')
-        navigation.navigate('Login')
-
-    }
+     
     return (
         <>
             <Header
                 placement="center"
                 leftComponent={<Text style={{ color: 'white', marginLeft: '5%', marginTop: 0, fontSize: 16, fontWeight: 'bold' }}>โปรไฟล์</Text>}
                 rightComponent={
-                    <TouchableOpacity onPress={logout}>
+                    <TouchableOpacity
+                        // onPress={logout}
+                        onPress={() => { navigation.navigate('Setting') }}
+                    >
                         <Image
                             style={{ height: 25, width: 25, marginRight: '5%', marginTop: 0 }}
                             source={require('../../img/setting.png')}
@@ -73,7 +72,7 @@ export default function Profile({navigation}) {
                                 data={userdata}
                                 renderItem={({ item }) => (
                                     <View style={styles.bodyContent}>
-                                        <Text style={styles.name}>{item.name}</Text>
+                                        <Text style={styles.name}>{item.username}</Text>
                                         <Text style={styles.info}>เป้าหมาย : ลดน้ำหนัก / ประสบการณ์ : มือใหม่</Text>
                                         <Text style={styles.description}>อายุ:20  ส่วนสูง:180  น้ำหนัก:70</Text>
                                         <TouchableOpacity
@@ -136,7 +135,7 @@ export default function Profile({navigation}) {
                                         borderRadius: 7
                                     }}
                                 />
-                                
+
 
                                 <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
                                 <LineChart

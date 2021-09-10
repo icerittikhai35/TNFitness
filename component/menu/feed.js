@@ -1,44 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Animated, Dimensions } from 'react-native';
 import { Header, Image, Tile } from 'react-native-elements';
-import { SliderBox } from "react-native-image-slider-box";
 import axios from 'axios';
 
+const { width } = Dimensions.get("window");
+const { height } = width * 100 / 60;
+
 export default function Feed({ navigation, route }) {
-  const path = ['01.jpg', '02.jpg', '03.jpg'];
   const [info, setInfo] = useState([]);
   const [infoexer, setInfoexer] = useState([]);
+  const scrollX = new Animated.Value(0);
+  const position = Animated.divide(scrollX, width);
 
-  {/*useEffect(() => {
-    axios.get('http://35.240.174.142/showdata.php'
-
-    )
-        .then(response => {
-          setInfoexer(response.data);
-        })
-        .catch(err => {
-            console.log(err)
-        })
-})
-*/}
 
 
   useEffect(() => {
-    axios.get('http://35.240.174.142/showdata_Health_Food.php')
-      .then(response => {
-        setInfo(response.data);
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  })
+    const alldatanews = async () => {
+      try {
+        const response = await axios.get('http://34.126.141.128/showdata.php')
+        setInfoexer(response.data)
+      } catch {
+        alert('eerroor')
+      }
+    }
+    alldatanews();
+  }, [infoexer])
 
-  const images = infoexer.map(item => (
-    item.Link_forder_img
-  ))
-  const showpath = path.map(item => (
-    images + item
-  ))
+  useEffect(() => {
+    const alldatanewsFood = async () => {
+      try {
+        const response = await axios.get('http://34.126.141.128/showdata_Health_Food.php')
+        setInfo(response.data)
+      } catch {
+        alert('error')
+      }
+    }
+    alldatanewsFood();
+  }, [info])
+
+
+
 
 
   return (
@@ -75,12 +76,46 @@ export default function Feed({ navigation, route }) {
             <Text style={{ fontSize: 20, color: '#ffffff', paddingLeft: '5%' }}>ดูเนื้อหาล่าสุดจาก</Text>
             <Text style={{ fontSize: 20, color: '#ffffff', paddingLeft: '5%', fontWeight: 'bold' }}>TRAINING FITNESS.</Text>
             <View style={{ alignItems: 'center', marginTop: 30, }}>
-              <View style={{ width: '100%', marginBottom: 0 }}>
-              {/*
-                <SliderBox sliderBoxHeight={500} images={showpath} />
-                <Text>{showpath}</Text>
-              */}
 
+              <View style={{ width: '100%', height: 500, marginBottom: 0, backgroundColor: '#e5e5e5' }}>
+                <ScrollView
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                 
+                  onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                    { useNativeDriver: false }
+                  )}
+                  horizontal={true}
+                  style={{
+                    width,
+                    height
+                  }}>
+                  {infoexer.map((item, index) => (
+                    <TouchableOpacity onPress={() => navigation.navigate('showExerciseNews', { idNewFeed: item.idnew_feed_exer })} style={{ width, height }}>
+                      <Image
+                        key={index}
+                        style={{
+                          width: '100%',
+                          height: '100%'
+                        }}
+                        source={{ uri: item.url }}
+                      />
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+                <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center' }}>
+                  {infoexer.map((i, k) => {
+                    let opacity = position.interpolate({
+                      inputRange: [k - 1, k, k + 1],
+                      outputRange: [0.3, 1, 0.3],
+                      extrapolate: 'clamp'
+                    })
+                    return (
+                      <Animated.View key={k} style={{ opacity, height: 10, width: 10, backgroundColor: 'black', borderRadius: 20, margin: 5 }} />
+                    )
+                  })}
+                </View>
               </View>
 
               <View style={{ width: '100%', height: 300 }}>

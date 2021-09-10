@@ -9,7 +9,7 @@ export default function FoodNews({ props, route, navigation }) {
 
 
     useEffect(() => {
-        axios.get('http://35.240.174.142/showdata_Health_Food.php'
+        axios.get('http://34.126.141.128/showdata_Health_Food.php'
 
         )
             .then(response => {

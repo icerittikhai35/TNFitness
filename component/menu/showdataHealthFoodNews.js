@@ -12,7 +12,7 @@ export default function showHealthFoodNews({ navigation, route }) {
 
 
     useEffect(() => {
-        axios.get('http://35.240.174.142/showdataNewHF.php', {
+        axios.get('http://34.126.141.128/showdataNewHF.php', {
             params: {
                 id: idNewFeed
             }

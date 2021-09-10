@@ -39,7 +39,7 @@ async function logIn() {
 
 
 export default function LoginInfo(props) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [googleSubmitting, setGoogleSubmitting] = useState("");
 
@@ -50,17 +50,25 @@ export default function LoginInfo(props) {
     const authenticate = async () => {
       axios
         .post(
-          "http://35.240.174.142/login.php",
+          "http://34.126.141.128/login.php",
           JSON.stringify({
-            email: email,
+            username: username,
             password: password,
           })
         )
         .then((response) => {
+          //response.data.gender != null
           if (response.data.onLogin == "true") {
-            props.navigation.navigate("connectInfoUser");
-            AsyncStorage.setItem('id', response.data.iduser)
-            setIsSubmit(false)
+            if (response.data.gender != null) {
+              props.navigation.navigate("InformationScreen");
+              AsyncStorage.setItem('id', response.data.iduser)
+              setIsSubmit(false)
+              alert("เเม่นแแล้วๆ");
+            } else {
+              props.navigation.navigate("connectInfoUser");
+              AsyncStorage.setItem('id', response.data.iduser)
+              setIsSubmit(false)
+            }
           } else {
             alert(JSON.stringify(response.data));
             setIsSubmit(false)
@@ -76,7 +84,7 @@ export default function LoginInfo(props) {
   }, [isSubmit]);
 
   const usernameHandler = (text) => {
-    setEmail(text);
+    setUsername(text);
 
   };
 
