@@ -13,6 +13,7 @@ export default function InsertInfo(props) {
 
     let [isSubmit, setIsSubmit] = useState(false);
 
+
     useEffect(() => {
         const authenticate = async () => {
             axios
@@ -20,7 +21,7 @@ export default function InsertInfo(props) {
                     "http://34.126.141.128/insert.php",
                     JSON.stringify({
                         username: username,
-                        password: password, 
+                        password: password,
                         email: email
                     })
                 )
@@ -43,6 +44,8 @@ export default function InsertInfo(props) {
     const usernameHandler = (text) => {
         setUsername(text);
     };
+
+   
 
     return (
         <View style={{ height: '100%', backgroundColor: '#3D3D3D' }}>

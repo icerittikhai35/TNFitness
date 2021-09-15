@@ -24,7 +24,7 @@ export default function showHealthFoodNews({ navigation, route }) {
             .catch(err => {
                 console.log(err)
             })
-    })
+    }, [])
 
     const images = info.map(item => (
         item.Link_forder_img
@@ -41,7 +41,7 @@ export default function showHealthFoodNews({ navigation, route }) {
                 leftComponent={
                     <View style={{ marginTop: 0, alignItems: 'center' }}>
                         <TouchableOpacity
-                            onPress={() => { navigation.navigate('ExerciseNews') }}>
+                            onPress={() => { navigation.navigate('FoodNews') }}>
                             <Icon
                                 name="arrow-left"
                                 size={25}
@@ -60,7 +60,7 @@ export default function showHealthFoodNews({ navigation, route }) {
 
 
 
-            <View style={{ marginTop: 0, marginBottom: '5%' }}>
+            <View style={{ marginTop: 0, marginBottom: 180 }}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >
@@ -75,13 +75,14 @@ export default function showHealthFoodNews({ navigation, route }) {
                         data={info}
                         keyExtractor={item => item.idnew_feed_health_food}
                         renderItem={({ item }) => (
-                            <View key={item}>         
+                            <View key={item} >
                                 <Text style={styles.text}>
                                     {item.Topic_new_feed_health_food}
                                 </Text>
-                                <Text style={styles.text}>
+                                <Text style={styles.detailtext}>
                                     {item.Material_new_feed_health_food}
                                 </Text>
+                                
                             </View>
 
                         )}
@@ -92,7 +93,7 @@ export default function showHealthFoodNews({ navigation, route }) {
 
                 </ScrollView>
             </View>
-
+ 
 
         </>
     );
@@ -101,15 +102,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        paddingBottom: 0
+        paddingBottom: 0,
+
+
     },
     lastcontainer: {
-        flex: 1,
+        height: '100%',
         flexDirection: "column",
         paddingBottom: 30
     },
     image: {
-        flex: 1,
+        height: '100%',
         resizeMode: "cover",
         justifyContent: "flex-end",
         height: 400,
@@ -118,15 +121,23 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "black",
-        fontSize: 22,
+        fontSize: 18,
         fontWeight: "bold",
         paddingLeft: '5%',
         paddingRight: '5%',
         paddingBottom: 15,
         paddingTop: 15,
         // backgroundColor: "#000000a0"
-
-
+    },
+    detailtext: {
+        color: "black",
+        fontSize: 16,
+        fontWeight: "normal",
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingBottom: 15,
+        paddingTop: 15,
+        // backgroundColor: "#000000a0"
     }
 });
 

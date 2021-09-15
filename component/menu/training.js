@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, StatusBar, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Header, } from 'react-native-elements';
+import UploadImage from './updateImage';
 
 
 const Training = (props) => {
@@ -27,7 +28,7 @@ const Training = (props) => {
           <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#ffffff', paddingLeft: '5%' }}>การฝึกฝน</Text>
           <Text style={{ fontSize: 10, color: '#ffffff', paddingLeft: '5%' }}>เลือกเมนูสำหรับการฝึกฝน</Text>
           <View style={{ alignItems: 'center', marginTop: 30, }}>
-
+           
 
 
             <View style={{ width: '90%', marginBottom: 20 }}>

@@ -7,17 +7,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Picker } from '@react-native-community/picker';
-import UploadImage from './updateImage';
-
 
 
 
 export default function EditProfile({ navigation }) {
-   
+    let [isInclude, setIsInclude] = useState(true);
     //โชว์ข้อมูล
     const [infouser, setUser] = useState();
     const [userdata, setUserdata] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         AsyncStorage.getItem('id')
@@ -30,18 +27,18 @@ export default function EditProfile({ navigation }) {
                 })
                     .then(response => {
                         setUserdata(response.data);
-                        setLoading(true)
+                        setIsInclude(false)
                     })
                     .catch(err => {
                         console.log(err)
                     })
             })
-    }, [loading])
+    })
 
     //อัพเดตข้อมูล
     const [iduser, setIduser] = useState();
     const [email, setEmail] = useState();
-    const [gender, setGender] = useState(1);
+    const [gender, setGender] = useState();
     const [weight, setWeight] = useState();
     const [height, setHeight] = useState();
     const [target, setTarget] = useState();
@@ -152,12 +149,19 @@ export default function EditProfile({ navigation }) {
                                     }}>
                                     แก้ไขข้อมูล
                                 </Text>
-                                <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#DCDCDC', height: 200, width: '100%', flexDirection: 'column' }}>
-                                    <UploadImage />
-
+                                <View style={{ alignItems: 'center', backgroundColor: '#DCDCDC', height: 180, width: '100%' }}>
+                                    <Image style={styles.avatar} source={{ uri: item.url }} />
+                                    <View style={{ width: '100%', justifyContent: 'flex-end', flexDirection: 'row', }}>
+                                        <Icon
+                                            name="edit"
+                                            size={25}
+                                            color={'#696969'}
+                                            style={{ paddingRight: '5%', paddingTop: '5%' }}
+                                        />
+                                    </View>
                                 </View>
                                 <View style={{ marginTop: 5, alignItems: 'center', width: '100%' }}>
-                                    <Text style={styles.name}>{gender}</Text>
+                                    <Text style={styles.name}>{item.username}</Text>
 
                                     <View style={{ marginTop: 0, alignItems: 'center', margin: '3%', width: '100%', flexDirection: 'row', justifyContent: 'center', }}>
                                         <Text style={{ width: '25%', fontSize: 16, paddingTop: 0, paddingRight: '1%' }}>
@@ -192,7 +196,7 @@ export default function EditProfile({ navigation }) {
                                                     borderRadius: 50, alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
-                                                selectedValue={gender}
+                                                selectedValue={item.gender}
                                                 enabled={true}
                                                 onValueChange={(itemValue) => setGender(itemValue)}
                                             >

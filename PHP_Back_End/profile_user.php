@@ -4,7 +4,7 @@ include 'connect.php';
 $iduser = $_GET["id"];
 
 // Creating SQL command to fetch all records from Table.
-$sql = "SELECT * FROM user WHERE iduser = '".$iduser."'";
+$sql = "SELECT * ,(YEAR(NOW()) - YEAR(birthday)) as old FROM user WHERE iduser = '".$iduser."'";
 
 $result = $conn->query($sql);
 
@@ -24,4 +24,6 @@ if ($result->num_rows >0) {
 }
  echo $json;
 $conn->close();
+
+
 ?>

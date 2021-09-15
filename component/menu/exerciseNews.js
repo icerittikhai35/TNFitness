@@ -51,7 +51,7 @@ export default function ExerciseNews({ props, route, navigation }) {
                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000000', paddingLeft: '5%' }}>ข่าวสารการออกกำลังกาย</Text>
                     <Text style={{ fontSize: 20, color: '#000000', paddingLeft: '5%' }}>ดูเนื้อหาล่าสุดจาก</Text>
                     <Text style={{ fontSize: 20, color: '#000000', paddingLeft: '5%', fontWeight: 'bold', marginBottom: 15 }}>TRAINING FITNESS.</Text>
-                    <View style={{paddingBottom:20}}>
+                    <View style={{ paddingBottom: 20 }}>
                         {info.map(item => (
                             <View style={styles.container}>
                                 <ImageBackground source={{ uri: item.url }}
@@ -62,11 +62,12 @@ export default function ExerciseNews({ props, route, navigation }) {
                                         {item.Topic_new_feed_exer}
                                     </Text>
                                     <Text
+                                        numberOfLines={3}
                                         style={styles.textDetail}>
                                         {item.Material_new_feed_exer}
                                     </Text>
                                     <View style={{ width: '100%', backgroundColor: "#000000a0" }}>
-                                        <View style={{ width: 150, paddingLeft: '5%', paddingBottom: 20,marginTop:20 }}>
+                                        <View style={{ width: 150, paddingLeft: '5%', paddingBottom: 20, marginTop: 20 }}>
 
 
                                             <TouchableOpacity
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: "bold",
         paddingLeft: '5%',
-        paddingBottom: 0,
+        paddingBottom: 5,
         paddingTop: 0,
         backgroundColor: "#000000a0"
 
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     },
     textDetail: {
         color: "white",
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: "normal",
         paddingLeft: '5%',
         paddingRight: '5%',

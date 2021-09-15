@@ -5,8 +5,6 @@ import {
     View,
     Image,
     TouchableOpacity,
-    Dimensions,
-    ScrollView,
 } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -17,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function EditProfile({navigation}) {
     function logout() {
-        AsyncStorage.setItem('id', '')
+        AsyncStorage.removeItem('id')
         navigation.navigate('Login')
 
     }
@@ -25,7 +23,7 @@ export default function EditProfile({navigation}) {
         <View style={styles.container}>
 
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                     <Icon
                         name="arrowleft"
                         size={25}
@@ -84,7 +82,7 @@ export default function EditProfile({navigation}) {
                 <Text style={{ color: 'white', paddingLeft: '5%', paddingTop: 3 }}>รายงานปัญหา</Text>
             </View>
             <TouchableOpacity
-                onPress={logout}
+                onPress={()=>navigation.navigate('Login',AsyncStorage.removeItem('id'))}
             >
                 <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
                     <Image

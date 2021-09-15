@@ -58,6 +58,7 @@ const RecommendedExercise = (props) => {
       <View style={{ paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginBottom: 50 }}>
         {Exercise.map(item => (
 
+
           <View
             style={{
               backgroundColor: '#292B2D',
@@ -68,7 +69,6 @@ const RecommendedExercise = (props) => {
               marginBottom: 10,
               borderRadius: 15
             }}>
-
             <View
               style={{
                 flexDirection: 'row',

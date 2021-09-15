@@ -9,12 +9,20 @@
 
 
     $count = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM user where email = '$email'"));
-    if ($email == "" && $username == "" && $password == ""){
-        echo json_encode("กรุณากรอกข้อมูล");
-    }
-    else{
-        if($count == 1){
+    $count2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM user where username ='$username'"));
+
+    if ($email == "" ){
+        echo json_encode("กรุณากรอกอีเมล์");
+    }elseif ($username == ""){ 
+        echo json_encode("กรุณากรอกชื่อผู้ใช้งาน");
+    }elseif ($password == ""){
+        echo json_encode("กรุณากรอกรหัสผ่าน");
+    }else{
+        if($count == 1 ){
             $message = "Email already has";
+            echo json_encode($message);
+        } elseif ($count2 == 1){
+            $message = "Username already has";
             echo json_encode($message);
         } elseif ($count == 0) {
             $query1 = "INSERT INTO user (iduser, username, email, password) VALUES (NULL, '$username', '$email', '$password');";
@@ -26,4 +34,3 @@
             echo json_encode($arr);
         } 
     }
-?>

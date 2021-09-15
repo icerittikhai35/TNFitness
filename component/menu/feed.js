@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Animated, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Animated, Dimensions,FlatList } from 'react-native';
 import { Header, Image, Tile } from 'react-native-elements';
 import axios from 'axios';
 
@@ -24,19 +24,19 @@ export default function Feed({ navigation, route }) {
       }
     }
     alldatanews();
-  }, [infoexer])
+  }, infoexer),
 
-  useEffect(() => {
-    const alldatanewsFood = async () => {
-      try {
-        const response = await axios.get('http://34.126.141.128/showdata_Health_Food.php')
-        setInfo(response.data)
-      } catch {
-        alert('error')
+    useEffect(() => {
+      const alldatanewsFood = async () => {
+        try {
+          const response = await axios.get('http://34.126.141.128/showdata_Health_Food.php')
+          setInfo(response.data)
+        } catch {
+          alert('error')
+        }
       }
-    }
-    alldatanewsFood();
-  }, [info])
+      alldatanewsFood();
+    }, info);
 
 
 
@@ -81,7 +81,7 @@ export default function Feed({ navigation, route }) {
                 <ScrollView
                   pagingEnabled
                   showsHorizontalScrollIndicator={false}
-                 
+
                   onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { x: scrollX } } }],
                     { useNativeDriver: false }
@@ -97,13 +97,16 @@ export default function Feed({ navigation, route }) {
                         key={index}
                         style={{
                           width: '100%',
-                          height: '100%'
+                          height: '100%',
                         }}
                         source={{ uri: item.url }}
                       />
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
+
+                
+
                 <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center' }}>
                   {infoexer.map((i, k) => {
                     let opacity = position.interpolate({
@@ -112,7 +115,7 @@ export default function Feed({ navigation, route }) {
                       extrapolate: 'clamp'
                     })
                     return (
-                      <Animated.View key={k} style={{ opacity, height: 10, width: 10, backgroundColor: 'black', borderRadius: 20, margin: 5 }} />
+                      <Animated.View key={k} style={{ opacity, height: 10, width: 10, backgroundColor: 'white', borderRadius: 20, margin: 5 }} />
                     )
                   })}
                 </View>
@@ -151,10 +154,10 @@ export default function Feed({ navigation, route }) {
                           style={{ height: 350, width: '100%', borderRadius: 15 }}
                           source={{ uri: item.Cover_page }}
                         />
-                        <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#000000', }}>
+                        <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#000000', }}numberOfLines={2} >
                           {item.Topic_new_feed_health_food}
                         </Text>
-                        <Text style={{ fontSize: 12, color: '#000000', }}>
+                        <Text style={{ fontSize: 12, color: '#000000', }} numberOfLines={1}>
                           {item.Material_new_feed_health_food}
                         </Text>
                       </View>

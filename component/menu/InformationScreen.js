@@ -40,6 +40,7 @@ const InformationScreen = () => {
             activeTintColor: '#69BD51',
             inactiveTintColor: '#525152',
             showLabel: true,
+            keyboardHidesTabBar: false,
             
             style: {
               shadowColor: 'rgba(58,55,55,0.1)',
@@ -53,7 +54,8 @@ const InformationScreen = () => {
               borderTopLeftRadius: 35,
               borderTopRightRadius: 35,
               height: '9%',
-              paddingBottom: '3%'
+              paddingBottom:'3%'
+              
             }
           }}>
           <Tab.Screen name="Feed" component={ConnectFeed} />

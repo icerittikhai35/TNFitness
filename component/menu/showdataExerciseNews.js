@@ -80,7 +80,7 @@ export default function showExerciseNews({ navigation, route }) {
                                 <Text style={styles.text}>
                                     {item.Topic_new_feed_exer}
                                 </Text>
-                                <Text style={styles.text}>
+                                <Text style={styles.detailtext}>
                                     {item.Material_new_feed_exer}
                                 </Text>
                             </View>
@@ -101,15 +101,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        paddingBottom: 0
+        paddingBottom: 0,
+
+
     },
     lastcontainer: {
-        flex: 1,
+        height: '100%',
         flexDirection: "column",
         paddingBottom: 30
     },
     image: {
-        flex: 1,
+        height: '100%',
         resizeMode: "cover",
         justifyContent: "flex-end",
         height: 400,
@@ -118,15 +120,22 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "black",
-        fontSize: 22,
+        fontSize: 18,
         fontWeight: "bold",
         paddingLeft: '5%',
         paddingRight: '5%',
         paddingBottom: 15,
         paddingTop: 15,
         // backgroundColor: "#000000a0"
-
-
+    },
+    detailtext: {
+        color: "black",
+        fontSize: 16,
+        fontWeight: "normal",
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingBottom: 15,
+        paddingTop: 15,
+        // backgroundColor: "#000000a0"
     }
 });
-

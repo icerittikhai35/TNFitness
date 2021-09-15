@@ -9,7 +9,6 @@ import { FlatList } from 'react-native';
 const screenWidth = Dimensions.get("window").width;
 
 
-
 export default function Profile({ navigation }) {
 
     const [infouser, setUser] = useState();
@@ -33,7 +32,7 @@ export default function Profile({ navigation }) {
     })
 
 
-     
+
     return (
         <>
             <Header
@@ -45,7 +44,7 @@ export default function Profile({ navigation }) {
                         onPress={() => { navigation.navigate('Setting') }}
                     >
                         <Image
-                            style={{ height: 25, width: 25, marginRight: '5%', marginTop: 0 }}
+                            style={{ height: 20, width: 20, marginRight: '5%', marginTop: 0 }}
                             source={require('../../img/setting.png')}
                         />
                     </TouchableOpacity>
@@ -59,136 +58,190 @@ export default function Profile({ navigation }) {
             />
 
             <View style={styles.container}>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                >
-                    <View style={styles.header}>
 
-                    </View>
-                    <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
-                    <View style={styles.body}>
-                        <View style={styles.bodyContent}>
-                            <FlatList
-                                data={userdata}
-                                renderItem={({ item }) => (
-                                    <View style={styles.bodyContent}>
-                                        <Text style={styles.name}>{item.username}</Text>
-                                        <Text style={styles.info}>เป้าหมาย : ลดน้ำหนัก / ประสบการณ์ : มือใหม่</Text>
-                                        <Text style={styles.description}>อายุ:20  ส่วนสูง:180  น้ำหนัก:70</Text>
-                                        <TouchableOpacity
-                                            style={styles.buttonContainer}
-                                            onPress={() => navigation.navigate('EditProfile')}
 
-                                        >
-                                            <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
-                                        </TouchableOpacity>
+                <View>
+                    <FlatList
+
+                        keyExtractor={item => item.id}
+                        style={{ width: '100%', height: '100 %', }}
+                        data={userdata}
+                        renderItem={({ item }) => (
+                            <>
+                                <View style={{ alignItems: 'center', height: 400, width: '100%' }}>
+                                    <View style={{ alignItems: 'center', backgroundColor: '#292B2D', height: 100, width: '100%' }}>
+                                        <Image style={styles.avatar} source={{ uri: item.url }} />
                                     </View>
-                                )}
-                            />
-
-
-
-
-                            <View style={{ width: '120%', height: '80%', alignItems: 'center', backgroundColor: '#ffffff', paddingTop: 15 }} >
-
-                                <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                                <LineChart
-                                    data={{
-                                        labels: ["January", "February", "March", "April", "May", "June"],
-                                        datasets: [
-                                            {
-                                                data: [
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100
-                                                ]
+                                    <View style={{ marginTop: 100, alignItems: 'center' }}>
+                                        <Text style={styles.name}>{item.username}</Text>
+                                    </View>
+                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', }}>
+                                        <Text style={styles.description}>เพศ: {(() => {
+                                            if (item.experience == 1) {
+                                                return (
+                                                    <Text>ชาย</Text>
+                                                )
+                                            } else {
+                                                return (
+                                                    <Text>หญิง</Text>
+                                                )
                                             }
-                                        ]
-                                    }}
-                                    width={Dimensions.get("window").width} // from react-native
-                                    height={220}
-                                    yAxisLabel="$"
-                                    yAxisSuffix="k"
-                                    yAxisInterval={1} // optional, defaults to 1
-                                    chartConfig={{
-                                        backgroundColor: "#3D3D3D",
-                                        backgroundGradientFrom: "#3D3D3D",
-                                        backgroundGradientTo: "#3D3D3D",
-                                        decimalPlaces: 2, // optional, defaults to 2dp
-                                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        style: {
-                                            borderRadius: 16
-                                        },
-                                        propsForDots: {
-                                            r: "6",
-                                            strokeWidth: "2",
-                                            stroke: "#69BD51"
-                                        }
-                                    }}
-                                    bezier
-                                    style={{
-                                        marginVertical: 8,
-                                        borderRadius: 7
-                                    }}
-                                />
-
-
-                                <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                                <LineChart
-                                    data={{
-                                        labels: ["January", "February", "March", "April", "May", "June"],
-                                        datasets: [
-                                            {
-                                                data: [
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100,
-                                                    Math.random() * 100
-                                                ]
+                                        })()}</Text>
+                                        <Text style={styles.description}>อายุ: {item.old} ปี</Text>
+                                        <Text style={styles.description}>ส่วนสูง: {item.height} ซม.</Text>
+                                        <Text style={styles.description}>น้ำหนัก: {item.weight} กก.</Text>
+                                    </View>
+                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
+                                        <Text style={styles.info}>เป้าหมาย : {(() => {
+                                            if (item.experience == 1) {
+                                                return (
+                                                    <Text>ลดไขมัน</Text>
+                                                )
+                                            } else if (item.experience == 2) {
+                                                return (
+                                                    <Text>สร้างกล้ามเนื้อ</Text>
+                                                )
+                                            } else {
+                                                return (
+                                                    <Text>เพื่อสุขภาพ</Text>
+                                                )
                                             }
-                                        ]
-                                    }}
-                                    width={Dimensions.get("window").width} // from react-native
-                                    height={220}
-                                    yAxisLabel="$"
-                                    yAxisSuffix="k"
-                                    yAxisInterval={1} // optional, defaults to 1
-                                    chartConfig={{
-                                        backgroundColor: "#3D3D3D",
-                                        backgroundGradientFrom: "#3D3D3D",
-                                        backgroundGradientTo: "#3D3D3D",
-                                        decimalPlaces: 2, // optional, defaults to 2dp
-                                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                                        style: {
-                                            borderRadius: 16
-                                        },
-                                        propsForDots: {
-                                            r: "6",
-                                            strokeWidth: "2",
-                                            stroke: "#69BD51"
-                                        }
-                                    }}
-                                    bezier
-                                    style={{
-                                        marginVertical: 8,
-                                        borderRadius: 7,
-                                        marginBottom: 50
-                                    }}
-                                />
+                                        })()}
+                                        </Text>
+                                        <Text style={styles.info}>
+                                            ประสบการณ์ : {(() => {
+                                                if (item.experience == 1) {
+                                                    return (
+                                                        <Text>มือใหม่</Text>
+                                                    )
+                                                } else if (item.experience == 2) {
+                                                    return (
+                                                        <Text>ปานกลาง</Text>
+                                                    )
+                                                } else {
+                                                    return (
+                                                        <Text>ประสบการณ์สูง</Text>
+                                                    )
+                                                }
+                                            })()}
+                                        </Text>
+                                    </View>
 
-                            </View>
+                                    <TouchableOpacity
+                                        style={styles.buttonContainer}
+                                        onPress={() => navigation.navigate('EditProfile')}
+                                    >
+                                        <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ width: '100%', height: '70%', alignItems: 'center', backgroundColor: '#696969', paddingTop: 15 }} >
 
-                        </View>
+                                    <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
+                                    <LineChart
+                                        data={{
+                                            labels: ["January", "February", "March", "April", "May", "June"],
+                                            datasets: [
+                                                {
+                                                    data: [
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100
+                                                    ]
+                                                }
+                                            ]
+                                        }}
+                                        width={Dimensions.get("window").width} // from react-native
+                                        height={220}
+                                        yAxisLabel="$"
+                                        yAxisSuffix="k"
+                                        yAxisInterval={1} // optional, defaults to 1
+                                        chartConfig={{
+                                            backgroundColor: "#3D3D3D",
+                                            backgroundGradientFrom: "#3D3D3D",
+                                            backgroundGradientTo: "#3D3D3D",
+                                            decimalPlaces: 2, // optional, defaults to 2dp
+                                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                            style: {
+                                                borderRadius: 16
+                                            },
+                                            propsForDots: {
+                                                r: "6",
+                                                strokeWidth: "2",
+                                                stroke: "#69BD51"
+                                            }
+                                        }}
+                                        bezier
+                                        style={{
+                                            marginVertical: 8,
+                                            borderRadius: 7
+                                        }}
+                                    />
 
-                    </View>
-                </ScrollView>
+
+                                    <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
+                                    <LineChart
+                                        data={{
+                                            labels: ["January", "February", "March", "April", "May", "June"],
+                                            datasets: [
+                                                {
+                                                    data: [
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100,
+                                                        Math.random() * 100
+                                                    ]
+                                                }
+                                            ]
+                                        }}
+                                        width={Dimensions.get("window").width} // from react-native
+                                        height={220}
+                                        yAxisLabel="$"
+                                        yAxisSuffix="k"
+                                        yAxisInterval={1} // optional, defaults to 1
+                                        chartConfig={{
+                                            backgroundColor: "#3D3D3D",
+                                            backgroundGradientFrom: "#3D3D3D",
+                                            backgroundGradientTo: "#3D3D3D",
+                                            decimalPlaces: 2, // optional, defaults to 2dp
+                                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                            style: {
+                                                borderRadius: 16
+                                            },
+                                            propsForDots: {
+                                                r: "6",
+                                                strokeWidth: "2",
+                                                stroke: "#69BD51"
+                                            }
+                                        }}
+                                        bezier
+                                        style={{
+                                            marginVertical: 8,
+                                            borderRadius: 7,
+                                            marginBottom: 50
+                                        }}
+                                    />
+
+                                </View>
+                            </>
+
+                        )}
+
+                    />
+
+
+
+
+
+
+                </View >
+
             </View >
         </>
     );
@@ -197,49 +250,71 @@ export default function Profile({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%'
+        flex: 1
     },
     header: {
         backgroundColor: "#3D3D3D",
-        height: 50,
+        height: 100,
         justifyContent: 'space-between',
         flexDirection: 'row'
     },
     avatar: {
-        width: 100,
-        height: 100,
-        borderRadius: 63,
-        borderWidth: 4,
+        width: 150,
+        height: 150,
+        borderRadius: 100,
+        borderWidth: 6,
         borderColor: "#ffffff",
         marginBottom: 10,
         alignSelf: 'center',
         position: 'absolute',
-        marginTop: 5
+        marginTop: 30,
+        backgroundColor: '#3D3D3D'
     },
     body: {
         marginTop: 20,
         marginBottom: 150,
+        alignItems: 'center',
+        height: '100%'
     },
     bodyContent: {
-
+        width: '100%',
         alignItems: 'center',
-        padding: 30,
+        paddingTop: 20,
+        height: '90%',
+
+
+    },
+    bodyContentIn: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        paddingTop: '0%',
+        paddingBottom: 0,
+        justifyContent: 'space-around',
+        flexDirection: 'column',
+
+
+
+
     },
     name: {
         fontSize: 28,
         color: "#696969",
-        fontWeight: "600"
+        fontWeight: 'bold'
     },
     info: {
         fontSize: 16,
-        color: "#69BD51",
-        marginTop: 10
+        color: "#696969",
+        marginTop: 10,
+        paddingLeft: 10,
+        paddingRight: 10
     },
     description: {
         fontSize: 16,
         color: "#696969",
         marginTop: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        justifyContent: 'space-around'
     },
     buttonContainer: {
         marginTop: 10,
