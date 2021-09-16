@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { ListItem, Header, Image, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Avatar } from 'react-native-paper';
-import { Exercise } from '../../DataExercise';
+import { ExerciseBack } from '../../DataExercise';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -22,7 +24,7 @@ const renderEmptyDate = () => {
   );
 }
 
-const RecommendedExercise = (props) => {
+export default function RecommendedExercise({ navigation, route }) {
   const [items, setItems] = useState({});
 
   const loadItems = (day) => {
@@ -51,77 +53,112 @@ const RecommendedExercise = (props) => {
   }
 
 
+  const [infouser, setUser] = useState();
+  const [userdata, setUserdata] = useState([]);
+  useEffect(() => {
+    AsyncStorage.getItem('id')
+      .then((value) => {
+        setUser(value);
+        axios.get('http://34.126.141.128/profile_user.php', {
+          params: {
+            id: 1
+          }
+        })
+          .then(response => {
+            setUserdata(response.data);
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+  })
+  const exerback = ExerciseBack.map(item => (item.weight + 10))
+
+
+  console.log(exerback)
 
   const renderItem = (items) => {
     return (
 
       <View style={{ paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginBottom: 50 }}>
-        {Exercise.map(item => (
+        <View styles={{ width: 500, backgroundColor: 'red' }}>
+          <Text >
+            {exerback}
+          </Text>
+        </View>
+        {ExerciseBack.map(item => (
+
+          <TouchableOpacity onPress={() => navigation.navigate('PageRCMExercise',
+            { name: item.name, volume: item.volume, round: item.round, weight: item.weight, breaks: item.breaks ,description: item.description}
+          )}>
 
 
-          <View
-            style={{
-              backgroundColor: '#292B2D',
-              borderRadius: 20,
-              height: 120,
-              flexDirection: 'column',
-              justifyContent: 'center',
-              marginBottom: 10,
-              borderRadius: 15
-            }}>
             <View
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
                 backgroundColor: '#292B2D',
-                //292B2D
-                margin: 10
+                borderRadius: 20,
+                height: 120,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                marginBottom: 10,
+                borderRadius: 15
               }}>
-              <Image
-                style={{ height: 100, width: 150, borderRadius: 15 }}
-                source={{ uri: item.imageUrls }}
-              />
-              <View style={{ width: "60%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
-                <View style={{ marginBottom: 0 }}>
-                  <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{item.name}</Text>
-                </View>
-                <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
-                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.volume}</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  backgroundColor: '#292B2D',
+                  //292B2D
+                  margin: 10
+                }}>
+                <Image
+                  style={{ height: 100, width: 150, borderRadius: 15 }}
+                  source={{ uri: item.imageUrls }}
+                />
+                <View style={{ width: "60%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                  <View style={{ marginBottom: 0 }}>
+                    <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{item.name}</Text>
                   </View>
-                  <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
-                    <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
-                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.round}</Text>
-                  </View>
-                  <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
-                    <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
-                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.weight}</Text>
-                  </View>
-                  <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
-                    <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
-                    <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.break}</Text>
-                  </View>
+                  <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                    <View style={{ alignItems: 'center' }}>
+                      <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                      <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.volume}</Text>
+                    </View>
+                    <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
+                      <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                      <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.round}</Text>
+                    </View>
+                    <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
+                      <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                      <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.weight}</Text>
+                    </View>
+                    <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
+                      <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                      <Text style={{ color: '#69BD51', fontSize: 10 }}>{item.breaks}</Text>
+                    </View>
 
-                  <View style={{ alignItems: 'flex-end', width: '25%', marginBottom: 20 }}>
-                    <Image
-                      style={{ height: 30, width: 30, borderRadius: 0 }}
-                      source={require('../../img/right-tn.png')}
-                    />
-                  </View>
+                    <View style={{ alignItems: 'flex-end', width: '25%', marginBottom: 20 }}>
+                      <Image
+                        style={{ height: 30, width: 30, borderRadius: 0 }}
+                        source={require('../../img/right-tn.png')}
+                      />
+                    </View>
 
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
 
-
+          </TouchableOpacity>
         ))}
 
       </View>
 
     );
   };
+
+
+
   return (
     <>
 
@@ -130,7 +167,7 @@ const RecommendedExercise = (props) => {
         leftComponent={
           <View style={{ marginTop: 19 }}>
             <TouchableOpacity
-              onPress={() => { props.navigation.navigate('Training') }}>
+              onPress={() => { navigation.goBack() }}>
               <Icon
                 name="arrowleft"
                 size={25}
@@ -198,6 +235,7 @@ const RecommendedExercise = (props) => {
   );
 
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 0,
@@ -207,5 +245,3 @@ const styles = StyleSheet.create({
 
   },
 });
-
-export default RecommendedExercise;
