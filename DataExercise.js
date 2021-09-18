@@ -4,10 +4,10 @@ const ExerciseBack = [
         id: 1,
         name: "Deadlift",
         category: "Back",
-        volume: "12",
-        round: "4",
-        weight: "5",
-        breaks: "60",
+        volume:12,
+        round: 4,
+        weight: 103,
+        breaks: 60,
         equipment: "Barbell",
         Imageequipment: "./assets/splash.png",
         
@@ -25,7 +25,7 @@ const ExerciseBack = [
         volume: 12,
         round: 4,
         weight: 5,
-        breaks: 60,
+        breaks: 66,
         equipment: "Dumbbell",
         Imageequipment: "./assets/splash.png",
         
