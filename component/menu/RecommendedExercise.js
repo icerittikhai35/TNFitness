@@ -61,7 +61,7 @@ export default function RecommendedExercise({ navigation, route }) {
         const response = await axios.get('http://34.126.141.128/infouserData.php',
           {
             params: {
-              id: infouser
+              id: 30
             }
           })
         if (response.data == 'null') {
@@ -75,7 +75,7 @@ export default function RecommendedExercise({ navigation, route }) {
       }
     }
     fetchData();
-  }, [infouser])
+  }, [infouser]),
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,11 +89,11 @@ export default function RecommendedExercise({ navigation, route }) {
     fetchData();
   },[infouser])
 
-  const bmi = userdata.map(item => (item.weight))
+  const bmi = userdata.map(item => ((item.weight)+(((item.height)/100)*2)))
   const exerback = ExerciseBack.map(item => (item.weight))
 
 
-  console.log(infouser)
+  console.log(bmi)
 
   const renderItem = (items) => {
     return (
