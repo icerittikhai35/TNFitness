@@ -53,15 +53,35 @@ export default function RecommendedExercise({ navigation, route }) {
   }
 
   //http://34.126.141.128/infouserData.php
-  const [infouser, setUser] = useState();
+  const [infouser, setUser] = useState([]);
   const [userdata, setUserdata] = useState([]);
+  const [exerdata, setExerdata] = useState([]);
+
+  useEffect(() => {
+    const retrieveData = async () => {
+      try {
+        const valueString = await AsyncStorage.getItem('id');
+        const value = JSON.parse(valueString);
+        // Other set states
+        setUser(value);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // Retrieve if has new data
+    if (infouser)
+    setUserdata();
+      setUser(false);
+  }, [infouser])
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://34.126.141.128/infouserData.php',
           {
             params: {
-              id: 30
+              id: 7
             }
           })
         if (response.data == 'null') {
@@ -75,25 +95,20 @@ export default function RecommendedExercise({ navigation, route }) {
       }
     }
     fetchData();
-  }, [infouser]),
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await AsyncStorage.getItem('id');
-        setUser(response);
-      } catch {
-        alert("showdoglevel")
-      }
-    }
-    fetchData();
-  },[infouser])
-
-  const bmi = userdata.map(item => ((item.weight)+(((item.height)/100)*2)))
-  const exerback = ExerciseBack.map(item => (item.weight))
+  })
 
 
-  console.log(bmi)
+
+
+
+
+
+  const bmi = userdata.map(item => (parseInt((item.weight)) / (((parseInt(item.height)) / 100) * 2)))
+  const test = userdata.map(item => (item.iduser))
+
+
+
+  console.log(parseInt(test))
 
   const renderItem = (items) => {
     return (
@@ -101,11 +116,10 @@ export default function RecommendedExercise({ navigation, route }) {
       <View style={{ paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginBottom: 50 }}>
         <View styles={{ width: 500, backgroundColor: 'red' }}>
           <Text >
-            {bmi}
+            {parseInt(bmi)}
           </Text>
         </View>
         {ExerciseBack.map(item => (
-
           <TouchableOpacity onPress={() => navigation.navigate('PageRCMExercise',
             {
               name: item.name,
@@ -116,6 +130,8 @@ export default function RecommendedExercise({ navigation, route }) {
               description: item.description,
 
               equipment: item.equipment,
+              Imageequipment: item.Imageequipment,
+              imageUrls: item.imageUrls,
 
 
             }

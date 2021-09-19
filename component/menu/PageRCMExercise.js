@@ -17,6 +17,8 @@ export default function PageRCMExercise({ navigation, route }) {
     const { breaks } = route.params;
     const { description } = route.params;
     const { equipment } = route.params;
+    const { Imageequipment } = route.params;
+    const { imageUrls } = route.params;
 
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -134,16 +136,14 @@ export default function PageRCMExercise({ navigation, route }) {
             <View style={styles.container}>
 
                 <ScrollView>
-                    <View style={{ width: '90%', height: 900, alignItems: 'center', }} >
+                    <View style={{ width: '90%', height: 1000, alignItems: 'center', }} >
 
 
 
                         <View style={{ width: "95%", height: 300, alignItems: 'center', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '0%', borderRadius: 10 }}>
                             <Image
                                 style={{ width: 420, height: '100%' }}
-                                source={{
-                                    uri: 'https://evofitness.at/wp-content/uploads/2019/03/EVO_Banner_March_14-1200x675.jpg'
-                                }}
+                                source={{ uri: imageUrls }}
                             />
                         </View>
 
@@ -171,18 +171,16 @@ export default function PageRCMExercise({ navigation, route }) {
                             </View>
                         </View>
 
-                        <View style={{ width: "95%", height: '10%', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '2%', flexDirection: 'row', borderRadius: 10 }}>
-                            <View style={{ width: '50%', alignItems: 'center', padding: '5%' }}>
+                        <View style={{ width: "95%", height: '20%', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '2%', flexDirection: 'row', borderRadius: 10 }}>
+                            <View style={{ width: '30%', alignItems: 'center', padding: '5%' }}>
                                 <Text style={{ color: 'white', fontSize: 14, weight: '100%' }}>อุปกรณ์</Text>
                                 <Text style={{ color: '#ffffff', fontSize: 14, height: '100%' }}> {JSON.stringify(equipment)}</Text>
                             </View>
-                            <View style={{ width: '50%', alignItems: 'center', margin: '3%' }}>
+                            <View style={{ width: '80%', alignItems: 'center', margin: '3%' }}>
 
                                 <Image
-                                    style={{ width: 100, height: '100%' }}
-                                    source={{
-                                        uri: 'https://th-live-05.slatic.net/shop/8114a7a46b2ad2ca9adf6fdfed2c2672.jpeg_2200x2200q80.jpg_.webp'
-                                    }}
+                                    style={{ width: 180, height: 160 }}
+                                    source={{ uri: Imageequipment }}
                                 />
                             </View>
 

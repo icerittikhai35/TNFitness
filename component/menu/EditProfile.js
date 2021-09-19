@@ -186,6 +186,7 @@ export default function EditProfile({ navigation }) {
                                                 borderWidth: 1,
                                                 height: 40,
                                             }}>
+                                            
                                             <Picker
                                                 style={{
                                                     width: '100%',
@@ -199,6 +200,9 @@ export default function EditProfile({ navigation }) {
                                                 <Picker.Item label="ชาย" value="1"></Picker.Item>
                                                 <Picker.Item label="หญิง" value="2"></Picker.Item>
                                             </Picker>
+                                            <Text>
+                                                {gender}
+                                            </Text>
                                         </View>
                                     </View>
 
