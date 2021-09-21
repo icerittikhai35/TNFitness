@@ -3,7 +3,7 @@ import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-nati
 import { Agenda } from 'react-native-calendars';
 import { ListItem, Header, Image, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { ExerciseBack, ExerciseChest } from '../../DataExercise';
+import { ExerciseBack, ExerciseChest,ExerciseLeg } from '../../DataExercise';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -114,7 +114,7 @@ export default function RecommendedExercise({ navigation, route }) {
             {bmiUser}
           </Text>
         </View>
-        {ExerciseChest.map(item => (
+        {ExerciseLeg.map(item => (
           <>
             {bmiUser <= item.bmi ? (
               <>

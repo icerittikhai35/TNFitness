@@ -213,6 +213,94 @@ const ExerciseChest = [
     },
 
 ];
+const ExerciseLeg = [
+    {
+        id: 21,
+        name: "Squat ",
+        category: "Leg",
+        volume: 12,
+        round: 4,
+        weight: 5,
+        breaks: 60,
+        equipment: "Barbbell",
+        Imageequipment: "https://bsg-i.nbxc.com/product/87/20/f3/7edae7f67d2ea2820fcb62f919.jpg",
+        
+        description:
+            "ท่า Squat นั้นดีต่อสุขภาพข้อต่อและกล้ามเนื้อแถมยังเสริมความเร็วและท่วงท่าในการวิ่งให้ดีขึ้น ร่างกายส่วนล่างที่แข็งแรงจะเพิ่มพลังในการสับขาวิ่งให้กับเรา และช่วยป้องกันอาการบาดเจ็บได้ การฝึกท่า Squat จึงมีความสำคัญแถมยังเป็นท่าที่ฝึกได้ง่ายอีกด้วย แต่มันยังมีอีกหลายเรื่องเกี่ยวกับท่า Squat ที่เพื่อนๆควรรู้",
+        popular: true,
+        imageUrls: "https://img.kapook.com/u/thachapol/b9999999999999999999999/a278_1.jpg",
+        bmi: 30
+    },
+    {
+        id: 22,
+        name: "Leg Press",
+        category: "Leg",
+        volume: 12,
+        round: 4,
+        weight: 5,
+        breaks: 60,
+        equipment: "Machine Leg Press",
+        Imageequipment: "https://yorkbarbell.com/wp-content/uploads/2017/01/55035_leg-press_main2_low.jpg",
+        
+        description:
+            "การฝึกด้วยท่า Leg Press เริ่มต้นจากการ นอนลงบนเบาะ วางเท้าทั้งสองข้างลงบนแป้นถีบ ด้วยความกว้างประมาณหัวไหล่ วางเท้าต่ำ จากนั้นถีบแป้นออกไป แล้วปลดตัวล็อกออก เป็นท่าเตรียมฝึกท่า Leg Press",
+        popular: true,
+        imageUrls: "https://planforfit.com/wp-content/uploads/2015/07/leg-press-start-resize1.jpg",
+        bmi: 30
+    },
+    {
+        id: 23,
+        name: "Leg extension",
+        category: "Leg",
+        volume: 12,
+        round: 4,
+        weight: 5,
+        breaks: 60,
+        equipment: "Machine Leg Extension",
+        Imageequipment: "https://image.makewebeasy.net/makeweb/0/t01KydE3z/PinLoad/HLE200B_Pic1.jpg",
+        
+        description:
+            "การฝึกด้วยท่า Leg Extension เริ่มต้นจากการ นั่งลงบนเครื่อง โดยให้หลังและก้นนาบสนิทติดกับเบาะ สอดเท้าทั้งสองข้าง ล็อคเข้าไว้กับเบาะรอง มือทั้สองข้างกำด้ามจับเอาไว้ เพื่อไม่ให้ตัวลอยขึ้นจากเบาะ ระหว่างการฝึก เป็นท่าเตรียมฝึกท่า Leg Extension",
+        popular: true,
+        imageUrls: "https://i0.wp.com/thefitnessmaverick.com/wp-content/uploads/2020/11/leg-extensions-bad-scaled-e1605887329262.jpg?fit=1000%2C667&ssl=1",
+        bmi: 30
+    },
+    {
+        id: 24,
+        name: "Lying Leg Curl",
+        category: "Chest",
+        volume: 12,
+        round: 4,
+        weight: 5,
+        breaks: 60,
+        equipment: " Machine Lying Leg Curl",
+        Imageequipment: "https://image.made-in-china.com/2f0j00sOMauZzjldpW/Lying-Leg-Curl.jpg",
+        
+        description:
+            "การฝึกด้วยท่า Pec Deck เริ่มต้นจากการนั่งลงบนเครื่อง Pec Deck โดยปรับเบาะให้สูง ในตำแหน่งที่เมื่อนั่งแล้ว ด้ามจับจะอยู่ในระดับเดียวกันกับหัวไหล่ จากนั้นจับด้ามจับทั้งสองข้างไว้ แล้วหมุนมาทางด้านหน้าของลำตัว ให้มือสัมผัสโดนกัน เป็นท่าเตรียมฝึกท่า Pec Deck",
+        popular: true,
+        imageUrls: "https://planforfit.com/wp-content/uploads/2015/07/lying-leg-curl-finish-resize-1-1.jpg",
+        bmi: 30
+    },
+    {
+        id: 25,
+        name: "Barbell Standing Calf Raise",
+        category: "Leg",
+        volume: 12,
+        round: 4,
+        weight: 5,
+        breaks: 60,
+        equipment: "Barbbell",
+        Imageequipment: "https://bsg-i.nbxc.com/product/87/20/f3/7edae7f67d2ea2820fcb62f919.jpg",
+        
+        description:
+            "การฝึกด้วยท่า Smith Machine Decline Bench Press เริ่มต้นจากการนอนหงายหน้าลงบนเบาะเอียงลง 45 องศา ในเครื่อง Smith Machine เกี่ยวขาทั้งสองข้างล็อคกับเบาะรองไว้ หงายมือทั้งสองข้างขึ้น จับบาร์เบลด้วยความกว้างกว่าหัวไหล่เล็กน้อย จากนั้นหมุนบาร์เบลออกมาจากที่พัก ในลักษณะที่แขนตึง แต่ไม่ล็อกข้อศอก เป็นท่าเตรียมฝึกท่า Smith Machine Decline Bench Press",
+        popular: true,
+        imageUrls: "https://planforfit.com/wp-content/uploads/2015/07/barbell-standing-calf-raise-finish1.jpg",
+        bmi: 30
+    },
+
+];
 
 // List of item categories.
 const categories = [
@@ -259,4 +347,4 @@ const dataForback = [
     }
 ];
 
-export { ExerciseChest, ExerciseBack, categories, dataForback };
+export { ExerciseChest, ExerciseBack, categories, ExerciseLeg };

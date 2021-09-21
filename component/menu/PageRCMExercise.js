@@ -136,7 +136,7 @@ export default function PageRCMExercise({ navigation, route }) {
             <View style={styles.container}>
 
                 <ScrollView>
-                    <View style={{ width: '90%', height: 1000, alignItems: 'center', }} >
+                    <View style={{ width: '90%', height: 1000, alignItems: 'center',marginBottom:50 }} >
 
 
 
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 0
+        marginTop:0
     },
     modalView: {
         margin: 20,
