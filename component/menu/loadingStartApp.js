@@ -1,7 +1,10 @@
 import React from "react";
-import { ActivityIndicator, StyleSheet, Text, View, Image } from "react-native";
+import { ActivityIndicator, StyleSheet, StatusBar, View, Image } from "react-native";
 
 const LoadingStartApp = () => (
+    <>
+         <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#292B2D" translucent = {true}/>
+
     <View style={styles.container}>
         <View style={{alignItems:'center',marginBottom:20}}>
             <Image
@@ -14,6 +17,7 @@ const LoadingStartApp = () => (
         </View>
 
     </View>
+    </>
 );
 
 const styles = StyleSheet.create({

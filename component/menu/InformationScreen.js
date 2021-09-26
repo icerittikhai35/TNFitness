@@ -13,7 +13,8 @@ const InformationScreen = () => {
 
   return (
     <>
-     
+      <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#3D3D3D" translucent = {true}/>
+
       
         <Tab.Navigator screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {

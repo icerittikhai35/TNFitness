@@ -11,6 +11,7 @@ export default function InsertInfo(props) {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
+    
     let [isSubmit, setIsSubmit] = useState(false);
 
 
@@ -58,6 +59,7 @@ export default function InsertInfo(props) {
                 containerStyle={{
                     backgroundColor: '#292B2D',
                     height: 112,
+                    borderBottomColor: '#292B2D'
                 }}
             />
 

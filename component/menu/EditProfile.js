@@ -261,7 +261,7 @@ export default function EditProfile({ navigation }) {
                                                     borderRadius: 50, alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
-                                                selectedValue={item.target}
+                                                selectedValue={target}
                                                 enabled={true}
                                                 onValueChange={(itemValue) => setTarget(itemValue)}
 
@@ -295,7 +295,7 @@ export default function EditProfile({ navigation }) {
                                                     justifyContent: 'center',
                                                 }}
                                                 enabled={true}
-                                                selectedValue={item.experience}
+                                                selectedValue={experience}
                                                 onValueChange={(itemValue) => setExperience(itemValue)}
                                             >
                                                 <Picker.Item label="มือใหม่" value="1"></Picker.Item>

@@ -8,6 +8,7 @@ import InformationScreen from './component/menu/InformationScreen';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import connectInfoUser from './component/connect/connectInfoUser';
+import Forget from './component/login/forget';
 
 
 const Stack = createStackNavigator();
@@ -17,7 +18,7 @@ const App = () => {
 
   return (
     <>
-
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#3D3D3D" translucent={true} />
 
       <NavigationContainer>
 
@@ -29,7 +30,11 @@ const App = () => {
             component={Login}
             options={{ headerShown: false }}
           />
-
+          <Stack.Screen
+            name="Forget"
+            component={Forget}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Register"
             component={Register}

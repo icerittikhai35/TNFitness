@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import * as Facebook from 'expo-facebook';
-import { Icon } from 'react-native-elements'
 import * as Google from 'expo-google-app-auth';
 import InformationScreen from '../menu/InformationScreen';
 import LoadingStartApp from '../menu/loadingStartApp';
@@ -39,14 +38,13 @@ async function logIn() {
   }
 }
 
-
 export default function LoginInfo(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [googleSubmitting, setGoogleSubmitting] = useState("");
   const [user, setUser] = useState();
   const [isloading, setIsloading] = useState(false);
-  
+
   //โหลดหน้าก่อนเข้าApp
 
   const [loading, setLoading] = useState(true)
@@ -144,6 +142,7 @@ export default function LoginInfo(props) {
   return (
 
     <>
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#3D3D3D" translucent={true} />
       {loading === false ? (
         <>
           {user == null ? (
@@ -157,26 +156,24 @@ export default function LoginInfo(props) {
                     style={{ width: 300, height: 300, }}
                   />
 
-                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 8 }}>
                     <TextInput label='ชื่อผู้ใช้งาน'
-                      style={{ width: '70%', height: 45, margin: '1%', borderWidth: 1, borderRadius: 5, }}
+                      style={{ width: '70%', height: 50, margin: '1%', borderWidth: 0, borderRadius: 5, }}
                       onChangeText={usernameHandler}
                       multiline={false}
                       theme={{
                         colors: {
                           primary: '#AEAEAE',
                           underlineColor: 'transparent',
-                          margin: 10,
+                          margin: 20,
                           text: 'black'
                         }
                       }}
                     />
-
                   </View>
-
                   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <TextInput label='รหัสผ่าน '
-                      style={{ width: '70%', height: 45, marginBottom: '0%', borderWidth: 1, borderRadius: 5 }}
+                      style={{ width: '70%', height: 50, marginBottom: '0%', borderWidth: 0, borderRadius: 5 }}
                       onChangeText={(text) => setPassword(text)}
                       secureTextEntry={true}
                       theme={{
@@ -190,9 +187,22 @@ export default function LoginInfo(props) {
                     />
                   </View>
 
-
                   <View style={{ flexDirection: 'row', width: '70%', justifyContent: 'flex-end' }}>
-                    <Text style={{ color: '#9A9A9A', fontWeight: "100", marginBottom: '5%', justifyContent: 'flex-end' }}>ลืมรหัสผ่าน ?</Text>
+                    <TouchableOpacity
+                      onPress={() => props.navigation.navigate('Forget')}
+                    >
+                      <Text
+                        style={{
+                          color: '#9A9A9A',
+                          fontWeight: "100",
+                          marginBottom: 15,
+                          marginTop: 5,
+                          justifyContent: 'flex-end'
+                        }}
+                      >
+                        ลืมรหัสผ่าน ?
+                      </Text>
+                    </TouchableOpacity>
                   </View>
 
                   <View style={{ paddingTop: '0%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
@@ -226,9 +236,7 @@ export default function LoginInfo(props) {
                       <Text style={{ color: '#4267B2', fontWeight: 'bold', fontSize: 18 }}>เข้าสู่ระบบ ด้วย Facebook</Text>
                     </TouchableOpacity>
                   </View>
-
                   <View style={{ paddingTop: '0%', width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-
                     <TouchableOpacity
                       style={{ backgroundColor: '#FFFFFF', width: '70%', height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, flexDirection: 'row' }}
                       title={"Go to the hell"}
@@ -241,7 +249,6 @@ export default function LoginInfo(props) {
                       <Text style={{ color: '#4267B2', fontWeight: 'bold', fontSize: 18 }}>เข้าสู่ระบบ ด้วย Google</Text>
                     </TouchableOpacity>
                   </View>
-
                   <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>สร้างบัญชัผู้ใช้ใหม่ ? </Text>
                     <TouchableOpacity
@@ -252,7 +259,9 @@ export default function LoginInfo(props) {
                 </View>
               </View>
             </>
+
           ) : (
+
             <>
               <InformationScreen />
             </>
@@ -260,7 +269,7 @@ export default function LoginInfo(props) {
         </>
       ) : (
         <>
-         <LoadingStartApp/>
+          <LoadingStartApp />
         </>
       )}
 

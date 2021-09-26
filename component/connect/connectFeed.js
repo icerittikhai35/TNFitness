@@ -15,16 +15,15 @@ export default function ConnectFeed() {
 
   return (
     <>
-     <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#3D3D3D" translucent={false} />
-    <Stack.Navigator>
-      <Stack.Screen name="Feed" component={Feed} options={{headerShown : false}}/>
-      <Stack.Screen name="ExerciseNews" component={ExerciseNews} options={{headerShown : false}}/>
-      <Stack.Screen name="FoodNews" component={FoodNews} options={{headerShown : false}}/>
-      <Stack.Screen name="showExerciseNews" component={showExerciseNews} options={{headerShown : false}}/>
-      <Stack.Screen name="showHealthFoodNews" component={showHealthFoodNews} options={{headerShown : false}}/>
-      <Stack.Screen name="slideExercise" component={slideExercise} options={{headerShown : false}}/>
-
-    </Stack.Navigator>
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#3D3D3D" translucent={true} />
+      <Stack.Navigator>
+        <Stack.Screen name="Feed" component={Feed} options={{ headerShown: false }} />
+        <Stack.Screen name="ExerciseNews" component={ExerciseNews} options={{ headerShown: false }} />
+        <Stack.Screen name="FoodNews" component={FoodNews} options={{ headerShown: false }} />
+        <Stack.Screen name="showExerciseNews" component={showExerciseNews} options={{ headerShown: false }} />
+        <Stack.Screen name="showHealthFoodNews" component={showHealthFoodNews} options={{ headerShown: false }} />
+        <Stack.Screen name="slideExercise" component={slideExercise} options={{ headerShown: false }} />
+      </Stack.Navigator>
     </>
   );
-} 
+}
