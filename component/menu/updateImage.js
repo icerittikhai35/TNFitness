@@ -2,46 +2,46 @@ import React, { useState, useEffect } from 'react';
 import { Image, View, Platform, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 
 export default function UploadImage() {
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState();
 
+    
 
-    const addImage = async () => {
-        let _image = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    useEffect(() => {
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (status !== 'granted') {
+                    alert('Sorry, we need camera roll permissions to make this work!');
+                }
+            }
+        })();
+    }, []);
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
         });
-
-        console.log(JSON.stringify(_image));
-
-        if (!_image.cancelled) {
-            setImage(_image.uri);
+        const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
+        console.log(base64);
+        const base = 'data:image/jpeg;base64,'
+        if (!result.cancelled) {
+            setImage(base + base64);
         }
     };
-    const checkForCameraRollPermission = async () => {
-        const { status } = await ImagePicker.addImage();
-        if (status !== 'granted') {
-            alert("Please grant camera roll permissions inside your system's settings");
-        } else {
-            console.log('Media Permissions are granted')
-        }
-
-    }
-    useEffect(() => {
-        checkForCameraRollPermission()
-    }, []);
-
     return (
         <View style={imageUploaderStyles.container}>
             {
-                image && <Image source={{ uri: image }} style={{ width: 150, height: 150 }} />
+                image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
             }
 
             <View style={imageUploaderStyles.uploadBtnContainer}>
-                <TouchableOpacity onPress={addImage} style={imageUploaderStyles.uploadBtn} >
+                <TouchableOpacity onPress={pickImage} style={imageUploaderStyles.uploadBtn} >
                     <Text>{image ? 'Edit' : 'Upload'} Image</Text>
                     <AntDesign name="camera" size={20} color="black" />
                 </TouchableOpacity>

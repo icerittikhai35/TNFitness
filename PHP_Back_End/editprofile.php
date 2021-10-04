@@ -10,10 +10,11 @@
     $height = $json["height"];
     $target = $json["target"];
     $experience = $json["experience"];
+    $url = $json["url"];
 
     
     
-        $query1 = "UPDATE user SET email='$email',gender='$gender',weight='$weight',height='$height',target='$target',experience='$experience' WHERE iduser='$id'";
+        $query1 = "UPDATE user SET email='$email',gender='$gender',weight='$weight',height='$height',target='$target',experience='$experience',url='$url' WHERE iduser='$id'";
         $query_output = mysqli_query($conn, $query1);
         $message = "ok";
         echo json_encode($message);

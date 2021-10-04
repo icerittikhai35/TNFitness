@@ -23,7 +23,7 @@ export default function Profile({ navigation }) {
                     }
                 })
                     .then(response => {
-                        setUserdata(response.data);
+                        setUserdata(response.data.all);
                     })
                     .catch(err => {
                         console.log(err)
@@ -46,8 +46,9 @@ export default function Profile({ navigation }) {
         barPercentage: 0.5,
         useShadowColorFromDataset: false // optional
       };
-
+      
     return (
+       
         <>
             <Header
                 placement="center"
@@ -91,7 +92,7 @@ export default function Profile({ navigation }) {
                                     </View>
                                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', }}>
                                         <Text style={styles.description}>เพศ: {(() => {
-                                            if (item.experience == 1) {
+                                            if (item.gender == 1) {
                                                 return (
                                                     <Text>ชาย</Text>
                                                 )
@@ -107,11 +108,11 @@ export default function Profile({ navigation }) {
                                     </View>
                                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
                                         <Text style={styles.info}>เป้าหมาย : {(() => {
-                                            if (item.experience == 1) {
+                                            if (item.target == 1) {
                                                 return (
                                                     <Text>ลดไขมัน</Text>
                                                 )
-                                            } else if (item.experience == 2) {
+                                            } else if (item.target == 2) {
                                                 return (
                                                     <Text>สร้างกล้ามเนื้อ</Text>
                                                 )

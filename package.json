@@ -29,6 +29,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-calendar-strip": "^2.2.5",
     "react-native-calendars": "^1.1260.0",
     "react-native-chart-kit": "^6.11.0",
     "react-native-date-picker": "^3.3.2",
@@ -52,7 +53,8 @@
     "react-native-textinput-effects": "^0.6.2",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
-    "toggle-switch-react-native": "^3.2.0"
+    "toggle-switch-react-native": "^3.2.0",
+    "expo-file-system": "~9.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

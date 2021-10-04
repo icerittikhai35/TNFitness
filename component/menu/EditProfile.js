@@ -1,51 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ScrollView, Flatlist, TextInput, } from 'react-native';
-import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 import { Header, Tile } from 'react-native-elements';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Picker } from '@react-native-community/picker';
-import UploadImage from './updateImage';
+import { AntDesign } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 
 
 
 
 export default function EditProfile({ navigation }) {
-   
+
     //โชว์ข้อมูล
     const [infouser, setUser] = useState();
     const [userdata, setUserdata] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        AsyncStorage.getItem('id')
-            .then((value) => {
-                setUser(value);
-                axios.get('http://34.126.141.128/profile_user.php', {
-                    params: {
-                        id: infouser
-                    }
-                })
-                    .then(response => {
-                        setUserdata(response.data);
-                        setLoading(true)
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            })
-    }, [loading])
-
     //อัพเดตข้อมูล
     const [iduser, setIduser] = useState();
     const [email, setEmail] = useState();
-    const [gender, setGender] = useState(1);
+    const [gender, setGender] = useState();
     const [weight, setWeight] = useState();
     const [height, setHeight] = useState();
     const [target, setTarget] = useState();
     const [experience, setExperience] = useState();
+    const [url, setImage] = useState();
+   
+
+    useEffect(() => {
+        AsyncStorage.getItem('id')
+            .then((value) => {
+                setIduser(value);
+
+            })
+    })
+
+    useEffect(() => {
+        axios.get('http://34.126.141.128/profile_user.php', {
+            params: {
+                id: iduser
+            }
+        })
+            .then(response => {
+                setUserdata(response.data.all);
+                setEmail(response.data.email)
+                setGender(response.data.gender)
+                setWeight(response.data.weight)
+                setHeight(response.data.height)
+                setTarget(response.data.target)
+                setExperience(response.data.experience)
+                setImage(response.data.url)
+                setLoading(true)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }, [iduser])
 
 
 
@@ -62,7 +76,8 @@ export default function EditProfile({ navigation }) {
                         weight: weight,
                         height: height,
                         target: target,
-                        experience: experience
+                        experience: experience,
+                        url: url,
                     })
                 )
                 .then((response) => {
@@ -81,20 +96,37 @@ export default function EditProfile({ navigation }) {
         if (isSubmit) authenticate();
     }, [isSubmit]);
 
+    //อัพรูป
     useEffect(() => {
-        AsyncStorage.getItem('id')
-            .then((value) => {
-                setIduser(value);
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (status !== 'granted') {
+                    alert('Sorry, we need camera roll permissions to make this work!');
+                }
+            }
+        })();
+    }, []);
 
-            })
-    }, [iduser])
-
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
+        console.log(base64);
+        const base = 'data:image/jpeg;base64,'
+        if (!result.cancelled) {
+            setImage(base + base64);
+        }
+    };
 
 
 
     return (
 
-        console.log(userdata),
         <>
             <Header
                 placement="center"
@@ -153,11 +185,24 @@ export default function EditProfile({ navigation }) {
                                     แก้ไขข้อมูล
                                 </Text>
                                 <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#DCDCDC', height: 200, width: '100%', flexDirection: 'column' }}>
-                                    <UploadImage />
+                                    <View style={styles.containerImage}>
+                                        {
+                                            url && <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
+                                        }
+
+                                        <View style={styles.uploadBtnContainer}>
+                                            <TouchableOpacity onPress={pickImage} style={styles.uploadBtn} >
+                                                <Text>{url ? 'Edit' : 'Upload'} Image</Text>
+                                                <AntDesign name="camera" size={20} color="black" />
+                                            </TouchableOpacity>
+                                        </View>
+
+
+                                    </View>
 
                                 </View>
                                 <View style={{ marginTop: 5, alignItems: 'center', width: '100%' }}>
-                                    <Text style={styles.name}>{gender}</Text>
+                                    <Text style={styles.name}>{email}</Text>
 
                                     <View style={{ marginTop: 0, alignItems: 'center', margin: '3%', width: '100%', flexDirection: 'row', justifyContent: 'center', }}>
                                         <Text style={{ width: '25%', fontSize: 16, paddingTop: 0, paddingRight: '1%' }}>
@@ -168,7 +213,7 @@ export default function EditProfile({ navigation }) {
                                             style={{ width: '45%', height: 30, paddingLeft: 10, paddingTop: 0, borderBottomWidth: 1, borderRadius: 5, borderColor: '#AEAEAE', backgroundColor: 'white' }}
                                             onChangeText={(text) => setEmail(text)}
                                             multiline={false}
-                                            placeholder={item.email}
+                                            value={email}
                                         />
                                     </View>
 
@@ -186,7 +231,7 @@ export default function EditProfile({ navigation }) {
                                                 borderWidth: 1,
                                                 height: 40,
                                             }}>
-                                            
+
                                             <Picker
                                                 style={{
                                                     width: '100%',
@@ -200,9 +245,7 @@ export default function EditProfile({ navigation }) {
                                                 <Picker.Item label="ชาย" value="1"></Picker.Item>
                                                 <Picker.Item label="หญิง" value="2"></Picker.Item>
                                             </Picker>
-                                            <Text>
-                                                {gender}
-                                            </Text>
+
                                         </View>
                                     </View>
 
@@ -216,7 +259,7 @@ export default function EditProfile({ navigation }) {
                                             style={{ width: '38%', height: 30, paddingLeft: 10, paddingTop: 0, borderBottomWidth: 1, borderRadius: 5, borderColor: '#AEAEAE', backgroundColor: 'white' }}
                                             onChangeText={(text) => setWeight(text)}
                                             multiline={false}
-                                            placeholder={item.weight}
+                                            value={weight}
                                             keyboardType='numeric'
                                         />
                                         <Text style={{ width: '8%', fontSize: 16, paddingTop: 0 }}>
@@ -232,7 +275,7 @@ export default function EditProfile({ navigation }) {
                                             style={{ width: '38%', height: 30, paddingLeft: 10, paddingTop: 0, borderBottomWidth: 1, borderRadius: 5, borderColor: '#AEAEAE', backgroundColor: 'white' }}
                                             onChangeText={(text) => setHeight(text)}
                                             multiline={false}
-                                            placeholder={item.height}
+                                            value={height}
                                             keyboardType='numeric'
                                         />
                                         <Text style={{ width: '8%', fontSize: 16, paddingTop: 0 }}>
@@ -400,5 +443,28 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 7,
         backgroundColor: "#69BD51",
+    },
+    uploadBtnContainer: {
+        opacity: 0.7,
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'lightgrey',
+        width: '100%',
+        height: '25%',
+    },
+    uploadBtn: {
+        display: 'flex',
+        alignItems: "center",
+        justifyContent: 'center'
+    },
+    containerImage: {
+        elevation: 2,
+        height: 180,
+        width: 180,
+        backgroundColor: '#efefef',
+        position: 'relative',
+        borderRadius: 999,
+        overflow: 'hidden',
     },
 });

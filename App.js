@@ -1,5 +1,5 @@
 
-import { StatusBar, Text, StyleSheet, Image } from 'react-native';
+import { StatusBar, Text, StyleSheet, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './component/login/login';
@@ -9,7 +9,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import connectInfoUser from './component/connect/connectInfoUser';
 import Forget from './component/login/forget';
-
+LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 const App = () => {
