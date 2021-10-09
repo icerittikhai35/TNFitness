@@ -24,7 +24,7 @@ export default function Feed({ navigation, route }) {
       }
     }
     alldatanews();
-  }, [infoexer]),
+  }, infoexer );
 
     useEffect(() => {
       const alldatanewsFood = async () => {
@@ -36,7 +36,7 @@ export default function Feed({ navigation, route }) {
         }
       }
       alldatanewsFood();
-    }, [info]);
+    }, info);
 
 
 
@@ -111,7 +111,7 @@ export default function Feed({ navigation, route }) {
 
 
                   <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center' }}>
-                    {infoexer.map((i, k) => {
+                    {infoexer.map((i,k) => {
                       let opacity = position.interpolate({
                         inputRange: [k - 1, k, k + 1],
                         outputRange: [0.3, 1.0, 0.3],

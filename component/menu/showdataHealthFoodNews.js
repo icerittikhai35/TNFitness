@@ -41,7 +41,7 @@ export default function showHealthFoodNews({ navigation, route }) {
                 leftComponent={
                     <View style={{ marginTop: 0, alignItems: 'center' }}>
                         <TouchableOpacity
-                            onPress={() => { navigation.navigate('FoodNews') }}>
+                           onPress={() => { navigation.goBack() }}>
                             <Icon
                                 name="arrow-left"
                                 size={25}
