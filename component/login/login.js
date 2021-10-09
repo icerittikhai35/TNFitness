@@ -83,7 +83,6 @@ export default function LoginInfo(props) {
               props.navigation.navigate("InformationScreen");
               AsyncStorage.setItem('id', response.data.iduser)
               setIsSubmit(false)
-              alert("เเม่นแแล้วๆ");
             } else {
               props.navigation.navigate("connectInfoUser");
               AsyncStorage.setItem('id', response.data.iduser)

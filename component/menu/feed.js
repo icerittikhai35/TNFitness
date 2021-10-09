@@ -24,7 +24,7 @@ export default function Feed({ navigation, route }) {
       }
     }
     alldatanews();
-  }, infoexer),
+  }, [infoexer]),
 
     useEffect(() => {
       const alldatanewsFood = async () => {
@@ -36,7 +36,7 @@ export default function Feed({ navigation, route }) {
         }
       }
       alldatanewsFood();
-    }, info);
+    }, [info]);
 
 
 
@@ -94,10 +94,10 @@ export default function Feed({ navigation, route }) {
                       width,
                       height
                     }}>
-                    {infoexer.map((item, index) => (
+                    {infoexer.map((item, i) => (
                       <TouchableOpacity onPress={() => navigation.navigate('showExerciseNews', { idNewFeed: item.idnew_feed_exer })} style={{ width, height }}>
                         <Image
-                          key={index}
+                          key={i}
                           style={{
                             width: '100%',
                             height: '100%',
@@ -114,7 +114,7 @@ export default function Feed({ navigation, route }) {
                     {infoexer.map((i, k) => {
                       let opacity = position.interpolate({
                         inputRange: [k - 1, k, k + 1],
-                        outputRange: [0.3, 1, 0.3],
+                        outputRange: [0.3, 1.0, 0.3],
                         extrapolate: 'clamp'
                       })
                       return (

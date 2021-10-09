@@ -28,7 +28,7 @@ export default function EditProfile({ navigation }) {
     const [target, setTarget] = useState();
     const [experience, setExperience] = useState();
     const [url, setImage] = useState();
-   
+
 
     useEffect(() => {
         AsyncStorage.getItem('id')
