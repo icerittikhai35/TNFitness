@@ -7,6 +7,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
+import { Agenda } from 'react-native-calendars';
+
 
 let datesWhitelist = [
   {
@@ -15,6 +17,11 @@ let datesWhitelist = [
   }
 ];
 console.log(datesWhitelist);
+
+const timeToString = (time) => {
+  const date = new Date(time);
+  return date.toISOString().split('T')[0];
+}
 
 export default function RecommendedExercise({ navigation, route }) {
 
@@ -48,7 +55,64 @@ export default function RecommendedExercise({ navigation, route }) {
   const [height, setHeight] = useState();
   const [age, setAge] = useState();
   const [target, setTarget] = useState();
+  const [items, setItems] = useState({});
+  const [recexer, setRecexer] = useState([]);
+  const [date, setDate] = useState([]);
+  const [exerdata, setexerdata] = useState([]);
 
+  const loadItems = (day) => {
+    setTimeout(() => {
+      for (let i = -15; i < 85; i++) {
+        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+        const strTime = timeToString(time);
+        if (!items[strTime]) {
+          items[strTime] = [];
+          const numItems = Math.floor(1);
+          for (let j = 0; j < numItems; j++) {
+            items[strTime].push({
+              name: 'Item for ' + ' #' + j,
+              height: 0,
+              width: 0
+            });
+          }
+        }
+      }
+      const newItems = {};
+      Object.keys(items).forEach(key => {
+        newItems[key] = items[key];
+      });
+      setItems(newItems);
+    }, 1000);
+  }
+
+  const renderItem = (items) => {
+    return (
+      <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
+        <View
+          style={{
+            backgroundColor: '#292B2D',
+            borderRadius: 20,
+            height: 120,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            marginBottom: 10,
+            borderRadius: 15
+          }}>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: 10
+            }}>
+            <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{items.neme_exersice}</Text>
+          </View>
+        </View>
+      </View>
+
+    );
+  };
 
 
   useEffect(() => {
@@ -79,6 +143,22 @@ export default function RecommendedExercise({ navigation, route }) {
     }
     fetchData();
   }, [user])
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://34.126.141.128/exerrecommend.php')
+        setRecexer(response.data);
+        console.log(response.data);
+      } catch (err) {
+        alert(err);
+      }
+    }
+    fetchData();
+  }, []);
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -136,21 +216,36 @@ export default function RecommendedExercise({ navigation, route }) {
           <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 10, backgroundColor: '#3D3D3D' }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
 
           <View style={styles.containercarenda}>
-            <CalendarStrip
-              calendarAnimation={{ type: 'sequence', duration: 50 }}
-              style={{ height: 100, paddingTop: 20, paddingBottom: 10 }}
-              calendarHeaderStyle={{ color: '#69BD51' }}
-              calendarColor={'#3D3D3D'}
-              dateNumberStyle={{ color: 'white' }}
-              dateNameStyle={{ color: 'white' }}
-              highlightDateNumberStyle={{ color: '#69BD51' }}
-              highlightDateNameStyle={{ color: '#69BD51' }}
-              disabledDateNameStyle={{ color: 'grey' }}
-              disabledDateNumberStyle={{ color: 'grey' }}
-              datesWhitelist={datesWhitelist}
-            // datesBlacklist={datesBlacklist}
-            // iconLeft={require('./img/left-arrow.png')}
-            // iconRight={require('./img/right-arrow.png')}
+            <Agenda
+              items={recexer}
+              onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
+              //renderEmptyDate={renderEmptyDate}
+              //renderDay={renderDay}
+              //โชว์ตาราง
+              loadItemsForMonth={loadItems}
+              renderItem={renderItem}
+              minDate={'2021-11-01'}
+              selected={'2021-11-06'}
+              maxDate={'2021-12-31'}
+              hideKnob={true}
+              onRefresh={() => console.log('refreshing...')}
+              theme={{
+                backgroundColor: '#3D3D3D',
+                calendarBackground: '#3D3D3D',
+                selectedDayBackgroundColor: '#69BD51',
+                selectedDayTextColor: '#ffffff',
+                todayTextColor: '#69BD51',
+                textDisabledColor: '#888888',
+                dayTextColor: '#9E9E9E',
+                agendaKnobColor: '#69BD51',
+                dotColor: '#3D3D3D',
+                agendaTodayColor: '#69BD51',
+
+
+                'stylesheet.calendar.header': { week: { marginTop: Platform.OS == 'ios' ? 6 : 2, flexDirection: 'row', justifyContent: 'space-between' } }
+
+
+              }}
             />
           </View>
 
