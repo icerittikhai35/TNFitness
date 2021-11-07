@@ -24,11 +24,14 @@ const renderEmptyDate = () => {
     );
 }
 
-const ManageExercise = (props) => {
+const ManageInsertExercise = ({ route, navigation }) => {
+    const { day } = route.params;
     const [items, setItems] = useState({});
-    const [day, setDay] = useState();
-    const [showdata, setShowdata] = useState([]);
-    const [iduser, setIduser] = useState();
+    const [dataexer, setDataexer] = useState([]);
+    const [iduser, setIduser] = useState(1);
+    const [idexer, setIdexer] = useState();
+    const [submit, setSubmit] = useState(false);
+
 
     const loadItems = (day) => {
         setTimeout(() => {
@@ -58,39 +61,35 @@ const ManageExercise = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await AsyncStorage.getItem('id');
-                setIduser(res);
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        fetchData();
-    })
-    console.log(iduser)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://34.126.141.128/test.php', {
-                    params: {
-                        iduser: 1
-                    }
-                })
-                setShowdata(response.data);
+                const response = await axios.get('http://34.126.141.128/showdataexercise.php')
+                setDataexer(response.data);
             } catch (err) {
                 alert(err);
             }
         }
         fetchData();
-    }, [showdata]);
+    }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.post('http://34.126.141.128/insertmanageexer.php', { day: day, iduser: iduser, idexer: idexer })
+                setSubmit(false);
+                alert(response.data)
+            } catch (err) {
+                alert(err);
+                setSubmit(false);
+            }
+        }
+        if (submit) fetchData();
+    }, [submit]);
 
 
     const renderItem = (item, firstItemInDay) => {
         return (
             <>
 
-                <TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
+                < TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
                     <View
                         style={{
                             backgroundColor: '#292B2D',
@@ -109,7 +108,7 @@ const ManageExercise = (props) => {
                                 alignItems: 'center',
                                 margin: 10
                             }}>
-                            <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{item.neme_exersice}</Text>
+                            <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>5555</Text>
                         </View>
                     </View>
                 </TouchableOpacity >
@@ -124,7 +123,7 @@ const ManageExercise = (props) => {
                 leftComponent={
                     <View style={{ marginTop: 19 }}>
                         <TouchableOpacity
-                            onPress={() => { props.navigation.navigate('Training') }}>
+                            onPress={() => { navigation.navigate('Training') }}>
                             <Icon
                                 name="arrowleft"
                                 size={25}
@@ -156,53 +155,41 @@ const ManageExercise = (props) => {
                 />
                 <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 20 }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
 
-                <View style={{ flex: 1, backgroundColor: '#3D3D3D', height: 100 }}>
+                <View style={{ flex: 10, backgroundColor: '#3D3D3D', height: 100, alignItems: 'center' }}>
+                    <ScrollView width={'100%'}>
+                        {dataexer.map(item => (
+                            <>
+                                <TouchableOpacity
+                                    onPress={() => { setSubmit(true); setIdexer(item.id_exersice); }}
+                                    style={{
+                                        width: '80%',
+                                        backgroundColor: '#292B2D',
+                                        borderRadius: 20,
+                                        height: 120,
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
+                                        marginBottom: 10,
+                                        borderRadius: 15
+                                    }}>
 
-                    <Text>{day}</Text>
-                    <Agenda
-                        items={showdata}
-                        onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
-                        //renderEmptyDate={renderEmptyDate}
-                        //renderDay={renderDay}
-                        //โชว์ตาราง
-                        onDayPress={(day) => { console.log(day); setDay(day.dateString); }}
-                        loadItemsForMonth={loadItems}
-                        onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
-                        renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay)) }}
-                        current={'2021-01-01'}
-                        hideKnob={true}
-                        onRefresh={() => console.log('refreshing...')}
-                        theme={{
-                            backgroundColor: '#3D3D3D',
-                            calendarBackground: '#3D3D3D',
-                            selectedDayBackgroundColor: '#69BD51',
-                            selectedDayTextColor: '#ffffff',
-                            todayTextColor: '#69BD51',
-                            textDisabledColor: '#888888',
-                            dayTextColor: '#9E9E9E',
-                            agendaKnobColor: '#69BD51',
-                            dotColor: '#3D3D3D',
-                            agendaTodayColor: '#69BD51',
-                            'stylesheet.calendar.header': { week: { marginTop: Platform.OS == 'ios' ? 6 : 2, flexDirection: 'row', justifyContent: 'space-between' } }
+                                    <View
+                                        style={{
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            margin: 10
+                                        }}>
+                                        <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{item.neme_exersice}{day}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </>
+                        ))}
+                    </ScrollView>
 
 
-                        }}
-                    />
 
                 </View>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('ManageInsertExercise', { day: day })}
-                    style={{
-                        position: 'absolute',
-                        left: '80%',
-                        top: '75%',
-                        backgroundColor: 'white',
-                        width: 50,
-                        height: 50,
-                        borderRadius: 50
-                    }}>
-                    <Text style={{ fontSize: 20, color: 'red' }}> เพิ่ม</Text>
-                </TouchableOpacity>
+
             </View>
 
 
@@ -220,4 +207,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ManageExercise;
+export default ManageInsertExercise;

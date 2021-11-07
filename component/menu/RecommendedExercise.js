@@ -87,30 +87,62 @@ export default function RecommendedExercise({ navigation, route }) {
 
   const renderItem = (items) => {
     return (
-      <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
-        <View
-          style={{
-            backgroundColor: '#292B2D',
-            borderRadius: 20,
-            height: 120,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            marginBottom: 10,
-            borderRadius: 15
-          }}>
+      <>
+        {items.category_exersice == 0 ? (
+          <>
+            <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
+              <View
+                style={{
+                  backgroundColor: '#292B2D',
+                  borderRadius: 20,
+                  height: 120,
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  marginBottom: 10,
+                  borderRadius: 15
+                }}>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              margin: 10
-            }}>
-            <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{items.neme_exersice}</Text>
-          </View>
-        </View>
-      </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: 10
+                  }}>
+                  <Text style={{ fontSize: 20, color: 'red', alignItems: 'center', }}>วันพ้ากกกกกกกกกกกกกกกกกกก</Text>
+                </View>
+              </View>
+            </View>
+          </>
+        ) : (
+          <>
+            <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
+              <View
+                style={{
+                  backgroundColor: '#292B2D',
+                  borderRadius: 20,
+                  height: 120,
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  marginBottom: 10,
+                  borderRadius: 15
+                }}>
 
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: 10
+                  }}>
+                  <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{items.neme_exersice}</Text>
+                </View>
+              </View>
+            </View>
+          </>
+        )}
+
+      </>
     );
   };
 
