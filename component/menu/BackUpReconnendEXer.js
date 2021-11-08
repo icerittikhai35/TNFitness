@@ -108,8 +108,6 @@ export default function RecommendedExercise({ navigation, route }) {
     return (
       <>
         <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
-
-
           <>
             {(() => {
               if (bmiUser <= item.bmi && age <= item.age && target == 1) {

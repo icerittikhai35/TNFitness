@@ -199,9 +199,17 @@ const ManageExercise = (props) => {
                         backgroundColor: 'white',
                         width: 50,
                         height: 50,
-                        borderRadius: 50
+                        borderRadius: 50,
+                        alignItems:'center',
+                        
                     }}>
-                    <Text style={{ fontSize: 20, color: 'red' }}> เพิ่ม</Text>
+
+                    <Icon
+                        name="plus"
+                        marginTop={20}
+                        size={50}
+                        color={'#69BD51'}
+                    />
                 </TouchableOpacity>
             </View>
 
