@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextInput, Text, ScrollView, View, TouchableOpacity, StyleSheet, Button, FlatList, Alert, Modal, Pressable } from 'react-native';
+import { TextInput, Text, ScrollView, View, TouchableOpacity, StyleSheet, Button, FlatList, Alert, Modal, Pressable, Dimensions, Animated } from 'react-native';
 import { ListItem, Header, Image, Tile } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -7,7 +7,8 @@ import axios from 'axios';
 import { SliderBox } from 'react-native-image-slider-box';
 import { ExerciseBack, } from '../../DataExercise';
 
-
+const { width } = Dimensions.get("window");
+const { height } = width * 100 / 60;
 
 export default function PageRCMExercise({ navigation, route }) {
     const { name } = route.params;
@@ -19,10 +20,65 @@ export default function PageRCMExercise({ navigation, route }) {
     const { equipment } = route.params;
     const { Imageequipment } = route.params;
     const { imageUrls } = route.params;
+    const { id_exersice } = route.params;
+    const scrollX = new Animated.Value(0);
+    const position = Animated.divide(scrollX, width);
+
 
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalround, setModalround] = useState(false);
+    const [albumtraining, setAlbumtraining] = useState([]);
     const [text, setText] = React.useState('');
+    const [count, setCount] = React.useState();
+    const [roundone, setRoundone] = React.useState();
+    const [roundtwo, setRoundtwo] = React.useState();
+    const [roundthree, setRoundthree] = React.useState();
+    const [roundfour, setRoundfour] = React.useState();
+    const [roundfive, setRounfive] = React.useState();
+    const [roundsix, setRoundsix] = React.useState();
+
+    useEffect(() => {
+        setCount(round);
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('http://34.126.141.128/showalbumtraining.php', {
+                    params: {
+                        id: id_exersice
+                    }
+                });
+                setAlbumtraining(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.post('http://34.126.141.128/showalbumtraining.php', {});
+                setAlbumtraining(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
+
+    console.log(count)
+
+    useEffect(() => {
+        if (count > 6) {
+            alert('กรอกไม่เกิน 6');
+            setCount(round);
+        }
+    })
+
     return (
         <>
 
@@ -68,9 +124,7 @@ export default function PageRCMExercise({ navigation, route }) {
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <TextInput
-                                        label="Email"
-                                        value={text}
-                                        keyboardType='numeric'
+                                        value={count}
                                         style={{
                                             borderRadius: 5,
                                             borderWidth: 1,
@@ -78,35 +132,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                             width: 70,
                                             height: 35
                                         }}
-                                        onChangeText={text => setText(text)}
+                                        onChangeText={(text) => setCount(text)}
                                     />
 
                                 </View>
                             </View>
 
-                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={styles.modalText}>จำนวนครั้ง</Text>
-                                </View>
-                                <View style={{ alignItems: 'center' }}>
-                                    <TextInput
-                                        label="Email"
-                                        value={text}
-                                        keyboardType='numeric'
-                                        style={{
-                                            borderRadius: 5,
-                                            borderWidth: 1,
-                                            borderColor: '#3D3D3D',
-                                            width: 70,
-                                            height: 35,
-                                        }}
-                                        onChangeText={text => setText(text)}
-                                    />
 
-                                </View>
-                            </View>
 
-                            <View style={{ flexDirection: 'row', alignItems: 'center', width: '70%',justifyContent:'space-around' }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', width: '70%', justifyContent: 'space-around' }}>
 
 
 
@@ -121,9 +155,497 @@ export default function PageRCMExercise({ navigation, route }) {
                                 <TouchableOpacity
                                     style={{ backgroundColor: '#69BD51', width: 80, height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
                                     title={"Go to the hell"}
-                                    onPress={() => setModalVisible(!modalVisible)}
+                                    onPress={() => { setModalVisible(!modalVisible); setModalround(true) }}
                                 >
-                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>เข้าสู่ระบบ</Text>
+                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>ต่อไป</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
+
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalround}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalround(!modalVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>กรอกค่าการออก</Text>
+
+
+
+                            {(() => {
+                                if (count == 1) {
+                                    return (
+                                        <>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 1 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundone}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundone(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                        </>
+                                    )
+
+                                }
+                                else if (count == 2) {
+                                    return (
+                                        <>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 1 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundone}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundone(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 2 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundtwo}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundtwo(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                        </>
+
+                                    )
+
+                                }
+                                else if (count == 3) {
+                                    return (
+                                        <>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 1 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundone}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundone(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 2 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundtwo}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundtwo(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 3 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundthree}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundthree(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                        </>
+                                    )
+
+                                } else if (count == 4) {
+                                    return (
+                                        <>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 1 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundone}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundone(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 2 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundtwo}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundtwo(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 3 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundthree}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundthree(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 4 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundfour}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundfour(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                        </>
+                                    )
+
+                                } else if (count == 5) {
+                                    return (
+                                        <>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 1 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundone}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundone(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 2 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundtwo}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundtwo(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 3 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundthree}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundthree(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 4 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundfour}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundfour(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 5 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundfive}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRounfive(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                        </>
+                                    )
+
+                                }
+                                else {
+                                    return (
+                                        <>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 1 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundone}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundone(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 2 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundtwo}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundtwo(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 3 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundthree}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundthree(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 4 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundfour}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundfour(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 5 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundfive}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRounfive(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <Text style={styles.modalText}>จำนวนครั้งที 6 </Text>
+                                                </View>
+                                                <View style={{ alignItems: 'center' }}>
+                                                    <TextInput
+                                                        value={roundsix}
+                                                        style={{
+                                                            borderRadius: 5,
+                                                            borderWidth: 1,
+                                                            borderColor: '#3D3D3D',
+                                                            width: 70,
+                                                            height: 35
+                                                        }}
+                                                        onChangeText={(text) => setRoundsix(text)}
+                                                    />
+
+                                                </View>
+                                            </View>
+                                        </>
+                                    )
+                                }
+                            })()}
+
+
+
+
+                            <View style={{ flexDirection: 'row', alignItems: 'center', width: '70%', justifyContent: 'space-around' }}>
+                                <TouchableOpacity
+                                    style={{ backgroundColor: '#292B2D', width: 80, height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
+                                    title={"Go to the hell"}
+                                    onPress={() => setModalround(!modalround)}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>ยกเลิก</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={{ backgroundColor: '#69BD51', width: 80, height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
+                                    title={"Go to the hell"}
+                                    onPress={() => setModalround(!modalround)}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>ต่อไป</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -136,19 +658,65 @@ export default function PageRCMExercise({ navigation, route }) {
             <View style={styles.container}>
 
                 <ScrollView>
-                    <View style={{ width: '90%', height: 1000, alignItems: 'center',marginBottom:50 }} >
+                    <View style={{ width: '100%', height: 1000, marginBottom: 5, alignItems: 'center' }} >
+
+                        {albumtraining == null ? (
+                            <>
+                                <View style={{ width: '100%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text>ยังไม่มีรูปภาพ</Text>
+                                </View>
+                            </>
+                        ) : (
+                            <>
+                                <View style={{ width: '90%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5', alignItems: 'center' }}>
+                                    <ScrollView
+                                        pagingEnabled
+                                        showsHorizontalScrollIndicator={false}
+
+                                        onScroll={Animated.event(
+                                            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                                            { useNativeDriver: false }
+                                        )}
+                                        horizontal={true}
+                                        style={{
+                                            width,
+                                            height
+                                        }}>
+                                        {albumtraining.map((item, i) => (
+                                            <TouchableOpacity style={{ width, height }}>
+                                                <Image
+                                                    key={i}
+                                                    style={{
+                                                        width: '100%',
+                                                        height: '100%',
+                                                    }}
+                                                    source={{ uri: item.album_training_img }}
+                                                />
+                                            </TouchableOpacity>
+                                        ))}
+                                    </ScrollView>
 
 
 
-                        <View style={{ width: "95%", height: 300, alignItems: 'center', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '0%', borderRadius: 10 }}>
-                            <Image
-                                style={{ width: 420, height: '100%' }}
-                                source={{ uri: imageUrls }}
-                            />
-                        </View>
+                                    <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0, alignSelf: 'center' }}>
+                                        {albumtraining.map((i, k) => {
+                                            let opacity = position.interpolate({
+                                                inputRange: [k - 1, k, k + 1],
+                                                outputRange: [0.3, 1.0, 0.3],
+                                                extrapolate: 'clamp'
+                                            })
+                                            return (
+                                                <Animated.View key={k} style={{ opacity, height: 10, width: 10, backgroundColor: 'white', borderRadius: 20, margin: 5 }} />
+                                            )
+                                        })}
+                                    </View>
+                                </View>
+                            </>
+                        )}
 
-                        <View style={{ width: "95%", height: 90, alignItems: 'center', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '2%', borderRadius: 10 }}>
-                            <View style={{ marginTop: 10, justifyContent: 'flex-start', width: '100%' }}>
+
+                        <View style={{ width: "95%", height: 90, alignItems: 'center', backgroundColor: '#292B2D', marginTop: '2%', borderRadius: 10 }}>
+                            <View style={{ marginTop: 10, justifyContent: 'flex-start', width: '95%' }}>
                                 <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', justifyContent: 'flex-start' }}> {(name)}</Text>
                             </View>
                             <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around', width: '100%' }}>
@@ -156,15 +724,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                     <Text style={{ color: 'white', fontSize: 14 }}>จำนวน</Text>
                                     <Text style={{ color: '#69BD51', fontSize: 14 }}> {(volume)} ครั้ง</Text>
                                 </View>
-                                <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
+                                <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>รอบ</Text>
                                     <Text style={{ color: '#69BD51', fontSize: 14 }}> {(round)} รอบ</Text>
                                 </View>
-                                <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
+                                <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>น้ำหนัก</Text>
                                     <Text style={{ color: '#69BD51', fontSize: 14 }}> {(weight)} กก.</Text>
                                 </View>
-                                <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
+                                <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>เวลาพัก</Text>
                                     <Text style={{ color: '#69BD51', fontSize: 14 }}> {JSON.stringify(breaks)} วินาที</Text>
                                 </View>
@@ -179,7 +747,7 @@ export default function PageRCMExercise({ navigation, route }) {
                             <View style={{ width: '80%', alignItems: 'center', margin: '3%' }}>
 
                                 <Image
-                                    style={{ width: 180, height: 160 }}
+                                    style={{ width: 180, height: 100 }}
                                     source={{ uri: Imageequipment }}
                                 />
                             </View>
@@ -220,12 +788,11 @@ export default function PageRCMExercise({ navigation, route }) {
 }
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
-        width: '100%',
+
         flexDirection: "column",
         paddingBottom: 0,
         backgroundColor: '#3D3D3D',
-        alignItems: 'center'
+
 
 
     },
@@ -266,7 +833,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop:0
+        marginTop: 0
     },
     modalView: {
         margin: 20,

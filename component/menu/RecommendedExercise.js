@@ -121,7 +121,6 @@ export default function RecommendedExercise({ navigation, route }) {
       try {
         const response = await axios.get('http://34.126.141.128/exerrecommend.php')
         setRecexer(response.data);
-        console.log(response.data);
       } catch (err) {
         alert(err);
       }
@@ -191,7 +190,7 @@ export default function RecommendedExercise({ navigation, route }) {
                         equipment: items.equipment_exersice,
                         Imageequipment: items.imageequipment_exersice,
                         imageUrls: items.imageUrls_exersice,
-
+                        id_exersice: items.id_exersice
                       }
                     )}>
                     <View
@@ -263,7 +262,7 @@ export default function RecommendedExercise({ navigation, route }) {
                         equipment: items.equipment_exersice,
                         Imageequipment: items.imageequipment_exersice,
                         imageUrls: items.imageUrls_exersice,
-
+                        id_exersice: items.id_exersice
                       }
                     )}>
                     <View
@@ -335,7 +334,7 @@ export default function RecommendedExercise({ navigation, route }) {
                         equipment: items.equipment_exersice,
                         Imageequipment: items.imageequipment_exersice,
                         imageUrls: items.imageUrls_exersice,
-
+                        id_exersice: items.id_exersice
                       }
                     )}>
                     <View
