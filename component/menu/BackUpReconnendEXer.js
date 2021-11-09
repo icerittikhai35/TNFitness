@@ -127,7 +127,7 @@ export default function RecommendedExercise({ navigation, route }) {
 
                     }
                   )}>
-                    <View
+                    <View 
                       style={{
                         backgroundColor: '#292B2D',
                         borderRadius: 20,

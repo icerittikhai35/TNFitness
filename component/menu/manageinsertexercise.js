@@ -123,7 +123,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
                 leftComponent={
                     <View style={{ marginTop: 19 }}>
                         <TouchableOpacity
-                            onPress={() => { navigation.navigate('Training') }}>
+                            onPress={() => { navigation.navigate('ManageExercise') }}>
                             <Icon
                                 name="arrowleft"
                                 size={25}

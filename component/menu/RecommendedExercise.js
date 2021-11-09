@@ -127,7 +127,7 @@ export default function RecommendedExercise({ navigation, route }) {
       }
     }
     fetchData();
-  }, []);
+  }, [recexer]);
 
 
 
@@ -142,12 +142,12 @@ export default function RecommendedExercise({ navigation, route }) {
   })
 
   const bmiUser = (parseInt((weight)) / (((parseInt(height)) / 100) * 2))
-  const renderItem = (items) => {
+  const renderItem = (items, index) => {
     return (
-      <View>
+      <View >
         {items.category_exersice == 0 ? (
           <>
-            <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginBottom:10, marginTop: 10 }}>
+            <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginTop: index == 0 ? 50 : 0 }}>
               <View
                 style={{
                   backgroundColor: '#292B2D',
@@ -171,77 +171,239 @@ export default function RecommendedExercise({ navigation, route }) {
               </View>
             </View>
           </>
-        ) : (      
-          
-              <>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('PageRCMExercise',
-                    {
-                      name: items.name,
-                      volume: parseInt(items.volume * 1.2),
-                      round: items.round,
-                      weight: items.weight,
-                      breaks: parseInt(items.breaks - 20),
-                      description: items.description,
+        ) : (
 
-                      equipment: items.equipment,
-                      Imageequipment: items.Imageequipment,
-                      imageUrls: items.imageUrls,
+          <>
+            {(() => {
+              if (bmiUser <= items.bmi_exersice && age <= items.age_exersice && target == 1) {
+                return (
+                  <TouchableOpacity
+                    style={{ marginTop: index == 0 ? 50 : 0 }}
+                    onPress={() => navigation.navigate('PageRCMExercise',
+                      {
+                        name: items.neme_exersice,
+                        volume: parseInt(items.volume_exersice * 1.2),
+                        round: items.round_exersice,
+                        weight: items.weight_exersice,
+                        breaks: parseInt(items.breaks_exersice - 20),
+                        description: items.description_exersice,
 
-                    }
-                  )}>
-                  <View
-                    style={{
-                      backgroundColor: '#292B2D',
-                      borderRadius: 20,
-                      height: 120,
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      marginBottom: 10,
-                      borderRadius: 15,
-                      marginRight: '5%'
-                    }}>
+                        equipment: items.equipment_exersice,
+                        Imageequipment: items.imageequipment_exersice,
+                        imageUrls: items.imageUrls_exersice,
+
+                      }
+                    )}>
                     <View
                       style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
                         backgroundColor: '#292B2D',
-                        //292B2D
-                        margin: 10,
+                        borderRadius: 20,
+                        height: 120,
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        marginBottom: 10,
+                        borderRadius: 15,
+                        marginRight: '5%',
                       }}>
-                      <Image
-                        style={{ height: 100, width: 140, borderRadius: 15 }}
-                        source={{ uri: items.imageUrls_exersice }}
-                      />
-                      <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
-                        <View style={{ marginBottom: 10 }}>
-                          <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
-                        </View>
-                        <View style={{ alignss: 'center', flexDirection: 'row' }}>
-                          <View style={{ alignss: 'center' }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
-                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.volume_exersice * 1.2)} ครั้ง</Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          backgroundColor: '#292B2D',
+                          //292B2D
+                          margin: 10,
+                        }}>
+                        <Image
+                          style={{ height: 100, width: 140, borderRadius: 15 }}
+                          source={{ uri: items.imageUrls_exersice }}
+                        />
+                        <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                          <View style={{ marginBottom: 10 }}>
+                            <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
                           </View>
-                          <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
-                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                          <View style={{ alignss: 'center', flexDirection: 'row' }}>
+                            <View style={{ alignss: 'center' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.volume_exersice * 1.2)} ครั้ง</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.weight_exersice} กก.</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice - 20)} วินาที</Text>
+                            </View>
                           </View>
-                          <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
-                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.weight_exersice} กก.</Text>
-                          </View>
-                          <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
-                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice - 20)} วินาที</Text>
-                          </View>
-                        </View>
 
+                        </View>
                       </View>
                     </View>
-                  </View>
 
-                </TouchableOpacity>
-              </>
+                  </TouchableOpacity>
+                )
+
+              }
+              if (bmiUser <= items.bmi_exersice && age <= items.age_exersice && target == 2) {
+                return (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('PageRCMExercise',
+                      {
+                        name: items.neme_exersice,
+                        volume: items.volume_exersice,
+                        round: items.round_exersice,
+                        weight: parseInt(items.weight_exersice * 2),
+                        breaks: parseInt(items.breaks_exersice) + 20,
+                        description: items.description_exersice,
+
+                        equipment: items.equipment_exersice,
+                        Imageequipment: items.imageequipment_exersice,
+                        imageUrls: items.imageUrls_exersice,
+
+                      }
+                    )}>
+                    <View
+                      style={{
+                        backgroundColor: '#292B2D',
+                        borderRadius: 20,
+                        height: 120,
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        marginBottom: 10,
+                        borderRadius: 15,
+                        marginRight: '5%'
+                      }}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          backgroundColor: '#292B2D',
+                          //292B2D
+                          margin: 10,
+                        }}>
+                        <Image
+                          style={{ height: 100, width: 140, borderRadius: 15 }}
+                          source={{ uri: items.imageUrls_exersice }}
+                        />
+                        <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                          <View style={{ marginBottom: 10 }}>
+                            <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
+                          </View>
+                          <View style={{ alignss: 'center', flexDirection: 'row' }}>
+                            <View style={{ alignss: 'center' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.volume_exersice} ครั้ง</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.weight_exersice * 2)} กก.</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice) + 20} วินาที</Text>
+                            </View>
+                          </View>
+
+                        </View>
+                      </View>
+                    </View>
+
+                  </TouchableOpacity>
+                )
+
+              }
+              if (bmiUser <= items.bmi_exersice && age <= items.age_exersice && target == 3) {
+                return (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('PageRCMExercise',
+                      {
+                        name: items.neme_exersice,
+                        volume: parseInt(items.volume_exersice),
+                        round: items.round_exersice,
+                        weight: items.weight_exersice,
+                        breaks: parseInt(items.breaks_exersice),
+                        description: items.description_exersice,
+
+                        equipment: items.equipment_exersice,
+                        Imageequipment: items.imageequipment_exersice,
+                        imageUrls: items.imageUrls_exersice,
+
+                      }
+                    )}>
+                    <View
+                      style={{
+                        backgroundColor: '#292B2D',
+                        borderRadius: 20,
+                        height: 120,
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        marginBottom: 10,
+                        borderRadius: 15,
+                        marginRight: '5%'
+                      }}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          backgroundColor: '#292B2D',
+                          //292B2D
+                          margin: 10,
+                        }}>
+                        <Image
+                          style={{ height: 100, width: 140, borderRadius: 15 }}
+                          source={{ uri: items.imageUrls_exersice }}
+                        />
+                        <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                          <View style={{ marginBottom: 10 }}>
+                            <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
+                          </View>
+                          <View style={{ alignss: 'center', flexDirection: 'row' }}>
+                            <View style={{ alignss: 'center' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.volume_exersice)} ครั้ง</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.weight_exersice} กก.</Text>
+                            </View>
+                            <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                              <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                              <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice)} วินาที</Text>
+                            </View>
+                          </View>
+
+                        </View>
+                      </View>
+                    </View>
+
+                  </TouchableOpacity>
+                )
+
+              }
+              else {
+                return (
+                  <>
+
+                  </>
+                )
+              }
+            })()}
+
+
+
+          </>
         )}
 
       </View>
@@ -307,7 +469,7 @@ export default function RecommendedExercise({ navigation, route }) {
               //selected={'2021-11-06'}
               maxDate={'2021-12-31'}
               hideKnob={true}
-              onRefresh={() => console.log('refreshing...')}
+              //onRefresh={() => console.log('refreshing...')}
               theme={{
                 backgroundColor: '#3D3D3D',
                 calendarBackground: '#3D3D3D',

@@ -41,15 +41,7 @@ const Training = (props) => {
             </View>
 
 
-            <View style={{ width: '90%',marginBottom: 20  }}>
-              <TouchableOpacity onPress={() => { props.navigation.navigate('ShowManageExercise') }}>
-                <Image
-                  style={{ height: 150, width: '100%', borderRadius: 20 }}
-                  source={require('../../img/TN2.jpg')}
-                />
-              </TouchableOpacity>
-
-            </View>
+            
             <View style={{ width: '90%', }}>
               <TouchableOpacity onPress={() => { props.navigation.navigate('ManageExercise') }}>
                 <Image

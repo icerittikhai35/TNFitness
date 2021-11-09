@@ -149,24 +149,24 @@ export default function PageRCMExercise({ navigation, route }) {
 
                         <View style={{ width: "95%", height: 90, alignItems: 'center', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '2%', borderRadius: 10 }}>
                             <View style={{ marginTop: 10, justifyContent: 'flex-start', width: '100%' }}>
-                                <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', justifyContent: 'flex-start' }}> {JSON.stringify(name)}</Text>
+                                <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', justifyContent: 'flex-start' }}> {(name)}</Text>
                             </View>
                             <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around', width: '100%' }}>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>จำนวน</Text>
-                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {JSON.stringify(volume)}</Text>
+                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {(volume)} ครั้ง</Text>
                                 </View>
                                 <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>รอบ</Text>
-                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {JSON.stringify(round)}</Text>
+                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {(round)} รอบ</Text>
                                 </View>
                                 <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>น้ำหนัก</Text>
-                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {JSON.stringify(weight)}</Text>
+                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {(weight)} กก.</Text>
                                 </View>
                                 <View style={{ alignItems: 'center', paddingLeft: '10%' }}>
                                     <Text style={{ color: 'white', fontSize: 14 }}>เวลาพัก</Text>
-                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {JSON.stringify(breaks)}</Text>
+                                    <Text style={{ color: '#69BD51', fontSize: 14 }}> {JSON.stringify(breaks)} วินาที</Text>
                                 </View>
                             </View>
                         </View>
@@ -174,7 +174,7 @@ export default function PageRCMExercise({ navigation, route }) {
                         <View style={{ width: "95%", height: '20%', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '2%', flexDirection: 'row', borderRadius: 10 }}>
                             <View style={{ width: '30%', alignItems: 'center', padding: '5%' }}>
                                 <Text style={{ color: 'white', fontSize: 14, weight: '100%' }}>อุปกรณ์</Text>
-                                <Text style={{ color: '#ffffff', fontSize: 14, height: '100%' }}> {JSON.stringify(equipment)}</Text>
+                                <Text style={{ color: '#ffffff', fontSize: 14, height: '100%' }}> {(equipment)}</Text>
                             </View>
                             <View style={{ width: '80%', alignItems: 'center', margin: '3%' }}>
 
