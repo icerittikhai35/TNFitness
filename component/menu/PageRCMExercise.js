@@ -56,21 +56,21 @@ export default function PageRCMExercise({ navigation, route }) {
             }
         }
         fetchData();
-    }, []);
+    }, [albumtraining]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.post('http://34.126.141.128/showalbumtraining.php', {});
-                setAlbumtraining(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        fetchData();
-    }, []);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const res = await axios.post('http://34.126.141.128/showalbumtraining.php', {});
+    //             setAlbumtraining(res.data);
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    //     fetchData();
+    // }, [albumtraining]);
 
-    console.log(count)
+
 
     useEffect(() => {
         if (count > 6) {
@@ -658,7 +658,7 @@ export default function PageRCMExercise({ navigation, route }) {
             <View style={styles.container}>
 
                 <ScrollView>
-                    <View style={{ width: '100%', height: 1000, marginBottom: 5, alignItems: 'center' }} >
+                    <View style={{ width: '100%', marginBottom: '40%', alignItems: 'center', }} >
 
                         {albumtraining == null ? (
                             <>
@@ -668,7 +668,7 @@ export default function PageRCMExercise({ navigation, route }) {
                             </>
                         ) : (
                             <>
-                                <View style={{ width: '90%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5', alignItems: 'center' }}>
+                                <View style={{ width: '100%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5', alignItems: 'center' }}>
                                     <ScrollView
                                         pagingEnabled
                                         showsHorizontalScrollIndicator={false}
@@ -739,20 +739,17 @@ export default function PageRCMExercise({ navigation, route }) {
                             </View>
                         </View>
 
-                        <View style={{ width: "95%", height: '20%', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', marginTop: '2%', flexDirection: 'row', borderRadius: 10 }}>
-                            <View style={{ width: '30%', alignItems: 'center', padding: '5%' }}>
-                                <Text style={{ color: 'white', fontSize: 14, weight: '100%' }}>อุปกรณ์</Text>
-                                <Text style={{ color: '#ffffff', fontSize: 14, height: '100%' }}> {(equipment)}</Text>
-                            </View>
-                            <View style={{ width: '80%', alignItems: 'center', margin: '3%' }}>
-
+                        <View style={{ width: "95%", height: 200, paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', margin: 10, flexDirection: 'column', alignItems: 'center', borderRadius: 10 }}>
+                            <View style={{flexDirection:'row',margin:'5%'}}>
+                                <Text style={{ color: 'white', fontSize: 14, }}>อุปกรณ์ :</Text>
+                                <Text style={{ color: '#ffffff', fontSize: 14, }}> {(equipment)}</Text>
+                            </View >
+                            <View >
                                 <Image
-                                    style={{ width: 180, height: 100 }}
+                                    style={{ width: 250, height: 120, borderRadius: 10 }}
                                     source={{ uri: Imageequipment }}
                                 />
                             </View>
-
-
                         </View>
 
 
