@@ -141,12 +141,13 @@ export default function RecommendedExercise({ navigation, route }) {
   })
 
   const bmiUser = (parseInt((weight)) / (((parseInt(height)) / 100) * 2))
+
   const renderItem = (items, index) => {
     return (
-      <View >
+      <View style={{marginBottom:0}} >
         {items.category_exersice == 0 ? (
           <>
-            <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginTop: index == 0 ? 50 : 0 }}>
+            <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginTop: index == 0 ? 5 : 0 }}>
               <View
                 style={{
                   backgroundColor: '#292B2D',
@@ -177,7 +178,7 @@ export default function RecommendedExercise({ navigation, route }) {
               if (bmiUser <= items.bmi_exersice && age <= items.age_exersice && target == 1) {
                 return (
                   <TouchableOpacity
-                    style={{ marginTop: index == 0 ? 50 : 0 }}
+                    style={{ marginTop: index == 0 ? 5 : 0 }}
                     onPress={() => navigation.navigate('PageRCMExercise',
                       {
                         name: items.neme_exersice,
