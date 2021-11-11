@@ -18,6 +18,7 @@ export default function InsertInfo(props) {
   const [height, setHeight] = useState();
   const [target, setTarget] = useState(1);
   const [experience, setExperience] = useState(1);
+  const [url, seturl] = useState("http://34.126.141.128/images/userimg.png");
 
 
 
@@ -35,7 +36,8 @@ export default function InsertInfo(props) {
             weight: weight,
             height: height,
             target: target,
-            experience: experience
+            experience: experience,
+            url: url
           })
         )
         .then((response) => {
@@ -60,7 +62,7 @@ export default function InsertInfo(props) {
         setIduser(value);
 
       })
-  },[iduser])
+  }, [iduser])
 
   return (
     <>
@@ -117,13 +119,10 @@ export default function InsertInfo(props) {
 
                 />
               </View>
-              <Text>
-                {gender}
-              </Text>
+
 
               <View style={{ width: 280, alignItems: 'center', }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#3D3D3D', margin: 5 }}>วันเกิด</Text>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#3D3D3D', margin: 5 }}>{birthday}</Text>
                 <DatePicker
                   style={{ width: '100%', backgroundColor: '#fffffff' }}
                   date={birthday}
@@ -141,7 +140,9 @@ export default function InsertInfo(props) {
                       marginLeft: 0,
                       backgroundColor: '#ffffff',
                       borderRadius: 7,
-                      borderWidth: 0
+                      borderWidth: 0,
+                      textAlign: 'center',
+
                     }
                     // ... You can check the source to find the other keys.
                   }}
@@ -193,19 +194,22 @@ export default function InsertInfo(props) {
           <View style={styles.container}>
             <View >
               <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>เป้าหมาย</Text>
-              <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>{target}</Text>
+
             </View>
 
             <View style={styles.containerPicker}>
-              <Picker style={{ width: '100%', backgroundColor: '#ffffff', borderRadius: 15, alignItems: 'center', justifyContent: 'center' }}
+              <Text style={{ fontSize: 16, fontWeight: 'normal', color: '#545454', marginBottom: 10 }}>กรุณาเลือกเป้าหมายของคุณ</Text>
+              <Picker style={{ width: '100%', backgroundColor: '#ffffff', borderRadius: 15, alignItems: 'center', justifyContent: 'center', }}
                 selectedValue={target}
                 enabled={true}
                 onValueChange={(itemValue) => setTarget(itemValue)}
+                textColor='red'
 
               >
-                <Picker.Item label="ลดไขมัน" value="1"></Picker.Item>
+                <Picker.Item label="ลดไขมัน" value="1" ></Picker.Item>
                 <Picker.Item label="สร้างกล้ามเนื้อ " value="2"></Picker.Item>
                 <Picker.Item label="เพื่อสุขภาพ" value="3"></Picker.Item>
+
               </Picker>
 
             </View>
@@ -224,10 +228,9 @@ export default function InsertInfo(props) {
           <View style={styles.container}>
             <View >
               <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>ประสบการณ์</Text>
-              <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>{iduser}</Text>
-              <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3D3D3D', }}>{experience}</Text>
             </View>
             <View style={styles.containerPicker}>
+              <Text style={{ fontSize: 16, fontWeight: 'normal', color: '#545454', marginBottom: 10 }}>กรุณาเลือกประสบการณ์ของคุณ</Text>
               <Picker style={{ width: '100%', backgroundColor: '#ffffff', borderRadius: 15, alignItems: 'center', justifyContent: 'center' }}
                 selectedValue={experience}
                 enabled={true}
@@ -288,7 +291,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: '80%',
     height: 200,
-    borderRadius: 7
+    borderRadius: 7,
 
 
   },

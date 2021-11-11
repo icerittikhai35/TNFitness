@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Alert } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { ListItem, Header, Image, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -149,37 +149,59 @@ const ManageInsertExercise = ({ route, navigation }) => {
 
 
             <View style={styles.container}>
-                <Image
-                    style={{ height: 100, width: '100%', borderRadius: 0 }}
-                    source={require('../../img/TN3.jpg')}
-                />
-                <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 20 }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
+
 
                 <View style={{ flex: 10, backgroundColor: '#3D3D3D', height: 100, alignItems: 'center' }}>
-                    <ScrollView width={'100%'}>
-                        {dataexer.map(item => (
+                    <ScrollView width={'100%'} alignItems='center' showsVerticalScrollIndicator={false}>
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#9E9E9E', paddingTop: 20, marginBottom: 20 }}>เลือกท่าออกกำลังกาย</Text>
+                        </View>
+                        {dataexer.map(items => (
                             <>
                                 <TouchableOpacity
-                                    onPress={() => { setSubmit(true); setIdexer(item.id_exersice); }}
+                                    onPress={() => { setSubmit(true); setIdexer(items.id_exersice);}}
                                     style={{
-                                        width: '80%',
-                                        backgroundColor: '#292B2D',
+                                        width: '100%',
+                                        backgroundColor: '#3D3D3D',
                                         borderRadius: 20,
                                         height: 120,
                                         flexDirection: 'column',
                                         justifyContent: 'center',
                                         marginBottom: 10,
-                                        borderRadius: 15
+                                        borderRadius: 15,
+                                        alignContent: 'center'
                                     }}>
 
                                     <View
                                         style={{
-                                            flexDirection: 'row',
+                                            backgroundColor: '#292B2D',
+                                            borderRadius: 20,
+                                            height: 120,
+                                            flexDirection: 'column',
                                             justifyContent: 'center',
-                                            alignItems: 'center',
-                                            margin: 10
+                                            borderRadius: 15,
+
                                         }}>
-                                        <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{item.neme_exersice}{day}</Text>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                                alignItems: 'center',
+                                                backgroundColor: '#292B2D',
+                                                //292B2D
+                                                margin: 10,
+                                            }}>
+                                            <Image
+                                                style={{ height: 100, width: 140, borderRadius: 15 }}
+                                                source={{ uri: items.imageUrls_exersice }}
+                                            />
+                                            <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                                                <View >
+                                                    <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
+                                                </View>
+
+
+                                            </View>
+                                        </View>
                                     </View>
                                 </TouchableOpacity>
                             </>
@@ -203,6 +225,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         height: '100%',
         backgroundColor: "#3D3D3D",
+        alignItems: 'center'
 
     },
 });

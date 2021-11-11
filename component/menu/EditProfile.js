@@ -187,7 +187,7 @@ export default function EditProfile({ navigation }) {
                                 <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#DCDCDC', height: 200, width: '100%', flexDirection: 'column' }}>
                                     <View style={styles.containerImage}>
                                         {
-                                            url && <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
+                                            url && <Image source={{ uri: url }} style={{ width: '100%', height: '100%' }} />
                                         }
 
                                         <View style={styles.uploadBtnContainer}>
@@ -297,6 +297,7 @@ export default function EditProfile({ navigation }) {
                                                 borderWidth: 1,
                                                 height: 40,
                                             }}>
+                                                
                                             <Picker
                                                 style={{
                                                     width: '100%',

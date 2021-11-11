@@ -24,6 +24,8 @@ const renderEmptyDate = () => {
     );
 }
 
+
+
 const ManageExercise = (props) => {
     const [items, setItems] = useState({});
     const [day, setDay] = useState();
@@ -66,7 +68,7 @@ const ManageExercise = (props) => {
         }
         fetchData();
     })
-    console.log(iduser)
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -86,11 +88,11 @@ const ManageExercise = (props) => {
 
 
 
-    const renderItem = (item, firstItemInDay) => {
+    const renderItem = (items, firstItemInDay) => {
         return (
             <>
 
-                <TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
+                <TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', backgroundColor: '#3D3D3D', }}>
                     <View
                         style={{
                             backgroundColor: '#292B2D',
@@ -99,17 +101,45 @@ const ManageExercise = (props) => {
                             flexDirection: 'column',
                             justifyContent: 'center',
                             marginBottom: 10,
-                            borderRadius: 15
+                            borderRadius: 15,
+                            marginRight: '5%'
                         }}>
-
                         <View
                             style={{
                                 flexDirection: 'row',
-                                justifyContent: 'center',
                                 alignItems: 'center',
-                                margin: 10
+                                backgroundColor: '#292B2D',
+                                //292B2D
+                                margin: 10,
                             }}>
-                            <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>{item.neme_exersice}</Text>
+                            <Image
+                                style={{ height: 100, width: 140, borderRadius: 15 }}
+                                source={{ uri: items.imageUrls_exersice }}
+                            />
+                            <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                                <View style={{ marginBottom: 10 }}>
+                                    <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
+                                </View>
+                                <View style={{ alignss: 'center', flexDirection: 'row' }}>
+                                    <View style={{ alignss: 'center' }}>
+                                        <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.volume_exersice)} ครั้ง</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                                        <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                                        <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.weight_exersice} กก.</Text>
+                                    </View>
+                                    <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                                        <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice)} วินาที</Text>
+                                    </View>
+                                </View>
+
+                            </View>
                         </View>
                     </View>
                 </TouchableOpacity >
@@ -157,11 +187,12 @@ const ManageExercise = (props) => {
                 <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 20 }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
 
                 <View style={{ flex: 1, backgroundColor: '#3D3D3D', height: 100 }}>
-
-                    <Text>{day}</Text>
+                    <View style={{paddingTop:10,alignItems:'center',width:'100%'}}>
+                        <Text style={{ color: '#69BD51', fontWeight: 'bold', fontSize: 16 }}>{day}</Text>
+                    </View>
                     <Agenda
                         items={showdata}
-                        onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
+                        //onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                         //renderEmptyDate={renderEmptyDate}
                         //renderDay={renderDay}
                         //โชว์ตาราง
@@ -169,9 +200,9 @@ const ManageExercise = (props) => {
                         loadItemsForMonth={loadItems}
                         onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                         renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay)) }}
-                        current={'2021-01-01'}
+                        //current={'2021-01-01'}
                         hideKnob={true}
-                        onRefresh={() => console.log('refreshing...')}
+                        //onRefresh={() => console.log('refreshing...')}
                         theme={{
                             backgroundColor: '#3D3D3D',
                             calendarBackground: '#3D3D3D',
@@ -200,8 +231,8 @@ const ManageExercise = (props) => {
                         width: 50,
                         height: 50,
                         borderRadius: 50,
-                        alignItems:'center',
-                        
+                        alignItems: 'center',
+
                     }}>
 
                     <Icon

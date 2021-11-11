@@ -116,7 +116,7 @@ export default function PageRCMExercise({ navigation, route }) {
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>การออกกำลังกาย</Text>
+                            <Text style={styles.modalText}>กรุณากรอกจำนวนรอบที่คุณเล่นได้ ?</Text>
 
                             <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ alignItems: 'center' }}>
@@ -125,12 +125,14 @@ export default function PageRCMExercise({ navigation, route }) {
                                 <View style={{ alignItems: 'center' }}>
                                     <TextInput
                                         value={count}
+                                        keyboardType='numeric'
                                         style={{
                                             borderRadius: 5,
                                             borderWidth: 1,
                                             borderColor: '#3D3D3D',
                                             width: 70,
-                                            height: 35
+                                            height: 35,
+                                            textAlign: 'center'
                                         }}
                                         onChangeText={(text) => setCount(text)}
                                     />
@@ -191,13 +193,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundone(text)}
                                                     />
@@ -218,13 +222,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundone(text)}
                                                     />
@@ -237,13 +243,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundtwo(text)}
                                                     />
@@ -265,13 +273,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundone(text)}
                                                     />
@@ -284,13 +294,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundtwo(text)}
                                                     />
@@ -303,13 +315,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundthree(text)}
                                                     />
@@ -329,13 +343,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundone(text)}
                                                     />
@@ -348,13 +364,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundtwo(text)}
                                                     />
@@ -367,13 +385,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundthree(text)}
                                                     />
@@ -386,13 +406,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundfour}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundfour(text)}
                                                     />
@@ -412,13 +434,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundone(text)}
                                                     />
@@ -431,13 +455,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundtwo(text)}
                                                     />
@@ -450,13 +476,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundthree(text)}
                                                     />
@@ -469,13 +497,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundfour}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundfour(text)}
                                                     />
@@ -488,13 +518,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundfive}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRounfive(text)}
                                                     />
@@ -515,13 +547,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundone(text)}
                                                     />
@@ -534,13 +568,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundtwo(text)}
                                                     />
@@ -553,13 +589,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundthree(text)}
                                                     />
@@ -572,13 +610,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundfour}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundfour(text)}
                                                     />
@@ -591,13 +631,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundfive}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRounfive(text)}
                                                     />
@@ -610,13 +652,15 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType='numeric'
                                                         value={roundsix}
                                                         style={{
                                                             borderRadius: 5,
                                                             borderWidth: 1,
                                                             borderColor: '#3D3D3D',
                                                             width: 70,
-                                                            height: 35
+                                                            height: 35,
+                                                            textAlign:'center'
                                                         }}
                                                         onChangeText={(text) => setRoundsix(text)}
                                                     />
@@ -740,9 +784,9 @@ export default function PageRCMExercise({ navigation, route }) {
                         </View>
 
                         <View style={{ width: "95%", height: 200, paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D', margin: 10, flexDirection: 'column', alignItems: 'center', borderRadius: 10 }}>
-                            <View style={{flexDirection:'row',margin:'5%'}}>
-                                <Text style={{ color: 'white', fontSize: 14, }}>อุปกรณ์ :</Text>
-                                <Text style={{ color: '#ffffff', fontSize: 14, }}> {(equipment)}</Text>
+                            <View style={{ flexDirection: 'row', margin: '5%' }}>
+                                <Text style={{ color: 'white', fontSize: 16,fontWeight:'bold' }}>อุปกรณ์ :</Text>
+                                <Text style={{ color: '#ffffff', fontSize: 16,fontWeight:'bold'  }}> {(equipment)}</Text>
                             </View >
                             <View >
                                 <Image
@@ -754,7 +798,7 @@ export default function PageRCMExercise({ navigation, route }) {
 
 
                         <View style={{ width: '95%', alignItems: 'flex-start', margin: '2%', backgroundColor: '#292B2D', padding: '4%', borderRadius: 10 }}>
-                            <Text style={{ color: 'white', fontSize: 14, alignItems: 'flex-start', }}>คำอธิบาย</Text>
+                            <Text style={{ color: 'white', fontSize: 16, alignItems: 'flex-start',fontWeight:'bold' ,marginBottom:5}}>คำอธิบาย</Text>
                             <Text style={{ color: '#ffffff', fontSize: 14, }}> {JSON.stringify(description)}</Text>
 
                         </View>

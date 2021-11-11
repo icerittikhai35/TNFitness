@@ -44,8 +44,7 @@ export default function Feed({ navigation, route }) {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#3D3D3D" translucent={true} />
-
+     
 
       <View style={{ height: '100%', backgroundColor: '#3D3D3D', margin: 0 }}>
 

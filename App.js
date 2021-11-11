@@ -18,7 +18,6 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#3D3D3D" translucent={true} />
 
       <NavigationContainer>
 
