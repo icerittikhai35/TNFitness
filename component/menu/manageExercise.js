@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { ListItem, Header, Image, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -7,6 +7,8 @@ import { Avatar } from 'react-native-paper';
 import { Exercise } from '../../DataExercise';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { FlatList } from 'react-native';
+import Swipeout from 'react-native-swipeout';
 
 const timeToString = (time) => {
     const date = new Date(time);
@@ -26,11 +28,14 @@ const renderEmptyDate = () => {
 
 
 
-const ManageExercise = (props) => {
+const ManageExercise = (props,navigation) => {
     const [items, setItems] = useState({});
     const [day, setDay] = useState();
     const [showdata, setShowdata] = useState([]);
     const [iduser, setIduser] = useState();
+    const [idmanage, setIdmanage] = useState();
+    const [submit, setSubmit] = useState(false)
+
 
     const loadItems = (day) => {
         setTimeout(() => {
@@ -68,14 +73,16 @@ const ManageExercise = (props) => {
         }
         fetchData();
     })
-    
+
+
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://34.126.141.128/test.php', {
                     params: {
-                        iduser: 1
+                        iduser: iduser
                     }
                 })
                 setShowdata(response.data);
@@ -86,63 +93,92 @@ const ManageExercise = (props) => {
         fetchData();
     }, [showdata]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get('http://34.126.141.128/delete_exersice.php', {
+              params: {
+                idmanage: idmanage
+              }
+            })
+            alert(res.data);
+          } catch (err) {
+            alert(err);
+          }
+        }
+        if (submit) fetchData();
+      }, [submit])
 
 
+    let swipeBtns = [{
+        text: 'ลบ',
+        backgroundColor: 'red',
+        underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+        onPress: () =>{setSubmit(true); setIdmanage(idmanage) }
+      
+    }];
+
+    console.log(idmanage);
     const renderItem = (items, firstItemInDay) => {
         return (
             <>
+                <Swipeout right={swipeBtns}
+                    autoClose='true'
+                    backgroundColor='transparent'>
 
-                <TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', backgroundColor: '#3D3D3D', }}>
-                    <View
-                        style={{
-                            backgroundColor: '#292B2D',
-                            borderRadius: 20,
-                            height: 120,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            marginBottom: 10,
-                            borderRadius: 15,
-                            marginRight: '5%'
-                        }}>
+
+                    <TouchableOpacity onPress={() =>navigation.navigate('PageRCMExercise')} style={{ paddingLeft: '0%', backgroundColor: '#3D3D3D', }}>
                         <View
                             style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
                                 backgroundColor: '#292B2D',
-                                //292B2D
-                                margin: 10,
+                                borderRadius: 20,
+                                height: 120,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                marginBottom: 10,
+                                borderRadius: 15,
+                                marginRight: '5%'
                             }}>
-                            <Image
-                                style={{ height: 100, width: 140, borderRadius: 15 }}
-                                source={{ uri: items.imageUrls_exersice }}
-                            />
-                            <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
-                                <View style={{ marginBottom: 10 }}>
-                                    <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
-                                </View>
-                                <View style={{ alignss: 'center', flexDirection: 'row' }}>
-                                    <View style={{ alignss: 'center' }}>
-                                        <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
-                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.volume_exersice)} ครั้ง</Text>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    backgroundColor: '#292B2D',
+                                    //292B2D
+                                    margin: 10,
+                                }}>
+                                <Image
+                                    style={{ height: 100, width: 140, borderRadius: 15 }}
+                                    source={{ uri: items.imageUrls_exersice }}
+                                />
+                                <View style={{ width: "50%", alignItems: 'flex-start', paddingRight: '5%', paddingLeft: '5%', backgroundColor: '#292B2D' }}>
+                                    <View style={{ marginBottom: 10 }}>
+                                        <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{items.neme_exersice}</Text>
                                     </View>
-                                    <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
-                                        <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
-                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                                    <View style={{ alignss: 'center', flexDirection: 'row' }}>
+                                        <View style={{ alignss: 'center' }}>
+                                            <Text style={{ color: 'white', fontSize: 10 }}>จำนวน</Text>
+                                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.volume_exersice)} ครั้ง</Text>
+                                        </View>
+                                        <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                                            <Text style={{ color: 'white', fontSize: 10 }}>รอบ</Text>
+                                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.round_exersice} รอบ</Text>
+                                        </View>
+                                        <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                                            <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
+                                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.onerm * 80 / 100} กก.</Text>
+                                        </View>
+                                        <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
+                                            <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
+                                            <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice)} วินาที</Text>
+                                        </View>
                                     </View>
-                                    <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
-                                        <Text style={{ color: 'white', fontSize: 10 }}>น้ำหนัก</Text>
-                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{items.weight_exersice} กก.</Text>
-                                    </View>
-                                    <View style={{ alignItems: 'center', paddingLeft: '8%' }}>
-                                        <Text style={{ color: 'white', fontSize: 10 }}>เวลาพัก</Text>
-                                        <Text style={{ color: '#69BD51', fontSize: 10 }}>{parseInt(items.breaks_exersice)} วินาที</Text>
-                                    </View>
-                                </View>
 
+                                </View>
                             </View>
                         </View>
-                    </View>
-                </TouchableOpacity >
+                    </TouchableOpacity >
+                </Swipeout>
             </>
         );
     };
@@ -180,6 +216,7 @@ const ManageExercise = (props) => {
 
 
             <View style={styles.container}>
+
                 <Image
                     style={{ height: 100, width: '100%', borderRadius: 0 }}
                     source={require('../../img/TN3.jpg')}
@@ -187,20 +224,23 @@ const ManageExercise = (props) => {
                 <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 20 }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
 
                 <View style={{ flex: 1, backgroundColor: '#3D3D3D', height: 100 }}>
-                    <View style={{paddingTop:10,alignItems:'center',width:'100%'}}>
+                    <View style={{ paddingTop: 10, alignItems: 'center', width: '100%' }}>
                         <Text style={{ color: '#69BD51', fontWeight: 'bold', fontSize: 16 }}>{day}</Text>
                     </View>
                     <Agenda
                         items={showdata}
-                        //onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
-                        //renderEmptyDate={renderEmptyDate}
+                        onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
+                        loadItemsForMonth={loadItems}
                         //renderDay={renderDay}
                         //โชว์ตาราง
                         onDayPress={(day) => { console.log(day); setDay(day.dateString); }}
-                        loadItemsForMonth={loadItems}
+                        //loadItemsForMonth={loadItems}
                         onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                         renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay)) }}
                         //current={'2021-01-01'}
+                        minDate={'2021-11-01'}
+                        //selected={'2021-11-06'}
+                        maxDate={'2021-12-31'}
                         hideKnob={true}
                         //onRefresh={() => console.log('refreshing...')}
                         theme={{

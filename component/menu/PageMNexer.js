@@ -10,7 +10,7 @@ import { ExerciseBack, } from '../../DataExercise';
 const { width } = Dimensions.get("window");
 const { height } = width * 100 / 60;
 
-export default function PageRCMExercise({ navigation, route }) {
+export default function PageMNexer({ navigation, route }) {
     const { name } = route.params;
     const { volume } = route.params;
     const { round } = route.params;

@@ -179,7 +179,7 @@ export default function RecommendedExercise({ navigation, route }) {
                 return (
                   <TouchableOpacity
                     style={{ marginTop: index == 0 ? 5 : 0 }}
-                    onPress={() => navigation.navigate('PageRCMExercise',
+                    onPress={() => navigation.navigate('PageMNexer',
                       {
                         name: items.neme_exersice,
                         volume: parseInt(items.volume_exersice * 1.2),

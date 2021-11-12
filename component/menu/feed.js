@@ -154,7 +154,7 @@ export default function Feed({ navigation, route }) {
                         <View style={{ width: 200, height: 400, marginRight: 15, }}>
                           <Image
                             style={{ height: 350, width: '100%', borderRadius: 15 }}
-                            source={{ uri: item.Cover_page }}
+                            source={{ uri: item.url }}
                           />
                           <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#000000', }} numberOfLines={2} >
                             {item.Topic_new_feed_health_food}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Alert, Modal, TextInput } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { ListItem, Header, Image, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -28,9 +28,11 @@ const ManageInsertExercise = ({ route, navigation }) => {
     const { day } = route.params;
     const [items, setItems] = useState({});
     const [dataexer, setDataexer] = useState([]);
-    const [iduser, setIduser] = useState(1);
+    const [iduser, setIduser] = useState();
     const [idexer, setIdexer] = useState();
     const [submit, setSubmit] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [oneRM, setOneRM] = useState("");
 
 
     const loadItems = (day) => {
@@ -61,6 +63,18 @@ const ManageInsertExercise = ({ route, navigation }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const res = await AsyncStorage.getItem('id');
+                setIduser(res);
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchData();
+    })
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
                 const response = await axios.get('http://34.126.141.128/showdataexercise.php')
                 setDataexer(response.data);
             } catch (err) {
@@ -73,9 +87,17 @@ const ManageInsertExercise = ({ route, navigation }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post('http://34.126.141.128/insertmanageexer.php', { day: day, iduser: iduser, idexer: idexer })
+                const response = await axios.post('http://34.126.141.128/insertmanageexer.php', {
+                    day: day,
+                    iduser: iduser,
+                    idexer: idexer,
+                    oneRM: oneRM
+                })
+                alert(response.data);
                 setSubmit(false);
-                alert(response.data)
+                setOneRM('');
+                setModal(false);
+
             } catch (err) {
                 alert(err);
                 setSubmit(false);
@@ -84,7 +106,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
         if (submit) fetchData();
     }, [submit]);
 
-
+    console.log(idexer)
     const renderItem = (item, firstItemInDay) => {
         return (
             <>
@@ -147,6 +169,65 @@ const ManageInsertExercise = ({ route, navigation }) => {
             />
 
 
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modal}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>กรอกค่า 1RM</Text>
+
+                            <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
+                                <View style={{ alignItems: 'center' }}>
+                                    <TextInput
+                                        value={oneRM}
+                                        style={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#3D3D3D',
+                                            width: 70,
+                                            height: 35
+                                        }}
+                                        onChangeText={(text) => setOneRM(text)}
+                                    />
+
+                                </View>
+                            </View>
+
+
+
+                            <View style={{ flexDirection: 'row', alignItems: 'center', width: '70%', justifyContent: 'space-around' }}>
+
+
+
+                                <TouchableOpacity
+                                    style={{ backgroundColor: '#292B2D', width: 80, height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
+                                    title={"Go to the hell"}
+                                    onPress={() => setModal(!modal)}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>ยกเลิก</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={{ backgroundColor: '#69BD51', width: 80, height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
+                                    title={"Go to the hell"}
+                                    onPress={() => { setSubmit(true); }}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>ยืนยัน</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+
+
 
             <View style={styles.container}>
 
@@ -159,7 +240,8 @@ const ManageInsertExercise = ({ route, navigation }) => {
                         {dataexer.map(items => (
                             <>
                                 <TouchableOpacity
-                                    onPress={() => { setSubmit(true); setIdexer(items.id_exersice);}}
+                                    //onPress={() => { setSubmit(true); setIdexer(items.id_exersice); }}
+                                    onPress={() => { setModal(true); setIdexer(items.id_exersice); }}
                                     style={{
                                         width: '100%',
                                         backgroundColor: '#3D3D3D',
@@ -228,6 +310,36 @@ const styles = StyleSheet.create({
         alignItems: 'center'
 
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 0
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    }
+    ,
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+        fontSize: 18,
+        fontWeight: 'normal',
+        color: '#3D3D3D',
+        paddingTop: 5
+    }
 });
 
 export default ManageInsertExercise;
