@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import { SliderBox } from 'react-native-image-slider-box';
 import { ExerciseBack, } from '../../DataExercise';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get("window");
 const { height } = width * 100 / 60;
@@ -21,6 +22,7 @@ export default function PageRCMExercise({ navigation, route }) {
     const { Imageequipment } = route.params;
     const { imageUrls } = route.params;
     const { id_exersice } = route.params;
+    const { day } = route.params;
     const scrollX = new Animated.Value(0);
     const position = Animated.divide(scrollX, width);
 
@@ -37,7 +39,22 @@ export default function PageRCMExercise({ navigation, route }) {
     const [roundfour, setRoundfour] = React.useState();
     const [roundfive, setRounfive] = React.useState();
     const [roundsix, setRoundsix] = React.useState();
+    const [id, setId] = React.useState();
+    const [status, setStatus] = React.useState();
     const [submit, setSubmit] = React.useState(false);
+
+
+    useEffect(() => {
+        const getid = async () => {
+            try {
+                const res = await AsyncStorage.getItem('id');
+                setId(res);
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getid();
+    });
 
     useEffect(() => {
         setCount(round);
@@ -59,17 +76,28 @@ export default function PageRCMExercise({ navigation, route }) {
         fetchData();
     }, []);
 
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.post('http://34.126.141.128/showalbumtraining.php', {});
-                setAlbumtraining(res.data);
+                const res = await axios.get('http://34.126.141.128/button_status.php', {
+                    params: {
+                        id_exersice: id_exersice,
+                        u_id: id,
+                        date: day,
+
+                    }
+                });
+                setStatus(res.data.status);
             } catch (err) {
                 console.log(err);
             }
         }
         fetchData();
-    }, []);
+    });
+
+    console.log(status)
 
     useEffect(() => {
         const Insertcount = async () => {
@@ -81,10 +109,10 @@ export default function PageRCMExercise({ navigation, route }) {
                     roundfour: roundfour,
                     roundfive: roundfive,
                     roundsix: roundsix,
-                    iduser: 29,
-                    idexercise: 1,
-                    round: 2,
-                    date: '2021-11-12'
+                    iduser: id,
+                    idexercise: id_exersice,
+                    round: count,
+                    date: day
                 });
                 alert(res.data);
                 setRoundone("");
@@ -96,14 +124,13 @@ export default function PageRCMExercise({ navigation, route }) {
                 setSubmit(false);
 
             } catch (err) {
-                console.log(err);
+                alert(err);
                 setSubmit(false);
             }
         }
         if (submit) Insertcount();
     }, [submit]);
 
-    console.log(count)
 
     useEffect(() => {
         if (count > 6) {
@@ -678,7 +705,7 @@ export default function PageRCMExercise({ navigation, route }) {
                                     title={"Go to the hell"}
                                     onPress={() => { setModalround(!modalround); setSubmit(true) }}
                                 >
-                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>ต่อไป</Text>
+                                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>บันทึก</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -696,7 +723,7 @@ export default function PageRCMExercise({ navigation, route }) {
                         {albumtraining == null ? (
                             <>
                                 <View style={{ width: '100%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5', justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text>ยังไม่มีรูปภาพ</Text>
+                                    <Text>ยังไม่มีรูปภาพ???</Text>
                                 </View>
                             </>
                         ) : (
@@ -796,12 +823,29 @@ export default function PageRCMExercise({ navigation, route }) {
                         </View>
 
                         <View style={{ width: '100%', alignItems: 'center', paddingTop: '10%' }}>
-                            <Pressable
-                                style={[styles.button, styles.buttonOpen]}
-                                onPress={() => setModalVisible(true)}
-                            >
-                                <Text style={styles.textStyle}>เสร็จสิ้น</Text>
-                            </Pressable>
+
+                            {status == true ? (
+                                <>
+                                    <Pressable
+                                        style={[styles.button, styles.buttonClose]}
+
+                                    >
+                                        <Text style={styles.textStyle}>ฝึกเรียบร้อยแล้ว</Text>
+                                    </Pressable>
+                                </>
+                            ) : (
+                                <>
+                                    <Pressable
+                                        style={[styles.button, styles.buttonOpen]}
+                                        onPress={() => setModalVisible(true)}
+                                    >
+                                        <Text style={styles.textStyle}>เสร็จสิ้น</Text>
+                                    </Pressable>
+                                </>
+                            )}
+
+
+
                         </View>
 
                     </View>
@@ -894,8 +938,8 @@ const styles = StyleSheet.create({
 
     },
     buttonClose: {
-        backgroundColor: "#292B2D",
-        marginTop: 30
+        backgroundColor: "#555555",
+        width: '70%',
     },
     textStyle: {
         color: "white",

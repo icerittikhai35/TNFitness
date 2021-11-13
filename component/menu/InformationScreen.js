@@ -21,11 +21,11 @@ const InformationScreen = () => {
         tabBarIcon: ({ focused }) => {
           let imagepath;
 
-          if (route.name === 'Feed') {
+          if (route.name === 'ข่าวสาร') {
             imagepath = focused ? require('../../img/home1.png') : require('../../img/home.png')
-          } else if (route.name === 'Training') {
+          } else if (route.name === 'ออกกำลังกาย') {
             imagepath = focused ? require('../../img/dumbbell.png') : require('../../img/dumbbell1.png');
-          } else if (route.name === 'Profile') {
+          } else if (route.name === 'โปรไฟล์') {
             imagepath = focused ? require('../../img/pie-chart1.png') : require('../../img/pie-chart.png')
           }
 
@@ -60,9 +60,9 @@ const InformationScreen = () => {
 
           }
         }}>
-        <Tab.Screen name="Feed" component={ConnectFeed} />
-        <Tab.Screen name="Training" component={ConnectTraining} />
-        <Tab.Screen name="Profile" component={ConnectProfile} />
+        <Tab.Screen name="ข่าวสาร" component={ConnectFeed} />
+        <Tab.Screen name="ออกกำลังกาย" component={ConnectTraining} />
+        <Tab.Screen name="โปรไฟล์" component={ConnectProfile} />
       </Tab.Navigator>
 
     </>

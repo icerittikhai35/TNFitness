@@ -59,6 +59,7 @@ export default function RecommendedExercise({ navigation, route }) {
   const [recexer, setRecexer] = useState([]);
   const [date, setDate] = useState([]);
   const [exerdata, setexerdata] = useState([]);
+  const [day, setDay] = useState();
 
   const loadItems = (day) => {
     setTimeout(() => {
@@ -144,7 +145,7 @@ export default function RecommendedExercise({ navigation, route }) {
 
   const renderItem = (items, index) => {
     return (
-      <View style={{marginBottom:0}} >
+      <View style={{ marginBottom: 0 }} >
         {items.category_exersice == 0 ? (
           <>
             <View style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', marginTop: index == 0 ? 5 : 0 }}>
@@ -179,7 +180,7 @@ export default function RecommendedExercise({ navigation, route }) {
                 return (
                   <TouchableOpacity
                     style={{ marginTop: index == 0 ? 5 : 0 }}
-                    onPress={() => navigation.navigate('PageMNexer',
+                    onPress={() => navigation.navigate('PageRCMExercise',
                       {
                         name: items.neme_exersice,
                         volume: parseInt(items.volume_exersice * 1.2),
@@ -191,7 +192,8 @@ export default function RecommendedExercise({ navigation, route }) {
                         equipment: items.equipment_exersice,
                         Imageequipment: items.imageequipment_exersice,
                         imageUrls: items.imageUrls_exersice,
-                        id_exersice: items.id_exersice
+                        id_exersice: items.id_exersice,
+                        day: day
                       }
                     )}>
                     <View
@@ -263,7 +265,8 @@ export default function RecommendedExercise({ navigation, route }) {
                         equipment: items.equipment_exersice,
                         Imageequipment: items.imageequipment_exersice,
                         imageUrls: items.imageUrls_exersice,
-                        id_exersice: items.id_exersice
+                        id_exersice: items.id_exersice,
+                        day: day
                       }
                     )}>
                     <View
@@ -335,7 +338,8 @@ export default function RecommendedExercise({ navigation, route }) {
                         equipment: items.equipment_exersice,
                         Imageequipment: items.imageequipment_exersice,
                         imageUrls: items.imageUrls_exersice,
-                        id_exersice: items.id_exersice
+                        id_exersice: items.id_exersice,
+                        day: day
                       }
                     )}>
                     <View
@@ -454,7 +458,7 @@ export default function RecommendedExercise({ navigation, route }) {
             style={{ height: 100, width: '100%', borderRadius: 0 }}
             source={require('../../img/TN1.jpg')}
           />
-          <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 10, backgroundColor: '#3D3D3D' }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
+          <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 10, backgroundColor: '#3D3D3D' }}>เลือกดูโปรเเกรมการออกกำลังกาย{day}</Text>
 
           <View style={styles.containercarenda}>
             <Agenda
@@ -463,6 +467,7 @@ export default function RecommendedExercise({ navigation, route }) {
               //renderEmptyDate={renderEmptyDate}
               //renderDay={renderDay}
               //โชว์ตาราง
+              onDayPress={(day) => { console.log(day); setDay(day.dateString); }}
               loadItemsForMonth={loadItems}
               renderItem={renderItem}
               minDate={'2021-11-01'}
