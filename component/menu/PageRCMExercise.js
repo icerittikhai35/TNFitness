@@ -74,7 +74,7 @@ export default function PageRCMExercise({ navigation, route }) {
             }
         }
         fetchData();
-    }, []);
+    }, [albumtraining]);
 
 
 
@@ -97,7 +97,7 @@ export default function PageRCMExercise({ navigation, route }) {
         fetchData();
     });
 
-    console.log(status)
+  
 
     useEffect(() => {
         const Insertcount = async () => {
@@ -136,6 +136,7 @@ export default function PageRCMExercise({ navigation, route }) {
         if (count > 6) {
             alert('กรอกไม่เกิน 6');
             setCount(round);
+            
         }
     })
 
@@ -184,7 +185,10 @@ export default function PageRCMExercise({ navigation, route }) {
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <TextInput
+                                        keyboardType={"numeric"}
+                                        textAlign={'center'}
                                         value={count}
+                                        maxLength={6}
                                         style={{
                                             borderRadius: 5,
                                             borderWidth: 1,
@@ -251,6 +255,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
@@ -278,6 +284,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
@@ -297,6 +305,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
@@ -325,6 +335,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
@@ -344,6 +356,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
@@ -363,6 +377,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
@@ -389,6 +405,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
@@ -408,6 +426,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
@@ -427,6 +447,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
@@ -446,6 +468,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundfour}
                                                         style={{
                                                             borderRadius: 5,
@@ -472,6 +496,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
@@ -491,6 +517,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
@@ -510,6 +538,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
@@ -529,6 +559,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundfour}
                                                         style={{
                                                             borderRadius: 5,
@@ -548,6 +580,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundfive}
                                                         style={{
                                                             borderRadius: 5,
@@ -575,6 +609,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundone}
                                                         style={{
                                                             borderRadius: 5,
@@ -594,6 +630,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundtwo}
                                                         style={{
                                                             borderRadius: 5,
@@ -613,6 +651,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundthree}
                                                         style={{
                                                             borderRadius: 5,
@@ -632,6 +672,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundfour}
                                                         style={{
                                                             borderRadius: 5,
@@ -651,6 +693,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundfive}
                                                         style={{
                                                             borderRadius: 5,
@@ -670,6 +714,8 @@ export default function PageRCMExercise({ navigation, route }) {
                                                 </View>
                                                 <View style={{ alignItems: 'center' }}>
                                                     <TextInput
+                                                        keyboardType={"numeric"}
+                                                        textAlign={'center'}
                                                         value={roundsix}
                                                         style={{
                                                             borderRadius: 5,
@@ -750,7 +796,7 @@ export default function PageRCMExercise({ navigation, route }) {
                                                         width: '100%',
                                                         height: '100%',
                                                     }}
-                                                    source={{ uri: item.album_training_img }}
+                                                    source={{uri: item.album_training_img}}
                                                 />
                                             </TouchableOpacity>
                                         ))}
@@ -807,7 +853,7 @@ export default function PageRCMExercise({ navigation, route }) {
                             <View style={{ width: '80%', alignItems: 'center', margin: '3%' }}>
 
                                 <Image
-                                    style={{ width: 180, height: 100 }}
+                                    style={{ width: 200, height: 180,borderRadius:10 }}
                                     source={{ uri: Imageequipment }}
                                 />
                             </View>

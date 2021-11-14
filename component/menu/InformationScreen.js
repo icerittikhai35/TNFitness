@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, Text, StyleSheet, Image } from 'react-native';
+import { StatusBar, Platform, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ConnectProfile from '../connect/connectProfile';
@@ -8,14 +8,20 @@ import ConnectFeed from '../connect/connectFeed';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingStartApp from '../menu/loadingStartApp';
 
+
+
 const InformationScreen = () => {
 
   const Tab = createBottomTabNavigator();
 
+
   return (
     
     <>
-
+ <StatusBar
+    backgroundColor="blue"
+    barStyle="light-content"
+  />
 
       <Tab.Navigator screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {

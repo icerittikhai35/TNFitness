@@ -32,7 +32,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
     const [idexer, setIdexer] = useState();
     const [submit, setSubmit] = useState(false);
     const [modal, setModal] = useState(false);
-    const [oneRM, setOneRM] = useState("");
+    const [onerm, setOnerm] = useState();
 
 
     const loadItems = (day) => {
@@ -91,11 +91,11 @@ const ManageInsertExercise = ({ route, navigation }) => {
                     day: day,
                     iduser: iduser,
                     idexer: idexer,
-                    oneRM: oneRM
+                    onerm: onerm
                 })
                 alert(response.data);
                 setSubmit(false);
-                setOneRM('');
+                setOnerm();
                 setModal(false);
 
             } catch (err) {
@@ -186,7 +186,9 @@ const ManageInsertExercise = ({ route, navigation }) => {
                             <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
                                 <View style={{ alignItems: 'center' }}>
                                     <TextInput
-                                        value={oneRM}
+                                    keyboardType={'numeric'}
+                                    textAlign={'center'}
+                                        value={10}
                                         style={{
                                             borderRadius: 5,
                                             borderWidth: 1,
@@ -194,7 +196,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
                                             width: 70,
                                             height: 35
                                         }}
-                                        onChangeText={(text) => setOneRM(text)}
+                                        onChangeText={(text) => setOnerm(text)}
                                     />
 
                                 </View>

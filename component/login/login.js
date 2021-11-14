@@ -5,6 +5,7 @@ import * as Facebook from 'expo-facebook';
 import * as Google from 'expo-google-app-auth';
 import InformationScreen from '../menu/InformationScreen';
 import LoadingStartApp from '../menu/loadingStartApp';
+import InsertInfo from './InfoUser';
 
 //npm install axios –save อย่าลืมติดตั้ง
 import axios from 'axios';
@@ -44,7 +45,8 @@ export default function LoginInfo(props) {
   const [googleSubmitting, setGoogleSubmitting] = useState("");
   const [user, setUser] = useState();
   const [isloading, setIsloading] = useState(false);
-
+  let [isSubmit, setIsSubmit] = useState(false);
+  let [target, setTarget] = useState();
   //โหลดหน้าก่อนเข้าApp
 
   const [loading, setLoading] = useState(true)
@@ -64,7 +66,28 @@ export default function LoginInfo(props) {
     fetchData();
   })
 
-  let [isSubmit, setIsSubmit] = useState(false);
+  const [infouser, setInfouser] = useState();
+  const [userdata, setUserdata] = useState([]);
+  useEffect(() => {
+    AsyncStorage.getItem('id')
+      .then((value) => {
+        setInfouser(value);
+        axios.get('http://34.126.141.128/profile_user.php', {
+          params: {
+            id: infouser
+          }
+        })
+          .then(response => {
+            setUserdata(response.data.all);
+            setTarget(response.data.target);
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+  })
+
+
 
   useEffect(() => {
     const authenticate = async () => {
@@ -106,7 +129,7 @@ export default function LoginInfo(props) {
     setUsername(text);
 
   };
-
+  console.log(userdata);
 
 
   //login Google
@@ -262,7 +285,16 @@ export default function LoginInfo(props) {
           ) : (
 
             <>
-              <InformationScreen />
+              {target == null ? (
+                <>
+                <InsertInfo/>
+                </>
+              ) : (
+                <>
+                 <InformationScreen />
+                </>
+              )}
+             
             </>
           )}
         </>

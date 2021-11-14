@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function InsertInfo(props) {
   const [iduser, setIduser] = useState();
   const [gender, setGender] = useState(2);
-  const [birthday, setBirthday] = useState("2005-01-01");
+  const [birthday, setBirthday] = useState("2003-01-01");
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [target, setTarget] = useState(1);
@@ -131,7 +131,7 @@ export default function InsertInfo(props) {
                   textColor={'#3D3D3D'}
                   format="YYYY-MM-DD"
                   minDate="1920-01-01"
-                  maxDate="2021-06-01"
+                  maxDate="2008-06-01"
                   confirmBtnText="ยืนยัน"
                   cancelBtnText="ยกเลิก"
                   onDateChange={(birthday) => { setBirthday(birthday) }}

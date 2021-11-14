@@ -114,7 +114,7 @@ export default function RecommendedExercise({ navigation, route }) {
       }
     }
     fetchData();
-  }, [user])
+  },[user])
 
 
   useEffect(() => {

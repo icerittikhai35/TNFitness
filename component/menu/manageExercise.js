@@ -107,7 +107,7 @@ const ManageExercise = (props,navigation) => {
           }
         }
         if (submit) fetchData();
-      }, [submit])
+      }, [idmanage])
 
 
     let swipeBtns = [{
@@ -241,7 +241,7 @@ const ManageExercise = (props,navigation) => {
                         minDate={'2021-11-01'}
                         //selected={'2021-11-06'}
                         maxDate={'2021-12-31'}
-                        hideKnob={true}
+                        hideKnob={false}
                         //onRefresh={() => console.log('refreshing...')}
                         theme={{
                             backgroundColor: '#3D3D3D',
@@ -249,6 +249,7 @@ const ManageExercise = (props,navigation) => {
                             selectedDayBackgroundColor: '#69BD51',
                             selectedDayTextColor: '#ffffff',
                             todayTextColor: '#69BD51',
+                            monthTextColor: '#ffffff',
                             textDisabledColor: '#888888',
                             dayTextColor: '#9E9E9E',
                             agendaKnobColor: '#69BD51',
