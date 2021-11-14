@@ -763,7 +763,7 @@ export default function PageRCMExercise({ navigation, route }) {
 
             <View style={styles.container}>
 
-                <ScrollView>
+                <ScrollView style={{marginBottom:'10%'}}>
                     <View style={{ width: '100%', height: 1000, marginBottom: 5, alignItems: 'center' }} >
 
                         {albumtraining == null ? (

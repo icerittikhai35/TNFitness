@@ -45,7 +45,7 @@ export default function EditProfile({navigation}) {
                 </View>
             </TouchableOpacity>
 
-            <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.8, flexDirection: 'row', justifyContent: 'space-between' }}>
+            {/* <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.8, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', paddingTop: 13, }}>
                     <Image
                         style={{ height: 25, width: 25, marginLeft: 15, }}
@@ -64,7 +64,7 @@ export default function EditProfile({navigation}) {
 
                 </View>
 
-            </View>
+            </View> */}
 
             <View style={{ width: '100%', height: 50, borderColor: '#292B2D', borderBottomWidth: 0.5, flexDirection: 'row', paddingTop: 13 }}>
                 <Image

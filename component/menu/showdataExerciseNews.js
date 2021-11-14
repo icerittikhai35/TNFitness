@@ -77,21 +77,22 @@ export default function showExerciseNews({ navigation, route }) {
 
 
 
-            <View style={{ marginTop: 0, marginBottom: '5%' }}>
+            <View style={styles.container}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
+                    style={{marginBottom:'20%'}}
                 >
 
 
                     {album == null ? (
                         <>
-                            <View style={{ width: '100%', height: 500, marginBottom: 0, backgroundColor: '#e5e5e5', justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={{ width: '100%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5', justifyContent: 'center', alignItems: 'center' }}>
                                 <Text>ยังไม่มีรูปภาพ</Text>
                             </View>
                         </>
                     ) : (
                         <>
-                            <View style={{ width: '100%', height: 500, marginBottom: 0, backgroundColor: '#e5e5e5' }}>
+                            <View style={{ width: '100%', height: 300, marginBottom: 0, backgroundColor: '#e5e5e5' }}>
                                 <ScrollView
                                     pagingEnabled
                                     showsHorizontalScrollIndicator={false}
@@ -167,8 +168,7 @@ export default function showExerciseNews({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "column",
-        paddingBottom: 0,
+
 
 
     },

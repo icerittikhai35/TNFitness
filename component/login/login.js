@@ -172,7 +172,7 @@ export default function LoginInfo(props) {
 
               <View style={{ height: '100%', backgroundColor: '#3D3D3D' }}>
 
-                <View style={{ alignItems: 'center', paddingTop: '15%' }}>
+                <View style={{ alignItems: 'center', paddingTop: '30%' }}>
                   <Image
                     source={require('../../img/Since1992.png')}
                     style={{ width: 300, height: 300, }}
@@ -227,7 +227,7 @@ export default function LoginInfo(props) {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={{ paddingTop: '0%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                  <View style={{ paddingTop: '10%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                     <TouchableOpacity
                       style={{ backgroundColor: '#69BD51', width: '70%', height: 45, justifyContent: 'center', alignItems: 'center', borderRadius: 6, }}
                       title={"Go to the hell"}
@@ -237,7 +237,7 @@ export default function LoginInfo(props) {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={{ flexDirection: 'row', alignItems: 'center', width: '70%', margin: '3%' }}>
+                  {/* <View style={{ flexDirection: 'row', alignItems: 'center', width: '70%', margin: '3%' }}>
                     <View style={{ flex: 1, height: 2, backgroundColor: '#6A6767', marginTop: 10, marginBottom: 10 }} />
                     <View style={{ alignItems: 'center' }}>
                       <Text style={{ color: '#6A6767', fontWeight: 'bold', fontSize: 14, margin: '5%' }}>or connection with</Text>
@@ -270,7 +270,7 @@ export default function LoginInfo(props) {
                       />
                       <Text style={{ color: '#4267B2', fontWeight: 'bold', fontSize: 18 }}>เข้าสู่ระบบ ด้วย Google</Text>
                     </TouchableOpacity>
-                  </View>
+                  </View> */}
                   <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                     <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>สร้างบัญชัผู้ใช้ใหม่ ? </Text>
                     <TouchableOpacity

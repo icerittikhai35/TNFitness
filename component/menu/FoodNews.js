@@ -44,7 +44,7 @@ export default function FoodNews({ props, route, navigation }) {
 
 
 
-            <View style={{ marginTop: 25, marginBottom: '40%' }}>
+            <View style={{ marginBottom: '40%' }}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >
@@ -54,7 +54,7 @@ export default function FoodNews({ props, route, navigation }) {
                     <View style={{ paddingBottom: 20 }}>
                         {info.map(item => (
                             <View style={styles.container}>
-                                <ImageBackground source={{ uri: item.Cover_page }}
+                                <ImageBackground source={{ uri: item.url }}
                                     style={styles.image}
                                 >
                                     <Text

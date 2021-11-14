@@ -32,23 +32,30 @@ export default function Profile({ navigation }) {
     })
 
     const data = {
-        labels: ["Swim", "Bike", "Run"], // optional
-        data: [0.95, 0.6, 0.9]
+        labels: ["January", "February", "March", "April", "May","March", "April", "May"],
+        datasets: [
+            {
+                data: [1, 2, 3, 4, 5, 6, 7 ,8],
+                color: (opacity = 1) => `rgba(105, 189, 81, ${opacity})`, // optional
+                strokeWidth: 2 // optional
+            }
+        ],
+        legend: ["สถิติการออกกำลังกาย"] // optional
     };
 
     const chartConfig = {
-        backgroundGradientFrom: "#1E2923",
+        backgroundGradientFrom: "#ffffff",
         backgroundGradientFromOpacity: 0,
         backgroundGradientTo: "#08130D",
-        backgroundGradientToOpacity: 0.5,
+        backgroundGradientToOpacity: 1,
         color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
         strokeWidth: 2, // optional, default 3
-        barPercentage: 0.5,
+        barPercentage: 1,
         useShadowColorFromDataset: false // optional
-      };
-      
+    };
+
     return (
-       
+
         <>
             <Header
                 placement="center"
@@ -70,16 +77,17 @@ export default function Profile({ navigation }) {
                     margin: 0,
                     borderBottomColor: '#292B2D'
                 }}
-            />
+            /> 
 
             <View style={styles.container}>
 
 
-                <View>
+                <View style={{ marginBottom: '10%' }}>
                     <FlatList
 
+                        showsVerticalScrollIndicator={false}
                         keyExtractor={item => item.id}
-                        style={{ width: '100%', height: '100 %', }}
+                        style={{ width: '100%', height: '100%', marginBottom:'10%'}}
                         data={userdata}
                         renderItem={({ item }) => (
                             <>
@@ -146,22 +154,19 @@ export default function Profile({ navigation }) {
                                         style={styles.buttonContainer}
                                         onPress={() => navigation.navigate('EditProfile')}
                                     >
-                                        <Text style={{ color: 'white' }}>แก้ไขข้อมูลส่วนตัว</Text>
+                                        <Text style={{ color: 'white',}}>แก้ไขข้อมูลส่วนตัว</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ width: '100%', height: '70%', alignItems: 'center', backgroundColor: '#696969', paddingTop: 15 }} >
+                                <View style={{ width: '100%', height: '100%', alignItems: 'center', backgroundColor: '#393B3D', paddingTop: 10,marginBottom:'20%' }} >
 
-                                    <Text style={{ color: '#3D3D3D', fontSize: 20 }}>ภาพรวมการออกกำลังกาย</Text>
-                                    <ProgressChart
+                                    <Text style={{ color: '#ffffff', fontSize: 20 ,marginBottom:10 }}>ภาพรวมการออกกำลังกาย</Text>
+                                    <LineChart
                                         data={data}
                                         width={screenWidth}
                                         height={220}
-                                        strokeWidth={16}
-                                        radius={32}
                                         chartConfig={chartConfig}
-                                        hideLegend={false}
                                     />
-                                   
+
 
                                 </View>
                             </>
@@ -186,8 +191,9 @@ export default function Profile({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
-        
+
+
+
     },
     header: {
         backgroundColor: "#3D3D3D",
