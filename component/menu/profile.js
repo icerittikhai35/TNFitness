@@ -13,6 +13,7 @@ export default function Profile({ navigation }) {
 
     const [infouser, setUser] = useState();
     const [userdata, setUserdata] = useState([]);
+    const [infohistory, setInfohistory] = useState([]);
     useEffect(() => {
         AsyncStorage.getItem('id')
             .then((value) => {
@@ -31,11 +32,33 @@ export default function Profile({ navigation }) {
             })
     })
 
+    useEffect(() => {
+        AsyncStorage.getItem('id')
+            .then((value) => {
+                setUser(value);
+                axios.get('http://34.126.141.128/history.php', {
+                    params: {
+                        id: infouser
+                    }
+                })
+                    .then(response => {
+                        setInfohistory(response.data);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
+    }, infohistory)
+
+
+
+
+
     const data = {
-        labels: ["January", "February", "March", "April", "May","March", "April", "May"],
+        labels: ["January", "February", "March", "April", "May", "March", "April", "May"],
         datasets: [
             {
-                data: [1, 2, 3, 4, 5, 6, 7 ,8],
+                data: [1, 2, 3, 4, 5, 6, 7, 8],
                 color: (opacity = 1) => `rgba(105, 189, 81, ${opacity})`, // optional
                 strokeWidth: 2 // optional
             }
@@ -77,7 +100,7 @@ export default function Profile({ navigation }) {
                     margin: 0,
                     borderBottomColor: '#292B2D'
                 }}
-            /> 
+            />
 
             <View style={styles.container}>
 
@@ -87,11 +110,11 @@ export default function Profile({ navigation }) {
 
                         showsVerticalScrollIndicator={false}
                         keyExtractor={item => item.id}
-                        style={{ width: '100%', height: '100%', marginBottom:'10%'}}
+                        style={{ width: '100%', height: '100%', marginBottom: '10%' }}
                         data={userdata}
                         renderItem={({ item }) => (
                             <>
-                                <View style={{ alignItems: 'center', height: 400, width: '100%' }}>
+                                <View style={{ alignItems: 'center',  width: '100%' }}>
                                     <View style={{ alignItems: 'center', backgroundColor: '#292B2D', height: 100, width: '100%' }}>
                                         <Image style={styles.avatar} source={{ uri: item.url }} />
                                     </View>
@@ -111,6 +134,10 @@ export default function Profile({ navigation }) {
                                             }
                                         })()}</Text>
                                         <Text style={styles.description}>อายุ: {item.old} ปี</Text>
+                                       
+                                    </View>
+                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', }}>
+                                       
                                         <Text style={styles.description}>ส่วนสูง: {item.height} ซม.</Text>
                                         <Text style={styles.description}>น้ำหนัก: {item.weight} กก.</Text>
                                     </View>
@@ -131,6 +158,10 @@ export default function Profile({ navigation }) {
                                             }
                                         })()}
                                         </Text>
+                                        
+                                    </View>
+                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
+                                       
                                         <Text style={styles.info}>
                                             ประสบการณ์ : {(() => {
                                                 if (item.experience == 1) {
@@ -154,18 +185,52 @@ export default function Profile({ navigation }) {
                                         style={styles.buttonContainer}
                                         onPress={() => navigation.navigate('EditProfile')}
                                     >
-                                        <Text style={{ color: 'white',}}>แก้ไขข้อมูลส่วนตัว</Text>
+                                        <Text style={{ color: 'white', }}>แก้ไขข้อมูลส่วนตัว</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ width: '100%', height: '100%', alignItems: 'center', backgroundColor: '#393B3D', paddingTop: 10,marginBottom:'20%' }} >
+                                <View style={{ width: '100%', height: '100%', alignItems: 'center', backgroundColor: '#393B3D', paddingTop: 10, marginBottom: '20%' }} >
 
-                                    <Text style={{ color: '#ffffff', fontSize: 20 ,marginBottom:10 }}>ภาพรวมการออกกำลังกาย</Text>
-                                    <LineChart
-                                        data={data}
-                                        width={screenWidth}
-                                        height={220}
-                                        chartConfig={chartConfig}
-                                    />
+                                    <Text style={{ color: '#ffffff', fontSize: 20, marginBottom: 10, fontWeight: 'bold' }}>ประวัติการออกกำลังกายล่าสุด</Text>
+                                    <View>
+                                        <View>
+                                            <View style={{ flexDirection: 'column' }}>
+                                                <View style={{ flexDirection: 'row', borderColor: 'gray', borderBottomWidth: 1, }}>
+                                                    <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                        <Text style={{ fontSize: 16, color: 'white' }}>จำนวนรอบ</Text>
+                                                    </View>
+                                                    <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                        <Text style={{ fontSize: 16, color: 'white' }}>จำนวนครั้ง</Text>
+                                                    </View>
+                                                    <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                        <Text style={{ fontSize: 16, color: 'white' }}>วันที่</Text>
+                                                    </View>
+                                                </View>
+                                            </View>
+                                            <FlatList
+                                                showsVerticalScrollIndicator={false}
+                                                keyExtractor={item => item.id}
+                                                style={{ width: '100%', height: '100%', marginBottom: '10%' }}
+                                                data={infohistory}
+                                                renderItem={({ item }) => (
+                                                    <View style={{ flexDirection: 'column' }}>
+                                                        <View style={{ flexDirection: 'row', borderColor: 'gray', borderBottomWidth: 1, }}>
+                                                            <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                                <Text style={{ fontSize: 16, color: 'white' }}>{item.round}</Text>
+                                                            </View>
+                                                            <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                                <Text style={{ fontSize: 16, color: 'white' }}>{item.roundvolume}</Text>
+                                                            </View>
+                                                            <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                                <Text style={{ fontSize: 16, color: 'white' }}>{item.date}</Text>
+                                                            </View>
+                                                        </View>
+                                                    </View>
+
+                                                )}
+                                            />
+
+                                        </View>
+                                    </View>
 
 
                                 </View>

@@ -127,7 +127,7 @@ const ManageExercise = (props,navigation) => {
                     backgroundColor='transparent'>
 
 
-                    <TouchableOpacity onPress={() =>navigation.navigate('PageRCMExercise')} style={{ paddingLeft: '0%', backgroundColor: '#3D3D3D', }}>
+                    <View style={{ paddingLeft: '0%', backgroundColor: '#3D3D3D', }}>
                         <View
                             style={{
                                 backgroundColor: '#292B2D',
@@ -177,7 +177,7 @@ const ManageExercise = (props,navigation) => {
                                 </View>
                             </View>
                         </View>
-                    </TouchableOpacity >
+                    </View >
                 </Swipeout>
             </>
         );

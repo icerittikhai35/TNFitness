@@ -48,7 +48,7 @@ export default function showExerciseNews({ navigation, route }) {
         fetchData();
     }, [album]);
 
-    console.log(album)
+    
 
     return (
         <>

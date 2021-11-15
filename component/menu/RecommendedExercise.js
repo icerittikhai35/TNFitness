@@ -16,7 +16,7 @@ let datesWhitelist = [
     end: moment().add(7, "days")
   }
 ];
-console.log(datesWhitelist);
+
 
 const timeToString = (time) => {
   const date = new Date(time);

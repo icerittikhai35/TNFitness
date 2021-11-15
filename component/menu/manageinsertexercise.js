@@ -106,7 +106,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
         if (submit) fetchData();
     }, [submit]);
 
-    console.log(idexer)
+ 
     const renderItem = (item, firstItemInDay) => {
         return (
             <>

@@ -116,7 +116,7 @@ export default function EditProfile({ navigation }) {
             quality: 1,
         });
         const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
-        console.log(base64);
+        //console.log(base64);
         const base = 'data:image/jpeg;base64,'
         if (!result.cancelled) {
             setImage(base + base64);
