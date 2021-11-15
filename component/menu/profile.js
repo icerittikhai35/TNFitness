@@ -114,31 +114,31 @@ export default function Profile({ navigation }) {
                         data={userdata}
                         renderItem={({ item }) => (
                             <>
-                                <View style={{ alignItems: 'center',  width: '100%' }}>
+                                <View style={{ alignItems: 'center', width: '100%' }}>
                                     <View style={{ alignItems: 'center', backgroundColor: '#292B2D', height: 100, width: '100%' }}>
                                         <Image style={styles.avatar} source={{ uri: item.url }} />
                                     </View>
                                     <View style={{ marginTop: 100, alignItems: 'center' }}>
                                         <Text style={styles.name}>{item.username}</Text>
                                     </View>
-                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', }}>
+                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', }}>
                                         <Text style={styles.description}>เพศ: {(() => {
                                             if (item.gender == 1) {
                                                 return (
-                                                    <Text>ชาย</Text>
+                                                    <Text>ชาย     </Text>
                                                 )
                                             } else {
                                                 return (
-                                                    <Text>หญิง</Text>
+                                                    <Text>หญิง     </Text>
                                                 )
                                             }
                                         })()}</Text>
                                         <Text style={styles.description}>อายุ: {item.old} ปี</Text>
-                                       
+
                                     </View>
-                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', }}>
-                                       
-                                        <Text style={styles.description}>ส่วนสูง: {item.height} ซม.</Text>
+                                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', }}>
+
+                                        <Text style={styles.description}>ส่วนสูง: {item.height} ซม.   </Text>
                                         <Text style={styles.description}>น้ำหนัก: {item.weight} กก.</Text>
                                     </View>
                                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -158,10 +158,10 @@ export default function Profile({ navigation }) {
                                             }
                                         })()}
                                         </Text>
-                                        
+
                                     </View>
                                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
-                                       
+
                                         <Text style={styles.info}>
                                             ประสบการณ์ : {(() => {
                                                 if (item.experience == 1) {
@@ -195,9 +195,10 @@ export default function Profile({ navigation }) {
                                         <View>
                                             <View style={{ flexDirection: 'column' }}>
                                                 <View style={{ flexDirection: 'row', borderColor: 'gray', borderBottomWidth: 1, }}>
-                                                    <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
-                                                        <Text style={{ fontSize: 16, color: 'white' }}>จำนวนรอบ</Text>
+                                                    <View style={{ margin: 3, width: 150, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                        <Text style={{ fontSize: 16, color: 'white' }}>ชื่อท่า</Text>
                                                     </View>
+                                                   
                                                     <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
                                                         <Text style={{ fontSize: 16, color: 'white' }}>จำนวนครั้ง</Text>
                                                     </View>
@@ -214,9 +215,108 @@ export default function Profile({ navigation }) {
                                                 renderItem={({ item }) => (
                                                     <View style={{ flexDirection: 'column' }}>
                                                         <View style={{ flexDirection: 'row', borderColor: 'gray', borderBottomWidth: 1, }}>
-                                                            <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
-                                                                <Text style={{ fontSize: 16, color: 'white' }}>{item.round}</Text>
+                                                            <View style={{ margin: 3, width: 150, height: 50, alignItems: 'center', justifyContent: 'center' }}>
+                                                                <Text style={{ fontSize: 14, color: 'white' }}>
+                                                                    {(() => {
+                                                                        if (item.idexercise == 1) {
+                                                                            return (
+                                                                                <Text>Deadlift</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 2) {
+                                                                            return (
+                                                                                <Text>Dumbbell Row</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 3) {
+                                                                            return (
+                                                                                <Text>Back Extension</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 4) {
+                                                                            return (
+                                                                                <Text>Dumbbell Upright Row</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 5) {
+                                                                            return (
+                                                                                <Text>T-Bar Row</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 6) {
+                                                                            return (
+                                                                                <Text>Lat Pulldown</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 7) {
+                                                                            return (
+                                                                                <Text>Seated cable row</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 8) {
+                                                                            return (
+                                                                                <Text>Decline Cable Flyes</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 9) {
+                                                                            return (
+                                                                                <Text>Bench Press</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 10) {
+                                                                            return (
+                                                                                <Text>Incline Dumbbell Bench Press</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 11) {
+                                                                            return (
+                                                                                <Text>Pec Deck</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 12) {
+                                                                            return (
+                                                                                <Text>Squat</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 13) {
+                                                                            return (
+                                                                                <Text>Leg Press</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 14) {
+                                                                            return (
+                                                                                <Text>Leg extension</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 15) {
+                                                                            return (
+                                                                                <Text>Lying Leg Curl</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 16) {
+                                                                            return (
+                                                                                <Text>Barbell Standing Calf Raise</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 17) {
+                                                                            return (
+                                                                                <Text>Push Press</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 18) {
+                                                                            return (
+                                                                                <Text>Dumbbell Lateral Raise</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 19) {
+                                                                            return (
+                                                                                <Text>Seated Dumbbell Shoulder Press</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 20) {
+                                                                            return (
+                                                                                <Text>Cable Rear Delt Fly</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 22) {
+                                                                            return (
+                                                                                <Text>Preacher Curls</Text>
+                                                                            )
+                                                                        } else if (item.idexercise == 23) {
+                                                                            return (
+                                                                                <Text>Lying Triceps Extensions</Text>
+                                                                            )
+                                                                        } else {
+                                                                            return (
+                                                                                <Text>Pushdowns</Text>
+                                                                            )
+                                                                        }
+                                                                    })()}
+                                                                </Text>
                                                             </View>
+
+
+                                                           
                                                             <View style={{ margin: 3, width: 100, height: 50, alignItems: 'center', justifyContent: 'center' }}>
                                                                 <Text style={{ fontSize: 16, color: 'white' }}>{item.roundvolume}</Text>
                                                             </View>
