@@ -82,7 +82,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
             }
         }
         fetchData();
-    }, []);
+    }, [dataexer]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -91,7 +91,7 @@ const ManageInsertExercise = ({ route, navigation }) => {
                     day: day,
                     iduser: iduser,
                     idexer: idexer,
-                    onerm: onerm
+                    onerm: onerm,
                 })
                 alert(response.data);
                 setSubmit(false);
@@ -107,36 +107,36 @@ const ManageInsertExercise = ({ route, navigation }) => {
     }, [submit]);
 
  
-    const renderItem = (item, firstItemInDay) => {
-        return (
-            <>
+    // const renderItem = (item, firstItemInDay) => {
+    //     return (
+    //         <>
 
-                < TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
-                    <View
-                        style={{
-                            backgroundColor: '#292B2D',
-                            borderRadius: 20,
-                            height: 120,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            marginBottom: 10,
-                            borderRadius: 15
-                        }}>
+    //             < TouchableOpacity onPress={() => console.log(items)} style={{ paddingLeft: '0%', paddingRight: '5%', backgroundColor: '#3D3D3D', }}>
+    //                 <View
+    //                     style={{
+    //                         backgroundColor: '#292B2D',
+    //                         borderRadius: 20,
+    //                         height: 120,
+    //                         flexDirection: 'column',
+    //                         justifyContent: 'center',
+    //                         marginBottom: 10,
+    //                         borderRadius: 15
+    //                     }}>
 
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                margin: 10
-                            }}>
-                            <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>5555</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity >
-            </>
-        );
-    };
+    //                     <View
+    //                         style={{
+    //                             flexDirection: 'row',
+    //                             justifyContent: 'center',
+    //                             alignItems: 'center',
+    //                             margin: 10
+    //                         }}>
+    //                         <Text style={{ fontSize: 20, color: '#ffffff', alignItems: 'center', }}>5555</Text>
+    //                     </View>
+    //                 </View>
+    //             </TouchableOpacity >
+    //         </>
+    //     );
+    // };
     return (
         <>
 

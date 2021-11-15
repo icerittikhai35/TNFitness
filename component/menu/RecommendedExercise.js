@@ -458,7 +458,7 @@ export default function RecommendedExercise({ navigation, route }) {
             style={{ height: 100, width: '100%', borderRadius: 0 }}
             source={require('../../img/TN1.jpg')}
           />
-          <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 10, backgroundColor: '#3D3D3D' }}>เลือกดูโปรเเกรมการออกกำลังกาย{day}</Text>
+          <Text style={{ fontSize: 10, fontWeight: 'bold', color: '#9E9E9E', paddingLeft: '5%', paddingTop: 10, backgroundColor: '#3D3D3D' }}>เลือกดูโปรเเกรมการออกกำลังกาย</Text>
 
           <View style={styles.containercarenda}>
             <Agenda

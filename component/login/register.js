@@ -72,6 +72,7 @@ export default function InsertInfo(props) {
                     <TextInput label='อีเมล์'
                         style={{ width: '70%', height: 45, margin: '1%', borderWidth: 1, borderRadius: 5, }}
                         onChangeText={(text) => setEmail(text)}
+                        keyboardType='email-address'
                         multiline={false}
                         theme={{
                             colors: {

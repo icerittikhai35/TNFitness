@@ -181,7 +181,7 @@ export default function PageRCMExercise({ navigation, route }) {
 
                             <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ alignItems: 'center' }}>
-                                    <Text style={styles.modalText}>จำนวนครั้ง</Text>
+                                    <Text style={styles.modalText}>จำนวนรอบ</Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <TextInput

@@ -118,7 +118,7 @@ const ManageExercise = (props,navigation) => {
       
     }];
 
-    console.log(idmanage);
+    
     const renderItem = (items, firstItemInDay) => {
         return (
             <>
