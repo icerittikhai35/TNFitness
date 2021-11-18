@@ -1,8 +1,9 @@
 <?php
 include 'connect.php';
 
+
 // Creating SQL command to fetch all records from Table.
-$sql = "SELECT * FROM new_feed_exer order by idnew_feed_exer desc";
+$sql = "SELECT * FROM data_exersice order by category_exersice asc;";
 
 $result = $conn->query($sql);
 
@@ -18,7 +19,7 @@ if ($result->num_rows >0) {
  }
  
 } else {
- echo "No Results Found.";
+$json = 'null';
 }
  echo $json;
 $conn->close();

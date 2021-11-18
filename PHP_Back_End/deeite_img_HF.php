@@ -3,8 +3,8 @@ header('Access-Control-Allow-Origin: *');
 include 'connect.php';
 
 // 
-$idmanage = $_GET['idmanage'];
-$sql = "DELETE FROM manageexercise WHERE  idmanage = '".$idmanage."' ";
+$idalbum_healthy = $_GET['idalbum_healthy'];
+$sql = "DELETE FROM album_healthy WHERE  idalbum_healthy = '" . $idalbum_healthy . "'";
 
 if ($conn->query($sql) === TRUE) {
   echo "ลบข้อมูลเสร็จสิ้น";
@@ -12,3 +12,4 @@ if ($conn->query($sql) === TRUE) {
   echo "Error deleting record: " . $conn->error;
 }
 $conn->close();
+?>

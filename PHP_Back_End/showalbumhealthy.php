@@ -1,9 +1,14 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 1000");
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
+header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 include 'connect.php';
 
 $id=$_GET["id"];
 // Creating SQL command to fetch all records from Table.
-$sql = "SELECT * FROM tnf.album_healthy where idnew_feed_health_food = '$id';";
+$sql = "SELECT * FROM album_healthy where idnew_feed_health_food = '$id';";
 
 $result = $conn->query($sql);
 

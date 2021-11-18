@@ -3,12 +3,12 @@ header('Access-Control-Allow-Origin: *');
 include 'connect.php';
 
 // 
-$idmanage = $_GET['idmanage'];
-$sql = "DELETE FROM manageexercise WHERE  idmanage = '".$idmanage."' ";
+$sql = "DELETE FROM user WHERE  iduser = '" . $iduser . "'";
 
 if ($conn->query($sql) === TRUE) {
-  echo "ลบข้อมูลเสร็จสิ้น";
+  echo "Record deleted successfully";
 } else {
   echo "Error deleting record: " . $conn->error;
 }
 $conn->close();
+?>

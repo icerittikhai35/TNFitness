@@ -1,9 +1,9 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 include 'connect.php';
 
-$id=$_GET["id"];
 // Creating SQL command to fetch all records from Table.
-$sql = "SELECT * FROM tnf.album_training where id_exersice = '$id'";
+$sql = "SELECT * FROM new_feed_health_food order by idnew_feed_health_food desc";
 
 $result = $conn->query($sql);
 
@@ -19,7 +19,7 @@ if ($result->num_rows >0) {
  }
  
 } else {
-    $json = 'null';
+ echo "No Results Found.";
 }
  echo $json;
 $conn->close();
